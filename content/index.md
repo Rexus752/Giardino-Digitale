@@ -1,6 +1,6 @@
 ---
-title: Welcome to Quartz
+title: Benvenuto nel Giardino Digitale di Rexus752
 ---
+Il sito è in Work In Progress. ecco perché è ancora vuoto e sta tutto fatto alla cazzo di cane.
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+Lista delle tablature: [[so, bassically-]]
