@@ -1,6 +1,7 @@
 ---
-title: Benvenuto nel Giardino Digitale di Rexus752
+title: Giardino Digitale di Rexus752
 ---
-Il sito è in Work In Progress. ecco perché è ancora vuoto e sta tutto fatto alla cazzo di cane.
+Ciao, benvenuto nel mio Giardino Digitale (se non sai cos'è, cerca su internet (poi metterò anche qui una descrizione)).
+Il sito è ancora _work in progress_, per questo c'è poca roba e fatta molto alla cazzo di cane. let me cook.
 
-Lista delle tablature: [[so, bassically-]]
+Tablature per basso: [[so, bassically-]]
