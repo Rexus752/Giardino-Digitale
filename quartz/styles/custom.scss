@@ -1,3 +1,27 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+.table-container {
+	& > table {
+		margin: 0rem;
+		padding: 0rem;
+		& > * {
+			line-height: 1.2rem;
+		}
+	}
+}
+
+th {
+	text-align: center;
+	padding: 0.4rem 0.7rem;
+	border: 1px solid var(--gray);
+	background-color: var(--lightgray);
+}
+
+td {
+	padding: 0.2rem 0.7rem;
+	border: 1px solid var(--lightgray);
+}
+
+tbody tr:nth-child(2n) {
+    background-color: #222222;
+}
