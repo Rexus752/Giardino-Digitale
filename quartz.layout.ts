@@ -6,7 +6,6 @@ export const sharedPageComponents: SharedLayout = {
 	head: Component.Head(),
 	header: [],
 	afterBody: [
-	/*
 		Component.Comments({
 			provider: 'giscus',
 			options: {
@@ -20,7 +19,6 @@ export const sharedPageComponents: SharedLayout = {
 				categoryId: 'DIC_kwDOMXGFSs4ChDeJ',
 			}
 		}),
-	*/
 	],
 	footer: Component.Footer({
 		links: {
