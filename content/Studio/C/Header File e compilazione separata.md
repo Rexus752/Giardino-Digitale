@@ -5,13 +5,13 @@ Una libreria NON è un programma perché contiene codice, funzioni, macro ecc. m
 # Primo esempio
 
 1. File `square.h`: scrivere cosa deve fare la funzione che voglio scrivere
-```C
+```c
 /** @brief Restituisce il quadrato del suo argomento
 */
 int square(int n);
 ```
 2. File `main.c`: scrivere il codice dell'applicazione che la usa
-```C
+```c
 #include <stdio.h>
 #include "square.h"
 
@@ -27,7 +27,7 @@ int main() {
 ```
 %%aggiustare gli argomenti del main%%
 3. File `square.h`: scrivere il codice della funzione
-```C
+```c
 /** @brief Restituisce il quadrato del suo argomento
 */
 int square(int n) {
@@ -41,7 +41,7 @@ int square(int n) {
 Numero non più letto da input, ma da linea di comando durante esecuzione
 
 File `stoi.h`:
-```C
+```c
 /**
 * @brief Converte una stringa in intero
 *
@@ -69,7 +69,7 @@ int stoi(char *s) {
 ```
 
 File `sqr.c`:
-```C
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include "stoi.h"
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
 %%aggiustare gli argomenti del main%%
 
 File `test_stoi.c`:
-```C
+```c
 #include <stdio.h>
 #include "stoi.h"
 int main(void) {

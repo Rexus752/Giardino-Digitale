@@ -24,7 +24,7 @@ In C, l’allocazione nella memoria heap e la sua liberazione sono espliciti, ci
 # Allocazione e deallocazione dinamiche
 
 Ovvero effettuate durante l’esecuzione del programma, occorre utilizzare delle funzioni di libreria:
-```C
+```c
 #include <stdlib.h>
 void *malloc(size_t size);
 void free(void *ptr);
@@ -33,7 +33,7 @@ void free(void *ptr);
 ## Funzione `malloc`
 
 Permette di allocare dinamicamente (durante l’esecuzione del programma) una quantità di memoria specificata.
-```C
+```c
 cast-type *ptr;
 ptr = (cast-type*) malloc(byte-size);
 ```
@@ -42,7 +42,7 @@ ptr = (cast-type*) malloc(byte-size);
 
 Permette di liberare dinamicamente (durante l’esecuzione del programma) della memoria precedentemente allocata in maniera dinamica. Dopo free tale memoria non sarà più considerata (dal run-time del C) come allocata – ovvero sarà (ri)allocabile.
 
-```C
+```c
 cast-type *ptr;
 ptr = (cast-type*) malloc(byte-size);
 free(ptr);
@@ -73,7 +73,7 @@ free(ptr);
 
 ## Allocazione dinamica di un array
 
-```C
+```c
 int *d;
 d = (int*) malloc(sizeof(int)*10);  // d = 0xabcf08134ba0
 // d* = valore nell'indirizzo di memoria 0xabcf08134ba0 = valore non noto
@@ -83,7 +83,7 @@ d = (int*) malloc(sizeof(int)*10);  // d = 0xabcf08134ba0
 
 ![](Pasted%20image%2020240806165356.png)
 
-```C
+```c
 T *d; 
 d = (T*) malloc(sizeof(T)*ESPR);
 ```
@@ -97,7 +97,7 @@ d = (T*) malloc(sizeof(T)*ESPR);
 
 # Deallocazione di un array
 
-```C
+```c
 T *d;
 d = (T*) malloc(sizeof(T)*ESPR);
 free(d); 
@@ -125,7 +125,7 @@ ATTENZIONE: è possibile che per un po' lo spazio liberato dalla `free` sembri a
 
 # Passaggio di array come parametro
 
-```C
+```c
 int main() {
 	int astatico[N];
 	int *adinamico = (int*) malloc(sizeof(int) * N);
@@ -142,7 +142,7 @@ Risposta: sarà uguale perché anche il nome di un array statico corrisponde a u
 
 # Allocazione di `struct`
 
-```C
+```c
 typedef struct {
 	char titolo[MAXT];
 	int pagine;
@@ -155,7 +155,7 @@ Questo è un prototipo di struttura, non ha allocata memoria. Occorre dichiarare
 
 ## Strutture allocate dinamicamente
 
-```C
+```c
 Libro *L;
 L = (Libro*) malloc(sizeof(Libro);
 (*L).pagine = 200;
@@ -170,7 +170,7 @@ l = NULL;
 
 # Passaggio di struct come parametro
 
-```C
+```c
 struct prova {
 	int x;
 	int y;
@@ -190,13 +190,13 @@ int main() {
 ```
 
 Come invoco `stampa` sulle due variabili?
-```C
+```c
 stampa(statica);
 stampa(*dinamica);
 ```
 (a differenza degli array, solo "dinamica" è puntatore)
 
-```C
+```c
 void init(struct prova *p) {
 	p->x = 15;
 	p->y = 25;
@@ -205,7 +205,7 @@ void init(struct prova *p) {
 `init` è una funzione che modifica la variabile passata come argomento. A questo fine dobbiamo necessariamente usare un puntatore
 
 Come invoco `init` sulle due variabili?
-```C
+```c
 init(&statica);
 init(dinamica);
 ```

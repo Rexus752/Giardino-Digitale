@@ -1,6 +1,6 @@
 # Il prototype di `printf`
 
-```C
+```c
 int printf(const char *format, ...)
 ```
 I puntini di sospensione nel prototipo della funzione indicano un numero variabile di argomenti di qualsiasi tipo. Si può utilizzare la sintassi `T0 f(T1 x1, ..., Tn xn, ...);` dove `n >= 1` per dichiarare una funzione con elenchi di argomenti a lunghezza variabile: la funzione deve avere almeno un parametro diverso dai puntini di sospensione e i puntini di sospensione possono essere usati solo come ultimo parametro
@@ -19,7 +19,7 @@ Si deve includere `<stdarg.h>` e si devono usare in modo opportuno (nel body del
 
 # Esempio: calcolo della media di $n \ge 1$ interi
 
-```C
+```c
 #include <stdio.h>
 
 // Dichiarazione della funzione variadica

@@ -36,7 +36,7 @@ L’indirizzo di x si ottiene con l’operatore unario &:
 Le strutture (struct) in C sono collezioni di dati correlati che possono essere disomogenei (cioè di tipo diverso)
 
 Tipo che identifica una collezione di dati correlati che possono essere disomogenei (`libro` è il _tag_ o _etichetta_ della struttura):
-```C
+```c
 struct libro {
 	char titolo[MAXT];
 	int pagine;
@@ -48,7 +48,7 @@ struct libro {
 Questo è un prototipo di struttura. Non ha allocata memoria.
 In seguito è possibile dichiarare variabili di tipo `struct libro` (è un tipo unico).
 Esempio:
-```C
+```c
 struct libro L; 
 ```
 
@@ -70,7 +70,7 @@ Nota: L’operatore `->` permette di accedere più semplicemente alla struct not
 
 ### 2.1.1) Esempio
 
-```C
+```c
 void stampalibro(struct libro L) {
 	// richiede la copia di sizeof(struct libro) bytes!
 }
@@ -84,7 +84,7 @@ void stampalibro(struct libro* Lptr) {
 I campi hanno dimensione diversa e sono allocati in ordine di specifica. I sistemi operativi non allocano la memoria a byte ma a gruppi di 4, 8, 16 … byte. Una struct può avere allocata un po’ più memoria dello stretto necessario per riempire lo spazio rimanente (padding).
 
 inizializziamo uno struct e due elementi P1, P2
-```C
+```c
 struct prova {
 	char x;
 	char y;
@@ -107,7 +107,7 @@ Notiamo che:
 Una struct non può contenere un membro del proprio tipo di struct, ma può contenere un puntatore a quel tipo di struct.
 
 Ad esempio:
-```C
+```c
 struct employee {
 	char firstName[20];
 	char lastName[20];
@@ -115,7 +115,7 @@ struct employee {
 };
 ```
 NON SI PUÒ FARE, mentre:
-```C
+```c
 struct employee {
 	char firstName[20];
 	char lastName[20];
@@ -129,7 +129,7 @@ struct employee {
 ### 2.4.1) Esempio più complesso
 
 Dichiarazione nutrizionale di un alimento:
-```C
+```c
 struct dich_nutriz {
 	int energia;
 	float grassi;
@@ -141,7 +141,7 @@ struct dich_nutriz {
 ```
 
 Posso costruire tipi di dati/variabili complessi/e, es.
-```C
+```c
 struct cibo {
 	char nome[MAX];
 	struct dich_nutriz tabella;
@@ -158,7 +158,7 @@ in dispensa ci sono tanti cibi, mantengo associata a ciascuno la sua dichiarazio
 
 Il `typedef` consente di creare sinonimi (o alias) per tipi precedentemente definiti. Spesso (ma non solo) usato con le struct, esempio:
 
-```C
+```c
 typedef struct {
 	char titolo[MAXT];
 	int pagine;
@@ -173,12 +173,12 @@ e in questo caso la struct tag non è più necessaria perché possiamo usare dir
 ## 3.1) Convenzione scrittura del nome
 
 Per convenzione, si scrive in MAIUSCOLO la prima lettera dei nomi dei tipi che sono sinonimi di altri tipi, es.
-```C
+```c
 typedef char* Stringa;
 ```
 
 Dopodichè è permesso scrivere le variabili in minuscolo come al solito, ad esempio:
-```C
+```c
 Stringa s;
 Stringa doc[MAXLINES];
 int strcmp(Stringa, Stringa);
@@ -187,7 +187,7 @@ int strcmp(Stringa, Stringa);
 # 4) `enum`
 
 Permette di definire una lista di valori interi costanti convenientemente rinominati con etichette (univoche), dichiarando solo per la prima etichetta il valore iniziale e, a seguire, le altre etichette avranno valori crescenti di un'unità %%mamma mia come cazzo l'ho scritta 'sta frase%%. Ad esempio:
-```C
+```c
 enum months {JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC};
 /* JAN è 1, FEB è 2, e così via */
 ```
@@ -198,11 +198,11 @@ associare valori interi a dei nomi.
 ## 4.1) Combinazione di `typedef` ed `enum`
 
 Posso anche combinare `typedef` e `enum`:
-```C
+```c
 typedef enum outcome {OUTOFMEMORY = −1, ALREADYPRESENT, INSERTED} Outcome;
 ```
 Cioè, prima enumeriamo una variabile `outcome` con le tre etichette e, successivamente, la definiamo come un nuovo tipo `Outcome`, che ora è un intero che può valere `-1`, `0` o `1`. Per esempio:
-```C
+```c
 Outcome operazione(...) {
 	...
 	return OUTOFMEMORY;
@@ -212,7 +212,7 @@ e questa funzione ritornerà il valore `-1` (perché nell'`enum` abbiamo assegna
 # 5) `union`
 
 Variabili simili alle strutture, ma che in un dato momento contengono uno solo dei membri specificati entro le parentesi graffe `{}`. Sintassi identica a quella per le strutture, sostituendo la keyword `struct` con la keyword `union`:
-```C
+```c
 union myunion {
 	char cval;
 	int ival;
@@ -234,7 +234,7 @@ Attenzione alla differenza tra strutture e unioni:
 ## Sintassi
 
 Stessa sintassi e operazioni delle strutture:
-```C
+```c
 union myunion {
 	char cval;
 	int ival;
@@ -252,7 +252,7 @@ Alla fine delle operazioni, `u` (e il suo puntatore `*ptru`) saranno di tipo `fl
 ### Struttura in un'unione
 
 Nota: come membro di una unione potrei avere una struttura!
-```C
+```c
 union name1 {
 	struct name2 {
 		int i;
@@ -267,7 +267,7 @@ E cioè, l'unione `name1` può avere solo un tipo di valore alla volta tra la st
 ### Unione in una struttura
 
 Similmente, un'unione può apparire in una struttura:
-```C
+```c
 struct {
 	int flags;
 	char *name;
@@ -284,7 +284,7 @@ Questo è un esempio realistico di uso delle unioni per realizzare una "tabella 
 ## Cosa contengono in un dato istante?
 
 È responsabilità del programmatore tenere traccia di quale sia il tipo attualmente registrato in una unione. Un approccio comune è quello di memorizzare in una variabile il tipo correntemente memorizzato nella unione, tramite ad esempio un piccolo intero con valori definiti tramite enumerazione:
-```C
+```c
 enum Union_Tag {IS_INT, IS_CHAR};
 struct TaggedUnion {
 	enum Union_Tag tag;
@@ -299,7 +299,7 @@ SI PARLA IN QUESTO CASO DI UNA "UNIONE ETICHETTATA" (TAGGED UNION)
 ## Esperimento pratico
 
 - Scrivere un semplice programma di test, `unione.c`, copiando le dichiarazioni qui sotto:
-	```C
+	```c
 	enum Union_Tag {IS_INT, IS_CHAR};
 	struct TaggedUnion {
 		enum Union_Tag tag;

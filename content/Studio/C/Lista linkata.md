@@ -182,7 +182,7 @@ I dati possono essere molti, es:
 
 ## Dichiarazione di un nodo
 
-```C
+```c
 struct nodo {
 	tipo-dato1 campo-dato1;
 	tipo-dato2 campo-dato2;

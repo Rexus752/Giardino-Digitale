@@ -1,6 +1,6 @@
 Una variabile locale (cioè dichiarata all'interno di una funzione) static è una variabile che mantiene il suo valore dopo che la funzione è terminata.
 Ad esempio:
-```C
+```c
 int nextNumber() {
 	static int counter = 1;
 	return counter++;
