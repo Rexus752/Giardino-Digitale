@@ -11,7 +11,7 @@ Si deve includere `<stdarg.h>` e si devono usare in modo opportuno (nel body del
 - Per accedere all'elenco di argomenti a lunghezza variabile, si deve dichiarare una variabile (es. di nome `ap`) di tipo `va_list`. Essa conterrà le informazioni necessarie alle macro `va_start`, `ca_arg` e `va_end`.
 - Prima di accedere all'elenco di argomenti a lunghezza variabile, si deve invocare la macro `va_start(ap, xn)` (dove `xn` è l'ultimo parametro fisso della funzione). Questa inizializza la variabile `ap` di tipo `va_list`.
 - Per accedere, nell'ordine, a ciascun elemento della lista degli `m >= 0` argomenti a numero variabile, si deve invocare per ciascun argomento `arg_{n+1}, ..., arg_{n+m}` la macro
-	```
+	```c
 	va_arg(ap, T_{n+1})
 	```
 	(dove `T_{n+1}` con `1 <= i <= m` è il tipo di `arg_{n+1}`) e restituisce il valore dal prossimo argomento nella lista degli `m >= 0` argomenti a numero variabile.
