@@ -298,13 +298,13 @@ Dopo `vrb = vrb->next;`, la variabile `temp` punterà ancora al primo elemento d
 int main() {
 	lista ml;
 	...
-	ml = cancellatesta(ml);
+	ml = cancella_testa(ml);
 }
 
-lista cancellatesta(lista l) {
+lista cancella_testa(lista l) {
 	lista temp = l->next;
 	free(l);
-	return(temp);
+	return temp;
 }
 ```
 
@@ -314,10 +314,10 @@ lista cancellatesta(lista l) {
 int main() {
 	lista ml;
 	...
-	cancellatesta(&ml);
+	cancella_testa(&ml);
 }
 
-void cancellatesta(lista *l) {
+void cancella_testa(lista *l) {
 	lista temp = *l;
 	*l = (*l)->next;
 	free(tmp);
@@ -332,8 +332,38 @@ Perché `(*l)->next` viene scritto con le parentesi tonde? Perché sia l'asteris
 
 ATTENZIONE A NON MISCHIARE LE DUE VERSIONI!
 
-## Inserimento in testa
+## Inserimento in testa (versione 1)
+
+Ovviamente vanno aggiunti i test di correttezza dei dati (ma non solo in questo inserimento, anche nelle altre cose)
 
 ```c
+int main() {
+	lista ml;
+	lista new = crea_nodo(...);
+	ml = aggiungi_testa(ml, new);
+}
 
+lista aggiungi_testa(lista l, lista new) {
+	new->next = l;
+	return new;
+}
 ```
+
+%% far vedere rappresentazione in memoria degli indirizzi %%
+
+## Inserimento in testa (versione 2)
+
+```c
+int main() {
+	lista ml;
+	lista new = crea_nodo(...);
+	aggiungi_testa(&ml, new);
+}
+
+void aggiungi_testa(lista *l, lista new) {
+	new->next = *l;
+	*l = new;
+}
+```
+
+%% far vedere rappresentazione in memoria degli indirizzi %%
