@@ -23,3 +23,12 @@ td {
 tbody tr:nth-child(2n) {
     background-color: #222222;
 }
+
+.page {
+	& > #quartz-body {
+		& .sidebar {
+			padding: 0 2rem;
+		}
+	}
+}
+
