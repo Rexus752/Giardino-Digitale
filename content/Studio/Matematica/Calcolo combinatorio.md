@@ -124,7 +124,7 @@ di ogni categoria le possibili combinazioni si indicano con la cardinalità es. 
 >$\blacksquare$
 
 >[!osservazione] _Osservazione_: principio di inclusione-esclusione è generalizzazione della cardinalità dell’unione di insiemi finiti disgiunti
->Il principio di inclusione-esclusione è in realtà la generalizzazione della [[#^c3e0e3|cardinalità dell’unione di insiemi finiti disgiunti]], in quanto quest’ultima si calcola appunto su insiemi che per definizione sono disgiunti e, non avendo elementi in comune, non bisogna applicare alcuna “esclusione”.
+>Il principio di inclusione-esclusione è in realtà la generalizzazione della [[#^c3e0e3|cardinalità dell’unione di insiemi finiti disgiunti]], in quanto quest’ultima si calcola appunto su insiemi che per definizione sono disgiunti e, non avendo elementi in comune, non bisogna applicare alcuna "esclusione".
 
 >[!osservazione] _Osservazione_: ricavare una quantità dell’equazione dalle altre tre
 >L’espressione del principio di inclusione-esclusione su due insiemi può riscriversi equivalentemente come
@@ -160,7 +160,7 @@ di ogni categoria le possibili combinazioni si indicano con la cardinalità es. 
 > [!dimostrazione] _Dimostrazione_: tramite ragionamento logico
 > Si inizia sommando il numero degli elementi di ciascun insieme, ottenendo $|A|+|B|+|C|$.
 > Questo totale, però, non tiene conto del fatto che gli elementi comuni a due di questi insiemi sono stati contati due volte, per esempio un elemento in $|A\cap B|$ contribuisce al conto sia per $|A|$ che per $|B|$. Si corregge quindi sottraendo il quantitativo di elementi comuni a due insiemi, ottenendo $|A|+|B|+|C|-|A\cap B|-|B\cap C|-|A\cap C|$.
-> Si considera ora il fatto che possono esserci elementi comuni ai tre insiemi, cioè in $A\cap B\cap C$. Tali elementi sono contati tre volte nella prima somma e sottratti altre tre volte nella “correzione”, in quanto un elemento in $A\cap B\cap C$ appartiene sia a $A\cap B$, sia a $B\cap C$ e sia ad $A\cap C$. Pertanto, per ottenere la formula corretta, bisogna ancora aggiungere $|A\cap B\cap C|$.
+> Si considera ora il fatto che possono esserci elementi comuni ai tre insiemi, cioè in $A\cap B\cap C$. Tali elementi sono contati tre volte nella prima somma e sottratti altre tre volte nella "correzione", in quanto un elemento in $A\cap B\cap C$ appartiene sia a $A\cap B$, sia a $B\cap C$ e sia ad $A\cap C$. Pertanto, per ottenere la formula corretta, bisogna ancora aggiungere $|A\cap B\cap C|$.
 > $\blacksquare$
 
 > [!dimostrazione] _Dimostrazione_: tramite applicazione del principio di inclusione-esclusione per due insiemi
@@ -175,7 +175,7 @@ di ogni categoria le possibili combinazioni si indicano con la cardinalità es. 
 
 >[!esempio] _Esempio_: persone che hanno ordinato entrambe le portate
 >Un cinema mette in programmazione un pomeriggio la trilogia di Matrix e con un unico biglietto si possono vedere un qualunque numero dei tre film. Alla fine della giornata il cinema ha venduto $129$ biglietti. Si sa che al primo film c’erano $109$ spettatori, $76$ al secondo e $55$ al terzo. Si sa anche che $52$ persone hanno visto i primi due film, $44$ gli ultimi due e $28$ spettatori erano presenti sia al primo che all’ultimo film. Quante persone hanno visto tutti e tre i film quel pomeriggio?
->Indicando con $S_i,\quad 1\le i\le 3$ l’insieme degli spettatori all’$i$-esimo film, se si “traducono” le informazioni in linguaggio matematico si ha che $|S_1\cup S_2\cup S_3|=129$, $|S_1|=109$, $|S_2|=76$, $|S_3|=55$, $|S_1\cap S_2|=52$, $|S_2\cap S_3|=44$ e $|S_1\cap S_3|=28$.
+>Indicando con $S_i,\quad 1\le i\le 3$ l’insieme degli spettatori all’$i$-esimo film, se si "traducono" le informazioni in linguaggio matematico si ha che $|S_1\cup S_2\cup S_3|=129$, $|S_1|=109$, $|S_2|=76$, $|S_3|=55$, $|S_1\cap S_2|=52$, $|S_2\cap S_3|=44$ e $|S_1\cap S_3|=28$.
 >Sostituendo questi numeri nella formula del principio di inclusione-esclusione per tre insiemi, si ottiene
 >$$ 129=109+76+55-52-44-28+|S_1\cap S_2\cap S_3| $$
 >da cui si ricava che $|S_1\cap S_2\cap S_3|=13$.

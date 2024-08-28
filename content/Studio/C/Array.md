@@ -3,7 +3,7 @@ Il C permette di usare gli array mono e multi-dimensionali, cioè sequenze di va
 
 `int v[10];`
 - quanto spazio occupa? `sizeof(v) == sizeof(int)*10 == 40 byte`
-- posso usare `v+1`? sì, es: `printf(“%d”, *(v+1))` e `*(v+1)` equivale a `v[1]`
+- posso usare `v+1`? sì, es: `printf("%d", *(v+1))` e `*(v+1)` equivale a `v[1]`
 - posso fare `v++`? no, `v` viene trattato come una costante non può essere modificato (perché in realtà `v++` corrisponde all'istruzione di assegnamento `v = v + 1`)
 
 # Scorrere un array con il cursore

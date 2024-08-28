@@ -2,6 +2,7 @@ Disclaimer: ancora tutto da sistemare, questo è solo l'inizio dei miei appunti.
 - Base:
 	- [Sintassi del C](Sintassi%20del%20C.md)
 	- [Ricorsione in C](Ricorsione%20in%20C.md)
+	- [Funzioni ricorsive](Funzioni%20ricorsive.md)  %% unire questa pagina e [Ricorsione in C](Ricorsione%20in%20C.md)%%
 	- [Funzioni variadiche](Funzioni%20variadiche.md)
 	- [Variabili globali e quantificatori extern e static](Variabili%20globali%20e%20quantificatori%20extern%20e%20static.md)
 	- [Variabili locali static](Variabili%20locali%20static.md)
@@ -19,6 +20,7 @@ Disclaimer: ancora tutto da sistemare, questo è solo l'inizio dei miei appunti.
 - Programmazione in generale:
 	- [Correttezza dei programmi](Correttezza%20dei%20programmi.md)
 	- [Test Driven Development (TDD)](Test%20Driven%20Development%20(TDD).md)
+
 Programmazione:
 - Proprietà del codice (es. affidabilità, correttezza, modularità ecc.) dipendono l'una dall'altra: es. un codice facilmente comprensibile sarà più facile da modificare e rendere più corretto e affidabile.
 
@@ -30,6 +32,7 @@ NO "CICLATA", usare "step del ciclo"
 
 "puntare" = avere come valore un indirizzo di memoria (es. puntare a un intero = avere come valore un indirizzo di memoria che fa riferimento a una cella di memoria contenente un intero)
 
+Fare un transformer che modifica automaticamente tutti i `“` e `”` in `"`
 %%
 
 ---

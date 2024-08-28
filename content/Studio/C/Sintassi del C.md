@@ -277,8 +277,8 @@ typedef struct {
 	int pagine;
 	char autore[MAXN];
 	float prezzo;
-} Libro; // nuovo tipo “Libro”
-Libro L1, L2; // variabili di tipo “Libro”
+} Libro; // nuovo tipo "Libro"
+Libro L1, L2; // variabili di tipo "Libro"
 ```
 
 e in questo caso la struct tag non è più necessaria perché possiamo usare direttamente la parola `Libro` per dichiarare il tipo delle variabili, come abbiamo fatto con `L1` e `L2`.

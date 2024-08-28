@@ -27,7 +27,7 @@ Inoltre in certi casi (shell SSH) si ha a disposizione solo questa modalità d�
 
 - Dalla prima pagina della guida di GDB:
 ```
-GDB allows you to see what is going on “inside” another program while it executes—or what another program was doing at the moment it crashed.
+GDB allows you to see what is going on "inside" another program while it executes—or what another program was doing at the moment it crashed.
 ```
 - E in particolare permette di:
 	- Start your program, specifying anything that might affect its behavior.

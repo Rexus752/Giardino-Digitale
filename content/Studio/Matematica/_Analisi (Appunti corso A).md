@@ -1,6 +1,6 @@
 # Programma d'esame
 
-Il programma fa riferimento al libro di testo “Analisi Matematica – Fare e comprendere” di Dambrosio (Zanichelli Editore). L’elenco delle dimostrazioni da studiare è riportato al fondo.
+Il programma fa riferimento al libro di testo "Analisi Matematica – Fare e comprendere" di Dambrosio (Zanichelli Editore). L’elenco delle dimostrazioni da studiare è riportato al fondo.
 
 ## Funzioni e modelli (Capitolo 1)
 

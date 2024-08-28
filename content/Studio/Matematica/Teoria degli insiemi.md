@@ -19,9 +19,9 @@ Per affermare l’appartenenza di un dato elemento a un insieme si usa il simbol
 
 #### 1.1.1.1) <span style="color:#888888; background:#00000000">Osservazione: restrizioni sulla natura degli elementi di un insieme</span>
 
-Non c’è alcuna restrizione su quale sia la natura degli oggetti che possono appartenere a un insieme: essi possono essere sia oggetti “matematici” (come i numeri), ma non solo (es. l’insieme delle capitali dei Paesi nel mondo). Non è neanche detto che gli oggetti dell’insieme debbano avere una natura “omogenea” (es. può esistere un insieme che ha come elementi il numero 4, il nome del Rettore dell’Università di Torino e la Mole Antonelliana).
+Non c’è alcuna restrizione su quale sia la natura degli oggetti che possono appartenere a un insieme: essi possono essere sia oggetti "matematici" (come i numeri), ma non solo (es. l’insieme delle capitali dei Paesi nel mondo). Non è neanche detto che gli oggetti dell’insieme debbano avere una natura "omogenea" (es. può esistere un insieme che ha come elementi il numero 4, il nome del Rettore dell’Università di Torino e la Mole Antonelliana).
 
-#### 1.1.1.2) <span style="color:#888888; background:#00000000">Osservazione: significato di _“ben definita”_</span>
+#### 1.1.1.2) <span style="color:#888888; background:#00000000">Osservazione: significato di _"ben definita"_</span>
 
 La richiesta che la collezione sia ben definita significa che non deve esserci alcuna ambiguità circa il fatto che un oggetto sia o meno un elemento di un dato insieme (es. l’insieme dei professori bravi dell’Università di Torino non può essere un insieme perché non è possibile definire in modo oggettivo quali professori ne facciano parte e quali no).
 
@@ -83,7 +83,7 @@ La notazione $B=\{\text{Francia}, \space\text{Germania}, \space\text{Svizzera}\}
 
 ### 1.4.2) Notazione: rappresentazione per caratteristica di un insieme
 
-La **rappresentazione per caratteristica** di un insieme consiste nel dare una proprietà che risulti verificata da tutti gli elementi dell’insieme e solo da essi. Dunque, la forma generale della definizione di un insieme $X$ con questo metodo è porre $X=\{x\in U\mid P(x)\}$ (da leggersi _“gli elementi $x$ dell’insieme $U$ tali che $x$ soddisfa la proprietà $P$”_) dove l’insieme $U$, detto _insieme universale_, che può essere implicito o esplicito, è definito precedentemente e funziona da ambito del discorso.
+La **rappresentazione per caratteristica** di un insieme consiste nel dare una proprietà che risulti verificata da tutti gli elementi dell’insieme e solo da essi. Dunque, la forma generale della definizione di un insieme $X$ con questo metodo è porre $X=\{x\in U\mid P(x)\}$ (da leggersi _"gli elementi $x$ dell’insieme $U$ tali che $x$ soddisfa la proprietà $P$"_) dove l’insieme $U$, detto _insieme universale_, che può essere implicito o esplicito, è definito precedentemente e funziona da ambito del discorso.
 
 #### 1.4.2.1) Esempio: $C=\{\text{cittadini italiani}\},D=\{x\in\mathbb{R}\mid x^2>1\}$
 
@@ -434,7 +434,7 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >$$ X/\sim =\{[a]_\sim\mid a\in X\} $$
 >
 >>[!esempio]+ Esempio: relazione di equivalenza su automobili con stesso colore
->>Dato un insieme $X$ di tutte le automobili e una sua relazione di equivalenza $\sim$ letta come _“ha lo stesso colore di”_, allora una classe di equivalenza può essere quella che comprende tutte le automobili verdi, mentre l’insieme quoziente $X/\sim$ è l’insieme dei colori delle automobili.
+>>Dato un insieme $X$ di tutte le automobili e una sua relazione di equivalenza $\sim$ letta come _"ha lo stesso colore di"_, allora una classe di equivalenza può essere quella che comprende tutte le automobili verdi, mentre l’insieme quoziente $X/\sim$ è l’insieme dei colori delle automobili.
 >
 >>[!esempio]+ Esempio: insieme $\Bbb Q$ dei numeri razionali come insieme quoziente
 >>L’insieme $\Bbb Q$ dei numeri razionali può essere espresso come un insieme quoziente. Data una coppia $(p,q)$ ottenuta dal prodotto cartesiano $\mathbb{Z}\times (\mathbb{Z}\setminus\{0\})$ (quindi $p$ può essere qualsiasi numero intero, mentre $q$ qualsiasi numero intero eccetto lo $0$), si può definire una relazione di equivalenza come:

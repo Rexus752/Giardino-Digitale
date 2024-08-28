@@ -18,11 +18,11 @@ gcc <path file(s) .c> -o <path file .out>
 ## Osservazione: perché i pathname?
 
 1. `gcc src/file1.c src/main.c -o bin/a.out`: la compilazione viene fatta nella cartella superiore a quella in cui si trovano i file. Occorre dire al compilatore dove troverà i sorgenti.
-2. `#include “../include/file1.h”`: il file sorgente si trova in una cartella sorella di quella in cui si trova il file header. La posizione dell’header è data come sequenza di passi per raggiungerlo: sali nella cartella genitore con i due puntini `..` e poi scendi in `include`.
+2. `#include "../include/file1.h"`: il file sorgente si trova in una cartella sorella di quella in cui si trova il file header. La posizione dell’header è data come sequenza di passi per raggiungerlo: sali nella cartella genitore con i due puntini `..` e poi scendi in `include`.
 
 Se il progetto è in una sola cartella, ci posizioniamo sulla cartella del progetto quindi:
 1. `gcc file1.c main.c -o a.out`: i sorgenti sono nella stessa cartella da cui si compila e lo sarà anche l’eseguibile
-2. `#include “file1.h”`: gli header sono nella stessa cartella del file che li usa
+2. `#include "file1.h"`: gli header sono nella stessa cartella del file che li usa
 
 # File System
 

@@ -240,7 +240,7 @@ iconColor: "#8888FF"
 >È importante osservare che la composizione $g \circ f$ è definita solo se il codominio di $f$ coincide col dominio di $g$.
 >
 >>[!notazione] _Notazione:_ composizione rappresentata con le frecce
->>La notazione “a frecce” delle funzioni permette di rappresentare semplicemente la composizione $g \circ f$ come:
+>>La notazione "a frecce" delle funzioni permette di rappresentare semplicemente la composizione $g \circ f$ come:
 >>$$ A \xrightarrow{f} B \xrightarrow{g} C,\quad A \xrightarrow{g\circ f} C $$
 >>dove entrambi i percorsi che può seguire un elemento $a \in A$ per arrivare in $C$ danno lo stesso risultato.
 >>^52824c
@@ -268,7 +268,7 @@ iconColor: "#8888FF"
 >$$ f\circ g \ne g \circ f $$
 >
 >>[!esempio] _Esempio:_ $f \colon \mathbb{R}\to \mathbb{R},\quad x\mapsto x^3$ e $g\colon \mathbb{R}\to \mathbb{R},\quad y\mapsto \sin y$
->>Date due funzioni $f \colon \mathbb{R}\to \mathbb{R},\quad x\mapsto x^3$ e $g\colon \mathbb{R}\to \mathbb{R},\quad y\mapsto \sin y$, se si prova a comporle in entrambe le “combinazioni” si ottiene:
+>>Date due funzioni $f \colon \mathbb{R}\to \mathbb{R},\quad x\mapsto x^3$ e $g\colon \mathbb{R}\to \mathbb{R},\quad y\mapsto \sin y$, se si prova a comporle in entrambe le "combinazioni" si ottiene:
 >>- $h=g\circ f\implies h\colon \mathbb{R}\to\mathbb{R},\quad x\to \sin x^3$;
 >>- $j=f\circ g\implies j\colon \mathbb{R}\to\mathbb{R},\quad x\to (\sin x)^3$.
 >>- Si può notare come $h\ne j$, quindi $g\circ f \ne f \circ g$.
@@ -470,8 +470,8 @@ iconColor: "#8888FF"
 >
 >>[!dimostrazione] _Dimostrazione_ 
 >>Se ci sono due elementi $e$ ed $e'$ neutri per $\star$, si deve dimostrare che $e = e'$. Si può calcolare il risultato dell’operazione tra i due elementi $e\star e'$ in due modi diversi:
->>1. Siccome $e$ è neutro, allora deve essere $e\star e'=e'$ ($e'$ è l’elemento mantenuto “invariato” dall’elemento neutro in questo caso);
->>2. Siccome $e'$ è neutro, allora deve essere $e\star e'=e$ ($e$ è l’elemento mantenuto “invariato” dall’elemento neutro in questo caso).
+>>1. Siccome $e$ è neutro, allora deve essere $e\star e'=e'$ ($e'$ è l’elemento mantenuto "invariato" dall’elemento neutro in questo caso);
+>>2. Siccome $e'$ è neutro, allora deve essere $e\star e'=e$ ($e$ è l’elemento mantenuto "invariato" dall’elemento neutro in questo caso).
 >>
 >>Dato che l’operazione $e\star e'$ dà come risultati sia $e$ che $e'$, allora si ha che $e=e'$.
 >>$\blacksquare$

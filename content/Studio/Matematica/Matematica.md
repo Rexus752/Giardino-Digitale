@@ -15,7 +15,7 @@ iconColor: "#FF8888"
 	- [1.1) L'insieme](/Teoria-degli-insiemi#11-linsieme)
 		- [1.1.1) <span style="color:#FF88FF; background:#00000000">Definizione: insieme</span>](/Teoria-degli-insiemi#111-definizione-insieme)
 			- [1.1.1.1) <span style="color:#888888; background:#00000000">Osservazione: restrizioni sulla natura degli elementi di un insieme</span>](/Teoria-degli-insiemi#1111-osservazione-restrizioni-sulla-natura-degli-elementi-di-un-insieme)
-			- [1.1.1.2) <span style="color:#888888; background:#00000000">Osservazione: significato di _“ben definita”_</span>](/Teoria-degli-insiemi#1112-osservazione-significato-di-ben-definita)
+			- [1.1.1.2) <span style="color:#888888; background:#00000000">Osservazione: significato di _"ben definita"_</span>](/Teoria-degli-insiemi#1112-osservazione-significato-di-ben-definita)
 			- [1.1.1.3) <span style="color:#888888; background:#00000000">Osservazione: insiemi come elementi di altri insiemi</span>](/Teoria-degli-insiemi#1113-osservazione-insiemi-come-elementi-di-altri-insiemi)
 			- [1.1.1.4) <span style="color:#888888; background:#00000000">Osservazione: unicità degli elementi</span>](/Teoria-degli-insiemi#1114-osservazione-unicità-degli-elementi)
 			- [1.1.1.5) <span style="color:#888888; background:#00000000">Osservazione: irrilevanza dell’ordine degli elementi</span>](/Teoria-degli-insiemi#1115-osservazione-irrilevanza-dellordine-degli-elementi)

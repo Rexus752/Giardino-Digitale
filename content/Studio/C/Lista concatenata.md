@@ -367,3 +367,87 @@ void aggiungi_testa(lista *l, lista new) {
 ```
 
 %% far vedere rappresentazione in memoria degli indirizzi %%
+
+# Ricorsione e liste concatenate
+
+Le liste concatenate si prestano a essere manipolate tramite funzioni ricorsive per via della propria natura ricorsiva, cioè per definizione una lista concatenata è uno dei possibili tipi di elenco:
+1. vuoto;
+2. costituito da un elemento seguito da un'altra lista concatenata.
+
+## Esempio: somma
+
+Voglio calcolare la somma dei valori contenuti nei nodi di una lista concatenata.
+```c
+int main() {
+	// Creazione lista
+	lista l = crea_nodo();
+	...
+	int sum = somma(l);
+}
+int somma(lista l) {
+	if (l == NULL) return 0;
+	// Dovrebbe essere corretto anche: if (l->next == NULL) return l->value;
+	else {
+		return somma(l->value + somma(l->next));
+	};
+}
+```
+
+Procedimento: percorri la lista accumulando i valori via via incontrati.
+Caso base: lista vuota, anche il caso base produce un valore.
+Passo ricorsivo: somma = valore nodo corrente + somma della lista che lo segue.
+
+Si può fare anche iterativamente es. con un ciclo for.
+
+Fare disegni dei record di attivazione con i colori:
+![](Pasted%20image%2020240827173433.png)
+
+Funzione ricorsiva: restituisce il dato che si vuole calcolare, tra i parametri si mette quel che serve a calcolarlo (in questo caso la lista).
+
+Ovviamente si può usare la ricorsione solo quando tutti i dati sono omogenei.
+
+## Rimozione ricorsiva di una lista
+
+Rimuovere una lista significa non solo togliere degli elementi da essa, ma anche liberare la memoria da essi occupata tramite la funzione `free`.
+
+Versione con parametro passato per riferimento:
+```c
+int main() {
+	// Creazione lista
+	lista l = crea_nodo();
+	...
+	elimina(&l);
+}
+void elimina(lista *l) {
+	if (l && *l) {
+		elimina(&((*l)->next));  // Sposto in avanti
+		free(*l);  // Libero il nodo (attuale ultimo)
+		*l = NULL;  // Segno che dopo non viene più nulla
+	};
+}
+```
+`if l` per vedere se il parametro è definito e `*l` per vedere se la lista non è vuota.
+
+La ricorsione viene fatta in testa perché, durante l'esecuzione della ricorsione, prima ci si deve posizionare in fondo alla lista, e poi bisogna cominciare a liberare i nodi a partire dall'ultimo (non possiamo cominciare a cancellare dal primo perché una volta eliminato il primo nodo non sappiamo come raggiungere il secondo). 
+
+%% In `elimina(&((*l)->next));` colorare le tonde e far capire a cosa serve ognuna %%
+
+Versione con parametro passato per valore:
+```c
+int main() {
+	// Creazione lista
+	lista l = crea_nodo();
+	...
+	l = elimina(l);
+}
+lista elimina(lista l) {
+	if (l) {
+		l->next = elimina(l->next);
+		free(l);
+		return NULL;
+	};
+	else return NULL;
+}
+```
+
+%% Rivedere le slide, c'è altra roba %%
