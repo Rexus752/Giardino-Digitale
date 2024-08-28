@@ -1,4 +1,4 @@
-Una lista concatenata è una struttura dati lineare, cioè una semplice sequenza di elementi collegati tra di loro.
+Una lista concatenata (o anche _lista linkata_ %%in [[itanglese]]%%) è una struttura dati lineare, cioè una semplice sequenza di elementi collegati tra di loro.
 In realtà, la lista concatenata ha una definizione _ricorsiva_, cioè la definizione di lista concatenata usa se stessa per definirsi:
 
 Una lista concatenata è uno dei possibili tipi di elenco:
@@ -67,9 +67,19 @@ Oppure, eliminato il primo elemento, dato che è quello puntato dalla variabile 
 
 %% completare %%
 
+Tabellone:
+
+| Operazione                            | Funzione Iterativa           | Funzione Ricorsiva           |
+| ------------------------------------- | ---------------------------- | ---------------------------- |
+| Eliminazione del primo elemento       | [[Riferimento]] & [[Valore]] | [[Riferimento]] & [[Valore]] |
+| Eliminazione di un elemento nel mezzo | [[Riferimento]] & [[Valore]] | [[Riferimento]] & [[Valore]] |
+| Eliminazione dell'ultimo elemento     | [[Riferimento]] & [[Valore]] | [[Riferimento]] & [[Valore]] |
+
+%% Cercare magari un modo per fare una tabella a 3 entrate %%
+
 ## Eliminazione di un elemento
 
-### Eliminazione del primo elemento
+### Eliminazione iterativa del primo elemento 
 
 ### Eliminazione di un elemento nel mezzo
 
@@ -79,7 +89,7 @@ Oppure, eliminato il primo elemento, dato che è quello puntato dalla variabile 
 
 ### Inserimento di un nuovo primo elemento
 
-### Inserimento di un elemento nel mezzo
+### Inserimento di un nuovo elemento nel mezzo
 
 ### Inserimento di un nuovo ultimo elemento
 
@@ -451,3 +461,135 @@ lista elimina(lista l) {
 ```
 
 %% Rivedere le slide, c'è altra roba %%
+
+## Stampa ricorsiva di una lista
+
+```c
+void stampa(lista l) {
+	if (l) {
+		printf("%d", l->value);
+		stampa(l->next);
+	} else printf("Lista terminata\n");
+}
+```
+
+Cosa succede se inverto le due istruzioni così:
+```c
+void stampa(lista l) {
+	if (l) {
+		stampa(l->next);
+		printf("%d", l->value);
+	} else printf("Lista terminata\n");
+}
+```
+
+Arriva prima all'ultimo elemento e comincia a stampare a ritroso. Quindi attenzione a dove posizionare il richiamo ricorsivo, perché avrà un effetto diverso sulla funzione.
+
+# Liste concatenate ordinate
+
+Ordinate: il modo in cui i nodi sono posizionati rispetta un criterio di ordine. Nel caso dei numeri, criterio di ordine crescente o decrescente. Nel caso delle stringhe, criterio di ordine lessicografico (alfabetico). Nel caso degli insiemi, ordine di inclusione.
+
+Ovviamente, ogni operazione che modifica la lista, deve mantenerla ordinata (es. in una lista ordinata in ordine crescente `3-10-25` vanno inseriti `1, 8, 30`, diventa `1-3-8-10-25-30`).
+
+Va usato quindi un algoritmo che, all'inserimento di un elemento, lo metta nella posizione corretta.
+
+## Inserimento per valore
+
+Assunzioni (P_IN):
+- `l` è una lista concatenata ordinata
+- `nodo` è il nodo di una lista
+
+P_OUT:
+- `l` è una lista concatenata ordinata che contiene tutti gli elementi iniziali + `nodo` inserito rispettando il criterio di ordine
+
+```c
+int main() {
+	lista l = ...
+	l = ins_ord(l, crea_nodo(8));
+}
+lista ins_ord(lista l, lista nodo) {
+	if (l) {  // Quando la lista NON è vuota
+		if (nodo->dato <= l->dato) {  // Nodo va in prima posizione
+			nodo->next = l;
+			return nodo;  // Nodo è la nuova testa della lista
+		} else if (!(l->next)) {  // Nodo va in fondo
+			l->next = nodo;
+			nodo->next = NULL;
+			return l;
+		} else if (nodo->dato < l->next->dato) {  // Nodo va nell'elemento successivo al primo
+			nodo->next = l->next;
+			l->next = nodo;
+			return l;
+		} else {  // Nessuno dei casi precedenti, si scorre
+			l->next = ins_ord(l->next, nodo);
+			return l;
+		}
+	} else {  // Quando la lista è vuota
+		nodo->next = NULL;
+		return nodo;
+	}
+}
+```
+
+Va restituita sempre la testa della lista.
+
+## Inserimento per riferimento
+
+Stesso P_IN e P_OUT ma `*l` è passato per riferimento e non per valore
+
+```c
+int main() {
+	lista l = ...
+	ins_ord(&l, crea_nodo(8));
+}
+void ins_ord(lista *l, lista nodo) {
+	if (!l) {  // Dato inconsistente!
+		printf("l inconsistente");
+	} else {
+		if (*l) {  // Quando la lista NON è vuota
+			if (nodo->dato <= (*l)->dato) {  // Nodo va in prima posizione
+				nodo->next = *l;
+				*l = nodo;  // Nodo è la nuova testa della lista
+			} else if (!((*l)->next)) {  // Nodo va in fondo
+				(*l)->next = nodo;
+				nodo->next = NULL;
+			} else if (nodo->dato < (*l)->next->dato) {  // Nodo va nell'elemento successivo al primo
+				nodo->next = (*l)->next;
+				(*l)->next = nodo;
+			} else {  // Nessuno dei casi precedenti, si scorre
+				(*l)->next = ins_ord((*l)->next, nodo);
+			}
+		} else {  // Quando la lista è vuota
+			nodo->next = NULL;
+			*l = nodo;  // Nodo è la nuova testa della lista
+		}
+	}
+}
+```
+
+Come trasformare da valore a riferimento:
+- Si sostituiscono tutti gli `l` con `*l` (e all'occorrenza `(*l)` per dare priorità all'operatore di dereferenziazione);
+- Si aggiunge controllo su `l`;
+- Non si restituisce nulla, però:
+	- Se `*l` rimane la testa, non si fa nulla;
+	- Se `nodo` diventa la nuova testa, si assegna a `*l`.
+
+Se nel primo `if` facessi al contrario:
+```c
+if (nodo->dato <= (*l)->dato) {  // Nodo va in prima posizione
+	*l = nodo;  // Nodo è la nuova testa della lista
+	nodo->next = *l;
+}
+```
+Succederà che `next` punterà a se stessa.
+
+## Raddoppia i pari
+
+```c
+lista raddoppia_pari(lista l) {
+	if (!l) return NULL;
+	else if (!(l->dato) % 2) {
+		
+	}
+}
+```

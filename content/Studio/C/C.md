@@ -33,6 +33,10 @@ NO "CICLATA", usare "step del ciclo"
 "puntare" = avere come valore un indirizzo di memoria (es. puntare a un intero = avere come valore un indirizzo di memoria che fa riferimento a una cella di memoria contenente un intero)
 
 Fare un transformer che modifica automaticamente tutti i `“` e `”` in `"`
+
+Strutture dati dinamiche = strutture di dati costituite da elementi detti _nodi_ che sono collegati tra loro tramite _relazioni_. Sono dinamiche perché non hanno una lunghezza fissata a run-time, ma possono essere espanse. Esempi:
+- Lineare: liste concatenate
+- Non-lineare: alberi
 %%
 
 ---

@@ -71,8 +71,11 @@ che, oltre a essere matematicamente sbagliato, è logicamente sbagliato perché 
 
 %% Fare vedere lo stack di esecuzione %%
 
-# 
+# Lineare
 
-La ricorsione permette di scrivere codice compatto e facile da interpretare. È detta _lineare_ quando produce una singola sequenza di chiamate (come nel caso del [[fattoriale]]). La ricorsione lineare in coda corrisponde a un ciclo.
+È detta _lineare_ quando produce una singola sequenza di chiamate (come nel caso del [[fattoriale]]). La ricorsione lineare in coda corrisponde a un ciclo.
 
+# Efficienza
+
+La ricorsione permette di scrivere codice compatto e facile da interpretare.
 La ricorsione comporta un _overhead_, cioè un tempo extra di esecuzione e occupazione di memoria dovuto alla creazione e rimozione del relativo record di attivazione. Se si vuole efficienza, quindi, meglio scegliere l'iterazione che fa uso di un unico record di attivazione.
