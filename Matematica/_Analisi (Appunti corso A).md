@@ -322,9 +322,9 @@ Zoommando sempre di più, il grafico "tende a essere rettilineo". La retta tange
 ### Osservazione
 
 Spesso il grafico di $f$ sta "localmente dalla stessa parte" rispetto alla tangente:
-![](Localmente.png)
+![](Matematica/attachments/Localmente.png)
 A volte invece il grafico di $f$ attraversa la tangente:
-![](Tangente.png)
+![](Matematica/attachments/Tangente.png)
 Questi punti si dicono _punti di flesso_.
 
 ### Esercizio: dato il grafico di $f$, tracciare approssimativamente il grafico di $p_f$
@@ -574,7 +574,7 @@ Il punto si muove verso destra per $2s$. Nell'intervallo $[0,1]$ accelera. In $[
 
 #### Punto 2
 
-![](s(t).png)
+![](Matematica/attachments/s(t).png)
 
 Problema: non conosciamo la posizione finale (o qualsiasi altra posizione) per $s$.
 Possiamo solo descrivere monotonia e convessità. Per risolvere questo problema ci sarà utile l'integrale definito.

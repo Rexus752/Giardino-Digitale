@@ -157,7 +157,7 @@ iconColor: "#8888FF"
 >
 >>[!esempio] _Esempio:_ esempio grafico dell’iniettività
 >>Un esempio grafico dell’iniettività è il seguente, in cui ogni elemento dell’insieme $A=\{2,4,6\}$ è associato a un solo elemento dell’insieme $B=\{9,7,5,3\}$:
->>![[Iniettività.png]]
+>>![[Matematica/attachments/Iniettività.png]]
 >
 >>[!esempio] _Esempio:_ iniettività della funzione $f\colon \mathbb{Z}\to\mathbb{Z},\quad n\mapsto2n+1$
 >>Data una funzione $f\colon \mathbb{Z}\to\mathbb{Z},\quad n\mapsto2n+1$, essa è iniettiva. Infatti, dati due interi $m\ne n$ si ha certamente $f(m)=2m+1\ne f(n)=2n+1$.
@@ -180,7 +180,7 @@ iconColor: "#8888FF"
 >
 >>[!esempio] _Esempio:_ esempio grafico della suriettività
 >>Un esempio grafico della suriettività è il seguente, in cui ogni elemento dell’insieme $B=\{9,7,5\}$ è associato ad almeno un elemento della funzione $A=\{2,4,6,8\}$:
->>![[Suriettività.png]]
+>>![[Matematica/attachments/Suriettività.png]]
 >
 >>[!esempio] _Esempio:_ non-suriettività della funzione $f\colon\mathbb{Z}\to\mathbb{Z},\quad x\mapsto 2x+1$
 >>Data una funzione $f\colon\mathbb{Z}\to\mathbb{Z},\quad x\mapsto 2x+1$, le immagini dei singoli elementi sono sempre numeri dispari e ogni numeri intero dispari $m$ può essere scritto nella forma $m = 2k+1,\quad \forall k \in \mathbb{Z}$. Dunque $m=f(k)$ e si può concludere che l’immagine di $f$ è costituita dagli interi dispari, ovvero $\text{Im}(f)=2\mathbb{Z}+1$. Poiché $2\mathbb{Z}+1\ne\mathbb{Z}$, la funzione $f$ non è suriettiva.
@@ -207,7 +207,7 @@ iconColor: "#8888FF"
 >
 >>[!esempio] _Esempio:_ esempio grafico della biettività
 >>Un esempio grafico della suriettività è il seguente, in cui ogni elemento dell’insieme $B=\{9,7,5,3\}$ è associato a uno e un solo elemento della funzione $A=\{2,4,6,8\}$:
->>![[Biettività.png]]
+>>![[Matematica/attachments/Biettività.png]]
 >
 >>[!esempio] _Esempio:_ biettività della funzione identità
 >>Per ogni insieme $A$, la [[#^c01106|funzione identità]] $\text{id}_A:A\to A$ è biettiva, in quanto a ogni elemento del codominio è associato un solo elemento del dominio (ossia se stesso).
