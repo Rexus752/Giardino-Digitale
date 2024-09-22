@@ -154,6 +154,12 @@ flowchart LR
 
 La lista diventa vuota
 
+## Cancellazione di tutta la lista
+
+### Iterativa
+
+### Ricorsiva
+
 # Esempio: lista della spesa
 
  Esempio: una lista della spesa è un elenco di prodotti da comperare, non ordinato e lo stesso elemento potrebbe comparire più volte.
@@ -585,11 +591,43 @@ Succederà che `next` punterà a se stessa.
 
 ## Raddoppia i pari
 
+Con le chiamate ricorsive, assegno alla chiamata il nodo successivo a quello corrente e ritorno il nodo (corrente) che deve essere agganciato al nodo precedente
+
 ```c
 lista raddoppia_pari(lista l) {
 	if (!l) return NULL;
-	else if (!(l->dato) % 2) {
-		
+	else if (!(l->dato) % 2) { // Se è pari
+		lista doppione = crea_nodo(l->dato);
+		doppione->next = l;
+		l->next = raddoppia_pari(l->next);
+		return doppione;
+	} else { // Se non è pari
+		l->next = raddoppia_pari(l->next);
+		return l;
 	}
 }
 ```
+
+```c
+int main() {
+	...
+	togli_tutti_val(&ml, 3);
+}
+
+void togli_tutti_val(lista *l, int val) {
+	if (l && *l) {
+		if ((*l)->dato == val) {
+			lista tmp = *l;
+			*l = (*l)->next;
+			free(tmp);
+			tmp = NULL;
+			togli_tutti_val(l, val); // Si richiama sempre l perché l è già il prossimo valore da controllare
+		} else {
+			toglie_tutti_val(&((*l)->next), val);
+		}
+	} else {
+		printf("Lista vuota o puntatore non corretto");
+	}
+}
+```
+

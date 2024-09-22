@@ -1,17 +1,23 @@
 Disclaimer: ancora tutto da sistemare, questo è solo l'inizio dei miei appunti.
+
 - Base:
-	- [Sintassi del C](Sintassi%20del%20C.md)
+	- [Sintassi del C](Sintassi%20del%20C.md) 
 	- [Ricorsione in C](Ricorsione%20in%20C.md)
 	- [Funzioni ricorsive](Funzioni%20ricorsive.md)  %% unire questa pagina e [Ricorsione in C](Ricorsione%20in%20C.md)%%
 	- [Funzioni variadiche](Funzioni%20variadiche.md)
 	- [Variabili globali e quantificatori extern e static](Variabili%20globali%20e%20quantificatori%20extern%20e%20static.md)
 	- [Variabili locali static](Variabili%20locali%20static.md)
-- Strutture dati:
 	- [Array](Array.md)
+- Tipi di dati astratti:
+	- [Lista concatenata](Lista%20concatenata.md)
+	- [Pila (stack)](Pila%20(stack).md)
+	- [Coda (queue)](Coda%20(queue).md)
+	- [Insiemi (set)](Insiemi%20(set).md)
+	- [Alberi](Alberi.md)
+	- [ADT generici](ADT%20generici.md)
 - Gestione della memoria:
 	- [Allocazione della memoria in C](Allocazione%20della%20memoria%20in%20C.md)
-	- [Lista concatenata](Lista%20concatenata.md)
-	- [Algoritmi su array ordinati](Algoritmi%20su%20array%20ordinati.md)
+	- [Puntatore a funzione](Puntatore%20a%20funzione.md)
 - Compilazione e struttura dei file in C:
 	- [Organizzazione dei file](Organizzazione%20dei%20file.md)
 	- [Compilazione del C](Compilazione%20del%20C.md)

@@ -160,7 +160,7 @@ free(ptr);
 
 La `free` va fatta quando si vuole liberare la porzione di RAM occupata dall’array perché non ci serve più. Sarà considerata (dal run-time del C) come non allocata - e quindi (ri)allocabile.
 
-Però rimane il valore dell'indirizzo in `ptr`: fare quindi `ptr = NULL;` (ATTENZIONE: il valore di d non diventa NULL automaticamente per effetto della free!)
+Però rimane il valore dell'indirizzo in `ptr`: fare quindi `ptr = NULL;` (ATTENZIONE: il valore di d non diventa NULL automaticamente per effetto della free!) https://it.wikipedia.org/wiki/Dangling_pointer
 
 ## Esempio di un uso errato
 

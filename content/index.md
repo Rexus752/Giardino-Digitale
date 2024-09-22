@@ -7,3 +7,6 @@ Il sito è ancora _work in progress_, per questo c'è poca roba e fatta molto al
 Tablature per basso: [[so, bassically-]]
 
 Roba di C (esame di Programmazione II): [C](C.md)
+
+Lista dei miei _rabbit hole_:
+- [NixOS](NixOS.md)

@@ -14,29 +14,29 @@ Risolvere problema link coi colori agli heading
 
 ### 1.1.1) <span style="color:#FF88FF; background:#00000000">Definizione: insieme</span>
 
-Un **insieme**, denotato con le lettere latine maiuscole (es. $A$, $B$, $C$, ecc.), è una collezione ben definita di oggetti distinti, detti _elementi_ dell’insieme, denotati con le lettere latine minuscole (es. $a$, $b$, $c$, ecc.) e contenuti nelle parentesi graffe $\{\}$.
-Per affermare l’appartenenza di un dato elemento a un insieme si usa il simbolo $\in$ (es. $a \in A$ denota che l’elemento $a$ appartiene all'insieme $A$), mentre per negarla si usa il simbolo $\notin$ (es. $b \notin B$ denota che l’elemento $b$ non appartiene all'insieme $B$).
+Un **insieme**, denotato con le lettere latine maiuscole (es. $A$, $B$, $C$, ecc.), è una collezione ben definita di oggetti distinti, detti _elementi dell'insieme_, generalmente denotati con le lettere latine minuscole (es. $a$, $b$, $c$, ecc.).
+Per affermare l'appartenenza di un dato elemento a un insieme si usa il simbolo $\in$ e si legge come _"appartiene a"_ (es. $a \in A$ denota che l'elemento $a$ appartiene all'insieme $A$), mentre per negarla si usa il simbolo $\notin$ e si legge come _"non appartiene a"_ (es. $b \notin B$ denota che l'elemento $b$ non appartiene all'insieme $B$).
 
 #### 1.1.1.1) <span style="color:#888888; background:#00000000">Osservazione: restrizioni sulla natura degli elementi di un insieme</span>
 
-Non c’è alcuna restrizione su quale sia la natura degli oggetti che possono appartenere a un insieme: essi possono essere sia oggetti "matematici" (come i numeri), ma non solo (es. l’insieme delle capitali dei Paesi nel mondo). Non è neanche detto che gli oggetti dell’insieme debbano avere una natura "omogenea" (es. può esistere un insieme che ha come elementi il numero 4, il nome del Rettore dell’Università di Torino e la Mole Antonelliana).
+Non c'è alcuna restrizione su quale sia la natura degli oggetti che possono appartenere a un insieme: essi possono essere sia oggetti "matematici" (come i numeri), ma non solo (es. l'insieme delle capitali dei Paesi nel mondo). Non è neanche detto che gli oggetti dell'insieme debbano avere una natura "omogenea" (es. può esistere un insieme che ha come elementi il numero 4, il nome del Rettore dell'Università di Torino e la Mole Antonelliana).
 
 #### 1.1.1.2) <span style="color:#888888; background:#00000000">Osservazione: significato di _"ben definita"_</span>
 
-La richiesta che la collezione sia ben definita significa che non deve esserci alcuna ambiguità circa il fatto che un oggetto sia o meno un elemento di un dato insieme (es. l’insieme dei professori bravi dell’Università di Torino non può essere un insieme perché non è possibile definire in modo oggettivo quali professori ne facciano parte e quali no).
+La richiesta che la collezione sia ben definita significa che non deve esserci alcuna ambiguità circa il fatto che un oggetto sia o meno un elemento di un dato insieme (es. l'insieme dei professori bravi dell'Università di Torino non può essere un insieme perché non è possibile definire in modo oggettivo quali professori ne facciano parte e quali no).
 
 #### 1.1.1.3) <span style="color:#888888; background:#00000000">Osservazione: insiemi come elementi di altri insiemi</span>
 
-Una volta definito correttamente un certo insieme, esso è certamente un oggetto e come tale può essere esso stesso elemento di un altro insieme: gli elementi di un insieme possono essere a loro volta insiemi (es. l’insieme $B$ può essere inteso come un elemento dell’insieme $A$).
-Inoltre, dati un insieme $A$ e un suo elemento l’insieme $B\in A$, gli elementi di $B$ non sono elementi di $A$ (es. se abbiamo $B=\{3,4\}$ e $A=\{0,1,2,\{3,4\}\}$, con $B \in A$ sono 4, in quanto gli elementi $\{3,4\}$ di $B$ sono contati come un unico elemento in $A$).
+Una volta definito correttamente un certo insieme, esso è certamente un oggetto e come tale può essere esso stesso elemento di un altro insieme: gli elementi di un insieme possono essere a loro volta insiemi (es. l'insieme $B$ può essere inteso come un elemento dell'insieme $A$).
+Inoltre, dati un insieme $A$ e un suo elemento l'insieme $B\in A$, gli elementi di $B$ non sono elementi di $A$ (es. se abbiamo $B=\{3,4\}$ e $A=\{0,1,2,\{3,4\}\}$, con $B \in A$ sono 4, in quanto gli elementi $\{3,4\}$ di $B$ sono contati come un unico elemento in $A$).
 
 #### 1.1.1.4) <span style="color:#888888; background:#00000000">Osservazione: unicità degli elementi</span>
 
 Per definizione, essendo un insieme una collezione di oggetti distinti, esso non può avere elementi ripetuti (es. gli insiemi $A=\{0,0,1,2,3\}$ e $B=\{0,1,2,3\}$ sono lo stesso insieme).
 
-#### 1.1.1.5) <span style="color:#888888; background:#00000000">Osservazione: irrilevanza dell’ordine degli elementi</span>
+#### 1.1.1.5) <span style="color:#888888; background:#00000000">Osservazione: irrilevanza dell'ordine degli elementi</span>
 
-In un insieme non conta l’ordine degli elementi (es. gli insiemi $A=\{0,1\}$ e $B=\{1,0\}$ sono lo stesso insieme).
+In un insieme non conta l'ordine degli elementi (es. gli insiemi $A=\{0,1\}$ e $B=\{1,0\}$ sono lo stesso insieme).
 
 ## 1.2) L'insieme vuoto
 
@@ -44,15 +44,21 @@ In un insieme non conta l’ordine degli elementi (es. gli insiemi $A=\{0,1\}$ e
 
 Un **insieme vuoto**, denotato col simbolo $\emptyset$, è un insieme privo di elementi.
 
-#### 1.2.1.1) <span style="color:#888888; background:#00000000">Osservazione: l’insieme $A=\{\emptyset\}$ non è vuoto</span>
+#### 1.2.1.1) <span style="color:#888888; background:#00000000">Osservazione: l'insieme $A=\{\emptyset\}$ non è vuoto</span>
 
-L’insieme $A=\{\emptyset\}$ non è un insieme vuoto: l’insieme vuoto è privo di elementi, mentre l’insieme $A$ ha un elemento, ossia l’elemento-insieme vuoto $\emptyset \in A$ ([come già osservato](#<mark%20style="background%2088888888;">1.1.1.3\)%20BoBxGlassesAlt%20Osservazione%20insiemi%20come%20elementi%20di%20altri%20insiemi%20skip), un insieme può avere come suoi elementi altri insiemi).
+L'insieme $A=\{\emptyset\}$ non è un insieme vuoto: l'insieme vuoto è privo di elementi, mentre l'insieme $A$ ha un elemento, ossia l'elemento-insieme vuoto $\emptyset \in A$ ([come già osservato](#<mark%20style="background%2088888888;">1.1.1.3\)%20BoBxGlassesAlt%20Osservazione%20insiemi%20come%20elementi%20di%20altri%20insiemi%20skip), un insieme può avere come suoi elementi altri insiemi).
+
+## Singoletto
+
+Definizione: Si dice _singoletto_ o _insieme unitario_ l'insieme formato da un solo elemento (es. $\{0\}$ o anche $\{\{1,2,3\}\}$)
 
 ## 1.3) Cardinalità di un insieme
 
-### 1.3.1) Definizione: cardinalità di un insieme
+### 1.3.1) <span style="color:#FF88FF; background:#00000000">Definizione: cardinalità di un insieme</span>
 
 La **cardinalità** di un insieme $A$, denotata $|A|$, è il numero degli elementi di $A$. Quindi, se $A$ contiene un numero finito $n$ di elementi si denota $|A|=n$ (es. $|\emptyset|=0$), mentre se $A$ contiene infiniti elementi si denota $|A| = \infty$.
+
+%% Esiste anche notazione $\#A$%%
 
 #### 1.3.1.1) Esempio: $|\{0,1\}|=2$
 
@@ -60,39 +66,43 @@ Dato un insieme $A=\{0,1\}$, la sua cardinalità $|A|=|\{0,1\}|$ è pari a $2$, 
 
 #### 1.3.1.2) Esempio: $|\{\{0,1\}, 0, 1\}|=3$
 
-Dato un insieme $A=\{0,1\}$ e un insieme $B$ che ha come elementi l’insieme $A$ e i numeri $0$ e $1$, quindi $B=\{\{0,1\},0,1\}$, la sua cardinalità $|B|=|\{\{0,1\},0,1\}|$ è pari a $3$, in quanto l’insieme $A$ viene considerato come un unico elemento in $B$, mentre gli altri due numeri $0$ e $1$ vengono considerati ognuno come un elemento a sé stante.
+Dato un insieme $A=\{0,1\}$ e un insieme $B$ che ha come elementi l'insieme $A$ e i numeri $0$ e $1$, quindi $B=\{\{0,1\},0,1\}$, la sua cardinalità $|B|=|\{\{0,1\},0,1\}|$ è pari a $3$, in quanto l'insieme $A$ viene considerato come un unico elemento in $B$, mentre gli altri due numeri $0$ e $1$ vengono considerati ognuno come un elemento a sé stante.
 %%mettere colori%%
 
 #### 1.3.1.3) Esempio: $|\mathbb{N}|=\infty$
 
-La cardinalità dell’insieme dei numeri naturali $\mathbb{N}$, quindi $|\mathbb{N}|$, è uguale a $\infty$, in quanto l’insieme $\mathbb{N}$ contiene infiniti elementi che vanno da $0$ a $+\infty$.
+La cardinalità dell'insieme dei numeri naturali $\mathbb{N}$, quindi $|\mathbb{N}|$, è uguale a $\infty$, in quanto l'insieme $\mathbb{N}$ contiene infiniti elementi che vanno da $0$ a $+\infty$.
 
 ## 1.4) Rappresentazioni di un insieme
 
 ### 1.4.1) Notazione: rappresentazione per elencazione di un insieme
 
-La **rappresentazione per elencazione** di un insieme prevede di indicare tutti gli elementi che appartengono ad un insieme semplicemente elencandoli uno ad uno, all’interno di parentesi graffe. Quando si rappresenta un insieme per elencazione, non ha mai importanza l’ordine con cui si scrivono gli elementi e, inoltre, tale metodo è pratico solo quando l’insieme in questione contiene pochi elementi.
+La **rappresentazione per elencazione** di un insieme prevede di indicare tutti gli elementi che appartengono ad un insieme semplicemente elencandoli uno ad uno, all'interno di parentesi graffe. Quando si rappresenta un insieme per elencazione, non ha mai importanza l'ordine con cui si scrivono gli elementi e, inoltre, tale metodo è pratico solo quando l'insieme in questione contiene pochi elementi.
 
 #### 1.4.1.1) Esempio: $A=\{1,2,3,4,5,6,7,8,9\}$
 
-La notazione $A=\{1,2,3,4,5,6,7,8,9\}$ definisce correttamente l’insieme $A$ come l’insieme dei numerali naturali compresi tra 1 e 9.
+La notazione $A=\{1,2,3,4,5,6,7,8,9\}$ definisce correttamente l'insieme $A$ come l'insieme dei numerali naturali compresi tra 1 e 9.
 
 #### 1.4.1.2) Esempio: $B=\{\text{Francia}, \space\text{Germania}, \space\text{Svizzera}\}$
 
-La notazione $B=\{\text{Francia}, \space\text{Germania}, \space\text{Svizzera}\}$ definisce correttamente l’insieme $B$ come un insieme contenente alcune nazioni europee.
+La notazione $B=\{\text{Francia}, \space\text{Germania}, \space\text{Svizzera}\}$ definisce correttamente l'insieme $B$ come un insieme contenente alcune nazioni europee.
 
 ### 1.4.2) Notazione: rappresentazione per caratteristica di un insieme
 
-La **rappresentazione per caratteristica** di un insieme consiste nel dare una proprietà che risulti verificata da tutti gli elementi dell’insieme e solo da essi. Dunque, la forma generale della definizione di un insieme $X$ con questo metodo è porre $X=\{x\in U\mid P(x)\}$ (da leggersi _"gli elementi $x$ dell’insieme $U$ tali che $x$ soddisfa la proprietà $P$"_) dove l’insieme $U$, detto _insieme universale_, che può essere implicito o esplicito, è definito precedentemente e funziona da ambito del discorso.
+La **rappresentazione per caratteristica** di un insieme consiste nel dare una proprietà che risulti verificata da tutti gli elementi dell'insieme e solo da essi. Dunque, la forma generale della definizione di un insieme $X$ con questo metodo è porre
+$$
+X=\{x\in U\mid P(x)\}
+$$
+(da leggersi _"gli elementi $x$ dell'insieme $U$ tali che $x$ soddisfa la proprietà $P$"_) dove l'insieme $U$, detto _insieme universale_, che può essere implicito o esplicito, è definito precedentemente e funziona da ambito del discorso.
 
 #### 1.4.2.1) Esempio: $C=\{\text{cittadini italiani}\},D=\{x\in\mathbb{R}\mid x^2>1\}$
 
-Le notazioni $C=\{\text{cittadini italiani}\}$ e $D=\{x\in\mathbb{R}\mid x^2>1\}$ definiscono correttamente due insiemi nonostante non siano elencati esplicitamente tutti i loro elementi, specialmente nel caso dell’insieme $D$ che sarebbe matematicamente impossibile, essendo questo insieme infinito.
-In particolare, gli oggetti a cui applicare i due criteri sono presi a priori da un certo insieme di riferimento, esplicito nel caso di $D$ (l’insieme $\mathbb{R}$ dei numeri reali) ed implicito nel caso di $C$ (avrebbe senso applicare il criterio su un insieme di esseri umani).
+Le notazioni $C=\{\text{cittadini italiani}\}$ e $D=\{x\in\mathbb{R}\mid x^2>1\}$ definiscono correttamente due insiemi nonostante non siano elencati esplicitamente tutti i loro elementi, specialmente nel caso dell'insieme $D$ che sarebbe matematicamente impossibile, essendo questo insieme infinito.
+In particolare, gli oggetti a cui applicare i due criteri sono presi a priori da un certo insieme di riferimento, esplicito nel caso di $D$ (l'insieme $\mathbb{R}$ dei numeri reali) ed implicito nel caso di $C$ (avrebbe senso applicare il criterio su un insieme di esseri umani).
 
 ### 1.4.3) Notazione: rappresentazione grafica di un insieme
 
-La **rappresentazione grafica di un insieme** consiste nel rappresentarlo con una regione di piano limitata da una curva chiusa: gli elementi dell’insieme sono scritti all’interno della linea chiusa, mentre gli elementi che non appartengono all’insieme stanno all’esterno. Il nome dell’insieme, invece, viene posto all’esterno della linea chiusa vicino a essa. Forme grafiche di questo tipo sono generalmente denominate _diagrammi di Eulero-Venn_ ed offrono un supporto intuitivo notevole nel rappresentare gli insiemi.
+La **rappresentazione grafica di un insieme** consiste nel rappresentarlo con una regione di piano limitata da una curva chiusa: gli elementi dell'insieme sono scritti all'interno della linea chiusa, mentre gli elementi che non appartengono all'insieme stanno all'esterno. Il nome dell'insieme, invece, viene posto all'esterno della linea chiusa vicino a essa. Forme grafiche di questo tipo sono generalmente denominate _diagrammi di Eulero-Venn_ ed offrono un supporto intuitivo notevole nel rappresentare gli insiemi.
 
 ### 1.4.4) Notazione: rappresentazione per intervalli di un insieme
 
@@ -110,7 +120,7 @@ Dato un insieme $A=\{x\in\mathbb{R}\mid x >-1 \land x \le 4\}$, esso si può anc
 
 # 2) Sottoinsiemi
 
-## 2.1) Definizione: sottoinsieme
+## 2.1) <span style="color:#FF88FF; background:#00000000">Definizione: sottoinsieme</span>
 
 Dati due insiemi $A$ e $B$, $B$ si dice _**sottoinsieme**_ di $A$ e si denota con $B \subseteq A$ se ogni elemento di $B$ è anche un elemento di $A$:
 $$ B\subseteq A=\{b \in B \mid b \in A\} $$
@@ -118,17 +128,17 @@ $A$ viene chiamato _soprainsieme_ di $B$.
 
 ### 2.1.1) Esempio: sottoinsiemi di $A=\{0,1,2,3,4\}$
 
-Dato un insieme $A=\{0,1,2,3,4\}$, possibili sottoinsiemi di $A$ sono gli insiemi $B=\{0,1,2\}$ e $C=\{4\}$, in quanto gli elementi che contengono appartengono anche ad $A$. Sono sottoinsiemi di $A$ anche l’insieme vuoto $\emptyset$ e un insieme $D=\{0,1,2,3,4\}$, ossia i suoi sottoinsiemi banali.
+Dato un insieme $A=\{0,1,2,3,4\}$, possibili sottoinsiemi di $A$ sono gli insiemi $B=\{0,1,2\}$ e $C=\{4\}$, in quanto gli elementi che contengono appartengono anche ad $A$. Sono sottoinsiemi di $A$ anche l'insieme vuoto $\emptyset$ e un insieme $D=\{0,1,2,3,4\}$, ossia i suoi sottoinsiemi banali.
 
-## 2.2) Definizione: sottoinsiemi banali
+## 2.2) <span style="color:#FF88FF; background:#00000000">Definizione: sottoinsiemi banali</span>
 
 Per ogni insieme $X$ si ha sempre che $\emptyset \subseteq X$ e $X \subseteq X$: questi sono detti ***sottoinsiemi banali*** di $X$.
 
 ### 2.2.1) Esempio: sottoinsiemi banali di $A=\{0,1,2,3,4\}$
 
-Dato un insieme $A=\{0,1,2,3,4\}$, i suoi sottoinsiemi banali sono l’insieme vuoto $\emptyset$ e l’insieme $D=\{0,1,2,3,4\}$.
+Dato un insieme $A=\{0,1,2,3,4\}$, i suoi sottoinsiemi banali sono l'insieme vuoto $\emptyset$ e l'insieme $D=\{0,1,2,3,4\}$.
 
-## 2.3) Definizione: sottoinsieme proprio
+## 2.3) <span style="color:#FF88FF; background:#00000000">Definizione: sottoinsieme proprio</span>
 
 Dati un insieme $A$ e un suo sottoinsieme $B$ con $B \ne A$, $B$ è detto sottoinsieme proprio di $A$ e si può indicare anche con il simbolo $\subsetneq$ per evidenziarne la disuguaglianza: $B\subsetneq A$.
 
@@ -138,9 +148,9 @@ Dato un insieme $A=\{0,1,2,3,4\}$, dei suoi possibili sottoinsiemi propri sono g
 
 ## 2.4) Insieme delle parti
 
-### 2.4.1) Definizione: insieme delle parti
+### 2.4.1) <span style="color:#FF88FF; background:#00000000">Definizione: insieme delle parti</span>
 
-Dato un insieme $A$, si definisce insieme delle parti di $A$ e si denota $\mathcal{P}(A)$ l’insieme i cui elementi sono tutti i sottoinsiemi di $A$:
+Dato un insieme $A$, si definisce insieme delle parti di $A$ e si denota $\mathcal{P}(A)$ l'insieme i cui elementi sono tutti i sottoinsiemi di $A$:
 $$\mathcal{P}(A)=\{B\mid B \subseteq A\}$$
 
 #### 2.4.1.1) Esempio: insieme delle parti di $A=\{a,b,c\}$
@@ -149,7 +159,7 @@ Dato un insieme $A=\{a,b,c\}$, si ha $\mathcal{P}(A)=\{\emptyset, \{a\}, \{b\}, 
 
 #### 2.4.1.2) <span style="color:#888888; background:#00000000">Osservazione: $\mathcal{P}(\emptyset)=\{\emptyset\}$</span>
 
-L’unico sottoinsieme di $\emptyset$ è $\{\emptyset\}$. Pertanto, $\mathcal{P}(\emptyset)=\{\emptyset\}$ e, dunque, $\mathcal{P}(\emptyset)\ne\emptyset$.
+L'unico sottoinsieme di $\emptyset$ è $\{\emptyset\}$. Pertanto, $\mathcal{P}(\emptyset)=\{\emptyset\}$ e, dunque, $\mathcal{P}(\emptyset)\ne\emptyset$.
 
 #### 2.4.1.3) <span style="color:#888888; background:#00000000">Osservazione: $\mathcal{P}(\{a\})=\{\emptyset,\{a\}\}$</span>
 
@@ -164,16 +174,16 @@ Dati due insiemi $A$ e $B$, essi sono uguali solo se $A\subseteq B$ e $B\subsete
 ### 3.1.1) Dimostrazione
 
 Se $A=B$, allora $A$ e $B$ hanno esattamente gli stessi elementi, cioè ogni elemento di $A$ è anche un elemento di $B$ (e quindi $A \subseteq B$) e ogni elemento di $B$ è anche un elemento di $A$ (e quindi $B \subseteq A$).
-Viceversa, se $A \subseteq B$ e $B \subseteq A$, allora $A$ e $B$ devono contenere esattamente gli stessi elementi, perché l’esistenza di un $x \in A \mid x \notin B$ contraddice l’ipotesi $A \subseteq B$ e l’esistenza di un $y \in B \mid y \notin A$ contraddice l’ipotesi $B \subseteq A$.
+Viceversa, se $A \subseteq B$ e $B \subseteq A$, allora $A$ e $B$ devono contenere esattamente gli stessi elementi, perché l'esistenza di un $x \in A \mid x \notin B$ contraddice l'ipotesi $A \subseteq B$ e l'esistenza di un $y \in B \mid y \notin A$ contraddice l'ipotesi $B \subseteq A$.
 $\blacksquare$
 
 # 4) Operazioni sugli insiemi
 
 ## 4.1) Intersezione
 
-### 4.1.1) Definizione: intersezione di due insiemi
+### 4.1.1) <span style="color:#FF88FF; background:#00000000">Definizione: intersezione di due insiemi</span>
 
-Dati due insiemi $A$ e $B$, si dice _**intersezione**_ di $A$ e $B$ e si denota $A\cap B$ l’insieme che comprende gli elementi che appartengono contemporaneamente sia ad $A$ che a $B$:
+Dati due insiemi $A$ e $B$, si dice _**intersezione**_ di $A$ e $B$ e si denota $A\cap B$ l'insieme che comprende gli elementi che appartengono contemporaneamente sia ad $A$ che a $B$:
 $$ A \cap B = \{x \mid x \in A \land x \in B\} $$
 Due insiemi $A$ e $B$ si dicono _disgiunti_ se non hanno elementi in comune:
 $$ A \cap B = \emptyset $$
@@ -197,9 +207,9 @@ allora $A \cap B = \{\{a,c\},\{b,c\},\{c,d\}\}$.
 
 ## 4.2) Unione
 
-### 4.2.1) Definizione: unione di due insiemi 
+### 4.2.1) <span style="color:#FF88FF; background:#00000000">Definizione: unione di due insiemi</span>
 
-Dati due insiemi $A$ e $B$, si dice _**unione**_ di $A$ e $B$ e si denota $A\cup B$ l’insieme contenente tutti gli elementi di entrambi gli insiemi:
+Dati due insiemi $A$ e $B$, si dice _**unione**_ di $A$ e $B$ e si denota $A\cup B$ l'insieme contenente tutti gli elementi di entrambi gli insiemi:
 $$ A \cup B = \{x \mid x \in A \lor x \in B\} $$
 Gli elementi che si trovano sia in $A$ che in $B$ vengono presi in considerazione una volta sola perché, [come già osservato](#^Insieme), non ci possono essere elementi ripetuti in un insieme.
 
@@ -223,9 +233,9 @@ Dati due insiemi $A=\{n \in \mathbb{N} \mid n\mod2=0\}$ e $B=\{n \in \mathbb{N} 
 
 ## 4.3) Differenza
 
-### 4.3.1) Definizione: differenza tra due insiemi
+### 4.3.1) <span style="color:#FF88FF; background:#00000000">Definizione: differenza tra due insiemi</span>
 
-Dati due insiemi $A$ e $B$, si dice _**differenza**_ tra $A$ e $B$ e si denota $A\setminus B$ l’insieme degli elementi presenti in $A$ ma non in $B$:
+Dati due insiemi $A$ e $B$, si dice _**differenza**_ tra $A$ e $B$ e si denota $A\setminus B$ l'insieme degli elementi presenti in $A$ ma non in $B$:
 $$ A \setminus B = \{x \mid x \in A \land x \notin B\} $$
 
 #### 4.3.1.1) Esempio: differenza tra due insiemi
@@ -245,25 +255,25 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >>Dati due insiemi $A$ e $B$ con $A\subseteq B$, il doppio complementare $\complement_B(\complement_B(A))$ di $A$ in $B$ è sempre uguale ad $A$: $\complement_B(\complement_B(A)) = A$.
 >
 >>[!osservazione]+ Osservazione: $\Bbb{I}=\complement_\Bbb{R}(\Bbb{Q})$
->>L’insieme dei numeri irrazionali $\Bbb{I}$ si può esprimere come complementare di $\Bbb{Q}$ in $\Bbb{R}$: $\Bbb{I}=\complement_\Bbb{R}(\Bbb{Q})$.
+>>L'insieme dei numeri irrazionali $\Bbb{I}$ si può esprimere come complementare di $\Bbb{Q}$ in $\Bbb{R}$: $\Bbb{I}=\complement_\Bbb{R}(\Bbb{Q})$.
 ^Complementare-di-un-insieme
 
 ## 4.5) Prodotto cartesiano
 
 >[!definizione]+ Definizione: prodotto cartesiano di due insiemi
->Dati due insiemi $A$ e $B$, si definisce ***prodotto cartesiano*** di $A$ e $B$ e si denota $A \times B$ l’insieme i cui elementi sono coppie di elementi con il primo elemento in $A$ e il secondo in $B$:
+>Dati due insiemi $A$ e $B$, si definisce ***prodotto cartesiano*** di $A$ e $B$ e si denota $A \times B$ l'insieme i cui elementi sono coppie di elementi con il primo elemento in $A$ e il secondo in $B$:
 >$$A \times B=\{(a,b)\mid a \in A \land b \in B\}$$
 >
 >>[!esempio]+ Esempio: prodotto cartesiano tra due insiemi
 >>Dati due insiemi $A=\{1,2\}$ e $B=\{3,4,5\}$, si ha che $A\times B=\{(1,3),(1,4),(1,5),(2,3),(2,4),(2,5)\}$.​
 >
 >>[!esempio]+ Esempio: prodotto cartesiano tra due intervalli e relativa rappresentazione grafica
->>Dati due insiemi $A=\{x\mid 0\le x\le1\}$ e $B=\{x\mid -1\le x\le0\}$, %%collegare a rappresentazione intervalli%% rappresentabili anche con gli intervalli chiusi $A=[0,1]$ e $B=[-1,0]$, il loro prodotto cartesiano $A\times B$ è rappresentabile su un piano cartesiano come l’insieme di tutti i punti compresi tra il punto $\color{Red}A(0,1)$ e il punto $\color{Green}B(-1,0)$:
+>>Dati due insiemi $A=\{x\mid 0\le x\le1\}$ e $B=\{x\mid -1\le x\le0\}$, %%collegare a rappresentazione intervalli%% rappresentabili anche con gli intervalli chiusi $A=[0,1]$ e $B=[-1,0]$, il loro prodotto cartesiano $A\times B$ è rappresentabile su un piano cartesiano come l'insieme di tutti i punti compresi tra il punto $\color{Red}A(0,1)$ e il punto $\color{Green}B(-1,0)$:
 >>
 >>![[Prodotto cartesiano tra due intervalli e relativa rappresentazione grafica.png]]
 >
 >>[!osservazione]+ Osservazione: $A\times\emptyset=\emptyset$
->>Il prodotto cartesiano tra un insieme $A$ e l’insieme vuoto $\emptyset$ è sempre pari all’insieme vuoto $\emptyset$:
+>>Il prodotto cartesiano tra un insieme $A$ e l'insieme vuoto $\emptyset$ è sempre pari all'insieme vuoto $\emptyset$:
 >$$A\times\emptyset=\emptyset$$
 >
 >>[!osservazione]+ Osservazione: $A \ne \emptyset \land B \ne \emptyset \implies A \times B \ne \emptyset$
@@ -271,9 +281,9 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >$$A \ne \emptyset \land B \ne \emptyset \implies A \times B \ne \emptyset$$
 >
 >>[!osservazione]+ Osservazione: valenza geometrica del prodotto cartesiano
->>Se si interpreta l’insieme $\mathbb{R}$ dei numeri reali come una retta, allora il prodotto cartesiano $\mathbb{R}^2=\mathbb{R}\times\mathbb{R}$ è l’insieme formato da tutte le coppie $(x, y)$ di numeri reali:
+>>Se si interpreta l'insieme $\mathbb{R}$ dei numeri reali come una retta, allora il prodotto cartesiano $\mathbb{R}^2=\mathbb{R}\times\mathbb{R}$ è l'insieme formato da tutte le coppie $(x, y)$ di numeri reali:
 >>$$ \mathbb{R}^2 = \{(x, y)\mid x \in \mathbb{R}\land y \in \mathbb{R}\} $$
->>In altre parole, $\mathbb{R}^2$ non è nient’altro che il piano cartesiano, in cui un elemento di $\mathbb{R}^2$ è un punto identificato dalla coppia $(x, y)$; stesso discorso si può fare per l’insieme $\mathbb{R}^3$, ossia l’insieme che rappresenta lo spazio cartesiano in cui i punti sono identificati dalle tre coordinate $(x,y,z)$.
+>>In altre parole, $\mathbb{R}^2$ non è nient'altro che il piano cartesiano, in cui un elemento di $\mathbb{R}^2$ è un punto identificato dalla coppia $(x, y)$; stesso discorso si può fare per l'insieme $\mathbb{R}^3$, ossia l'insieme che rappresenta lo spazio cartesiano in cui i punti sono identificati dalle tre coordinate $(x,y,z)$.
 ^Prodotto-cartesiano-di-due-insiemi
 
 >[!proposizione]+ _Proposizione:_ cardinalità del prodotto cartesiano
@@ -307,7 +317,7 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >- $(A\cap B)\cup C = (A\cup C) \cap (B \cup C)$.
 >
 >>[!dimostrazione]+ _Dimostrazione:_ $(A\cup B)\cap C = (A\cap C) \cup (B \cap C)$
->>La prima identità $(A\cup B)\cap C = (A\cap C) \cup (B \cap C)$ si dimostra usando la tecnica della doppia inclusione usata anche per dimostrare l’[uguaglianza di due insiemi](#^Uguaglianza-di-due-insiemi).
+>>La prima identità $(A\cup B)\cap C = (A\cap C) \cup (B \cap C)$ si dimostra usando la tecnica della doppia inclusione usata anche per dimostrare l'[uguaglianza di due insiemi](#^Uguaglianza-di-due-insiemi).
 >>Quindi, si deve dimostrare che $(A\cup B)\cap C\subseteq (A\cap C) \cup (B \cap C)$ e $(A\cap C) \cup (B \cap C) \subseteq (A\cup B)\cap C$.
 >>###### Dimostrazione di $(A\cup B)\cap C\subseteq (A\cap C) \cup (B \cap C)$
 >>- Sia $x \in (A \cup B) \cap C$;
@@ -349,16 +359,16 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >^a73b10
 
 >[!definizione]+ Definizione: intersezione e unione su famiglie di insiemi
->Data una famiglia di insiemi $\mathcal A$, l’unione degli $A_i$ è l’insieme degli elementi che appartengono a un qualsiasi $A_i$:
+>Data una famiglia di insiemi $\mathcal A$, l'unione degli $A_i$ è l'insieme degli elementi che appartengono a un qualsiasi $A_i$:
 >$$\displaystyle\bigcup_{i=1}^nA_i=\{x : x\in A_i,\quad \exists i\in [1,n]\}$$
->L’intersezione degli $A_i$ è l’insieme degli elementi che appartengono a ogni $A_i$:
+>L'intersezione degli $A_i$ è l'insieme degli elementi che appartengono a ogni $A_i$:
 >$$\displaystyle\bigcap_{i=1}^nA_i=\{x : x\in A_i,\quad\forall i \in [1,n]\}$$
 >
 >>[!esempio]+ Esempio: intersezione di una famiglia di insiemi $\mathcal A$
->Data una famiglia di insiemi $\mathcal A$ formata dagli $n$-esimi insiemi $A_n\in\mathcal A$ con $n \in \mathbb{N}\setminus\{0\}$ in cui ogni $A_n$ è definito come l’[intervallo aperto](#^Insieme) che va da $-\frac{1}{n}$ a $\frac{1}{n}$, quindi $A_n=(-\frac{1}{n},\frac{1}{n})$. Si ha quindi che $\displaystyle\bigcap_{n=0}^{+\infty}A_n=\{0\}$ perché $0 \in A_n$ per ogni $n \in \mathbb{N}\setminus\{0\}$.
+>Data una famiglia di insiemi $\mathcal A$ formata dagli $n$-esimi insiemi $A_n\in\mathcal A$ con $n \in \mathbb{N}\setminus\{0\}$ in cui ogni $A_n$ è definito come l'[intervallo aperto](#^Insieme) che va da $-\frac{1}{n}$ a $\frac{1}{n}$, quindi $A_n=(-\frac{1}{n},\frac{1}{n})$. Si ha quindi che $\displaystyle\bigcap_{n=0}^{+\infty}A_n=\{0\}$ perché $0 \in A_n$ per ogni $n \in \mathbb{N}\setminus\{0\}$.
 
 >[!definizione]+ Definizione: prodotto cartesiano su famiglie di insiemi
->Data una famiglia di insiemi $\mathcal A=\{A_1,A_2,\ldots,A_n\}$, il prodotto cartesiano degli $A_i$ è l’insieme delle $n$-ple $(a_1,a_2,\ldots,a_n)$ con $a_i\in A_i$:
+>Data una famiglia di insiemi $\mathcal A=\{A_1,A_2,\ldots,A_n\}$, il prodotto cartesiano degli $A_i$ è l'insieme delle $n$-ple $(a_1,a_2,\ldots,a_n)$ con $a_i\in A_i$:
 >$$ \displaystyle\prod_{i=1}^nA_i=\{(a_1,a_2,\ldots,a_n) : a_i\in A_i,\quad \forall i\in [1,n]\} $$
 >
 >>[!esempio]+ Esempio: prodotto cartesiano tra tre insiemi
@@ -367,7 +377,7 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 # 7) Ricoprimento e partizione
 
 >[!definizione]+ Definizione: ricoprimento
->Dati un insieme $X$ e una famiglia di sottoinsiemi $\mathcal A$ di $X$, allora la famiglia $\mathcal A$ si definisce un _**ricoprimento**_ di $X$ se l’unione di tutti gli $n$ insiemi $A_i$ della famiglia dà come risultato $X$:
+>Dati un insieme $X$ e una famiglia di sottoinsiemi $\mathcal A$ di $X$, allora la famiglia $\mathcal A$ si definisce un _**ricoprimento**_ di $X$ se l'unione di tutti gli $n$ insiemi $A_i$ della famiglia dà come risultato $X$:
 >$$ \displaystyle\bigcup_{i=1}^nA_i=X $$
 >^1fcd51
 >
@@ -378,10 +388,10 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >>- Se $x=0$, allora è compreso in $A_3=\{x\in\mathbb{R} : -1<x<1\}$.
 >
 >>[!esempio]+ Esempio: ricoprimento di $\mathbb{R}$ con infiniti sottoinsiemi
->>Dati un insieme $X=\mathbb{R}$ e una famiglia di insiemi $\mathcal A$ con $A_n=[n,n+1]$, allora la famiglia $\mathcal A$ è un ricoprimento di $X$ perché, per un qualsiasi indice $n\in\mathbb{Z}$, esisterà un insieme $A_n$ i cui elementi saranno tutti quei numeri reali compresi nell’intervallo $[n,n+1]$ con gli estremi inclusi. In questo modo, si riesce a ricoprire l’intero insieme $X$ (e quindi $\mathbb{R}$).
+>>Dati un insieme $X=\mathbb{R}$ e una famiglia di insiemi $\mathcal A$ con $A_n=[n,n+1]$, allora la famiglia $\mathcal A$ è un ricoprimento di $X$ perché, per un qualsiasi indice $n\in\mathbb{Z}$, esisterà un insieme $A_n$ i cui elementi saranno tutti quei numeri reali compresi nell'intervallo $[n,n+1]$ con gli estremi inclusi. In questo modo, si riesce a ricoprire l'intero insieme $X$ (e quindi $\mathbb{R}$).
 >
 >>[!esempio]+ Esempio: ricoprimento di $\mathbb{R}$ con infiniti sottoinsiemi
->>Dati un insieme $X=\mathbb{R}$ e una famiglia di insiemi $\mathcal A$ con $A_n=[n,n+1]$, allora la famiglia $\mathcal A$ è un ricoprimento di $X$ perché, per un qualsiasi indice $n\in\mathbb{Z}$, esisterà un insieme $A_n$ i cui elementi saranno tutti quei numeri reali compresi nell’intervallo $[n,n+1]$ con gli estremi inclusi. In questo modo, si riesce a ricoprire l’intero insieme $X$ (e quindi $\mathbb{R}$).
+>>Dati un insieme $X=\mathbb{R}$ e una famiglia di insiemi $\mathcal A$ con $A_n=[n,n+1]$, allora la famiglia $\mathcal A$ è un ricoprimento di $X$ perché, per un qualsiasi indice $n\in\mathbb{Z}$, esisterà un insieme $A_n$ i cui elementi saranno tutti quei numeri reali compresi nell'intervallo $[n,n+1]$ con gli estremi inclusi. In questo modo, si riesce a ricoprire l'intero insieme $X$ (e quindi $\mathbb{R}$).
 ^Ricoprimento
 
 >[!definizione]+ Definizione: partizione
@@ -420,7 +430,7 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >3. _Transitività_: $x\sim y,y\sim z\implies x\sim z,\quad \forall x,y,z\in X$.
 >
 >>[!esempio]+ Esempio: relazione di divisibilità tra due interi
->>Dato un numero naturale $n\in \mathbb{N}$, un numero intero $x\in\mathbb{Z}$ si dice _**divisibile**_ per $n$ e si denota con $n|x$ se esiste un $k\in \mathbb{Z}$ tale che $kn=x$. Si può definire una relazione di equivalenza sull’insieme $\mathbb{Z}$ degli interi affermando che, dati due elementi $x,y\in\mathbb{Z}$, $x$ è in relazione a $y$ se la loro differenza è divisibile per $n$:
+>>Dato un numero naturale $n\in \mathbb{N}$, un numero intero $x\in\mathbb{Z}$ si dice _**divisibile**_ per $n$ e si denota con $n|x$ se esiste un $k\in \mathbb{Z}$ tale che $kn=x$. Si può definire una relazione di equivalenza sull'insieme $\mathbb{Z}$ degli interi affermando che, dati due elementi $x,y\in\mathbb{Z}$, $x$ è in relazione a $y$ se la loro differenza è divisibile per $n$:
 >>$$ x\sim y\iff n|(x-y) $$
 >>Si può dimostrare che questa è una relazione di equivalenza verificando le tre proprietà:
 >>1. _Riflessività_: $n|(x-x)\implies n|0$ vale, perché $0$ è divisibile per qualsiasi numero naturale $n$;
@@ -428,22 +438,25 @@ Dati due insiemi $A=\{0,1,2\}$ e $B=\{2\}$, si ha che $A\setminus B=\{0,1\}$.
 >>3. _Transitività_: $n|(x-y),n|(y-z)\implies n|(x-z)$ vale, perché se $x-y$ e $y-z$ sono divisibili per $n$, lo è anche $x-z$; per esempio, $2|(12-6),2|(6-4)\implies 2|(12-4),\quad n=2,x=12,y=6,z=4$.
 
 >[!definizione]+ Definizione: classe di equivalenza e insieme quoziente
->Dato un insieme $A$ e un insieme $X$, si dice _**classe di equivalenza**_ di $a$ rispetto alla relazione di equivalenza $\sim$ e si indica con $[a]_\sim$ l’insieme degli elementi di $X$ che hanno una relazione di equivalenza con $a$:
+>Dato un insieme $A$ e un insieme $X$, si dice _**classe di equivalenza**_ di $a$ rispetto alla relazione di equivalenza $\sim$ e si indica con $[a]_\sim$ l'insieme degli elementi di $X$ che hanno una relazione di equivalenza con $a$:
 >$$ [a]_\sim=\{x\in X\mid x\sim a\} $$
->L’insieme delle classi di equivalenza $[a]_\sim$ si dice _**insieme quoziente**_ di $X$ per la relazione $\sim$ e si indica con $X/\sim$:
+>L'insieme delle classi di equivalenza $[a]_\sim$ si dice _**insieme quoziente**_ di $X$ per la relazione $\sim$ e si indica con $X/\sim$:
 >$$ X/\sim =\{[a]_\sim\mid a\in X\} $$
 >
 >>[!esempio]+ Esempio: relazione di equivalenza su automobili con stesso colore
->>Dato un insieme $X$ di tutte le automobili e una sua relazione di equivalenza $\sim$ letta come _"ha lo stesso colore di"_, allora una classe di equivalenza può essere quella che comprende tutte le automobili verdi, mentre l’insieme quoziente $X/\sim$ è l’insieme dei colori delle automobili.
+>>Dato un insieme $X$ di tutte le automobili e una sua relazione di equivalenza $\sim$ letta come _"ha lo stesso colore di"_, allora una classe di equivalenza può essere quella che comprende tutte le automobili verdi, mentre l'insieme quoziente $X/\sim$ è l'insieme dei colori delle automobili.
 >
 >>[!esempio]+ Esempio: insieme $\Bbb Q$ dei numeri razionali come insieme quoziente
->>L’insieme $\Bbb Q$ dei numeri razionali può essere espresso come un insieme quoziente. Data una coppia $(p,q)$ ottenuta dal prodotto cartesiano $\mathbb{Z}\times (\mathbb{Z}\setminus\{0\})$ (quindi $p$ può essere qualsiasi numero intero, mentre $q$ qualsiasi numero intero eccetto lo $0$), si può definire una relazione di equivalenza come:
+>>L'insieme $\Bbb Q$ dei numeri razionali può essere espresso come un insieme quoziente. Data una coppia $(p,q)$ ottenuta dal prodotto cartesiano $\mathbb{Z}\times (\mathbb{Z}\setminus\{0\})$ (quindi $p$ può essere qualsiasi numero intero, mentre $q$ qualsiasi numero intero eccetto lo $0$), si può definire una relazione di equivalenza come:
 >>$$ (p,q)\sim(p',q')\iff pq'=p'q $$
->>Ciò è verificabile se si interpreta la coppia $(p,q)$ come una frazione $\frac{p}{q}$, quindi questa relazione di equivalenza indica che due frazioni sono in relazione tra loro se sono uguali il prodotto tra il numeratore di uno e il denominatore dell’altro: $\frac{p}{q}=\frac{p'}{q'}\iff pq'=p'q$ (es. prendendo le frazioni $2\over 3$ e $4\over 6$, si può constatare che $2\cdot6=3\cdot4$).
->>Se si prende l’insieme quoziente di questa relazione, ossia $[\mathbb{Z}\times (\mathbb{Z}\setminus \{0\})]/\sim$, si può notare come esso corrisponda proprio all’insieme $\Bbb Q$ dei numeri razionali perché comprende tutte le combinazioni possibili di numeri presenti in $\Bbb Q$.
+>>Ciò è verificabile se si interpreta la coppia $(p,q)$ come una frazione $\frac{p}{q}$, quindi questa relazione di equivalenza indica che due frazioni sono in relazione tra loro se sono uguali il prodotto tra il numeratore di uno e il denominatore dell'altro: $\frac{p}{q}=\frac{p'}{q'}\iff pq'=p'q$ (es. prendendo le frazioni $2\over 3$ e $4\over 6$, si può constatare che $2\cdot6=3\cdot4$).
+>>Se si prende l'insieme quoziente di questa relazione, ossia $[\mathbb{Z}\times (\mathbb{Z}\setminus \{0\})]/\sim$, si può notare come esso corrisponda proprio all'insieme $\Bbb Q$ dei numeri razionali perché comprende tutte le combinazioni possibili di numeri presenti in $\Bbb Q$.
 
 Fonti
 - lezioni terracini, chen
 	^Lezioni
 - libro di bruno martelli
 - libro di mdag
+
+Insiemi numerabili = posso contare gli elementi dell'insieme, cioè posso associare in modo biunivoco ogni elemento dell'insieme ai numeri naturali. %%e in relazione alla cardinalità come funziona?%%
+$\mathbb{R}$ è un insieme NON numerabile, mentre $\mathbb{N}$ sì (la sua cardinalità è $\infty$)

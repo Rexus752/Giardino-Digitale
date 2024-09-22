@@ -316,7 +316,7 @@ associare valori interi a dei nomi.
 
 Posso anche combinare `typedef` e `enum`:
 ```c
-typedef enum outcome {OUTOFMEMORY = −1, ALREADYPRESENT, INSERTED} Outcome;
+typedef enum {OUTOFMEMORY = −1, ALREADYPRESENT, INSERTED} Outcome;
 ```
 Cioè, prima enumeriamo una variabile `outcome` con le tre etichette e, successivamente, la definiamo come un nuovo tipo `Outcome`, che ora è un intero che può valere `-1`, `0` o `1`. Per esempio:
 ```c
@@ -326,6 +326,7 @@ Outcome operazione(...) {
 }
 ```
 e questa funzione ritornerà il valore `-1` (perché nell'`enum` abbiamo assegnato `-1` all'etichetta `OUTOFMEMORY`).
+
 # 6) `union`
 
 Variabili simili alle strutture, ma che in un dato momento contengono uno solo dei membri specificati entro le parentesi graffe `{}`. Sintassi identica a quella per le strutture, sostituendo la keyword `struct` con la keyword `union`:
@@ -342,6 +343,10 @@ OPPURE
 - UN INTERO DI NOME `ival`
 OPPURE
 - UN FLOAT DI NOME `fval`
+
+`sizeof(myunion) = max(sizeof(char), sizeof(int), sizeof(float))`
+
+Il dominio dell'unione è l'unione dei domini dei suoi campi
 
 ## 6.1) Differenza tra `union` e `struct`
 
