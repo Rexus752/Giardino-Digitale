@@ -1,0 +1,4 @@
+- Esperimenti probabilistici = esperimenti che hanno un esito "non facilmente prevedibile" (es. il lancio di un dado)
+- Probabilità = materia che studia gli esperimenti probabilistici
+- Metodologia probabilistica: usa la teoria degli insiemi
+- Spazio campionario = insieme di tutti i possibili esiti di un esperimento probabilistico e si indica solitamente con $\Omega$ (es. lancio di un dado a sei facce --> $\Omega = \{1,2,3,4,5,6\}$)
