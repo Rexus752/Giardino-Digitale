@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     analytics: null,
     locale: "en-GB",
     baseUrl: "rexus752-digital-garden.pages.dev",
-    ignorePatterns: ["private", "templates", ".obsidian", "_TODO"],
+    ignorePatterns: ["private", "templates", ".obsidian", "**/private"],
     defaultDateType: "created",
     theme: {
       fontOrigin: "googleFonts",
