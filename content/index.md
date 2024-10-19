@@ -6,5 +6,6 @@ Il sito è ancora _work in progress_, per questo c'è poca roba e fatta molto al
 
 Tablature per basso: [[so, bassically-]]
 
-Lista appunti di studio:
+Appunti di studio:
 - [Teoria degli insiemi](Teoria%20degli%20insiemi.md)
+- [Processi di un Sistema Operativo](Processi%20di%20un%20Sistema%20Operativo.md)
