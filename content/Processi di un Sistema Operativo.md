@@ -194,8 +194,8 @@ In Windows, la terminazione forzata può avvenire tramite il Task Manager o tram
 
 \#### In Unix/Linux:
 
-- **èxit(int status)`**: Termina il processo corrente e restituisce un codice di uscita al processo padre o al sistema operativo.
-- **`_exit(int status)`**: Simile a èxit()`, ma non esegue le operazioni di pulizia standard (come la chiusura di file o l'invocazione dei gestori di uscita registrati).
+- **`exit(int status)`**: Termina il processo corrente e restituisce un codice di uscita al processo padre o al sistema operativo.
+- **`_exit(int status)`**: Simile a `exit()`, ma non esegue le operazioni di pulizia standard (come la chiusura di file o l'invocazione dei gestori di uscita registrati).
 - **`kill(pid_t pid, int signal)`**: Invia un segnale a un processo per terminare il processo con il PID specificato. Ad esempio, `kill(pid, SIGTERM)` invia un segnale di terminazione gentile, mentre `kill(pid, SIGKILL)` forza la terminazione immediata.
 
 \#### In Windows:
@@ -601,7 +601,7 @@ int main() {
 ## 4.2) Terminazione di un processo
 
 Un processo può terminare per vari motivi. Quando termina, le risorse assegnate al processo (come la memoria, i file aperti e il tempo CPU) vengono liberate dal sistema operativo. La terminazione di un processo può essere volontaria o forzata:
-- **Terminazione volontaria**: il processo completa l'esecuzione del suo codice (ad esempio, l'utente chiude un programma). Ogni processo può chiamare esplicitamente la funzione di terminazione, usando come èxit()` in Unix/Linux o `ExitProcess()` in Windows.
+- **Terminazione volontaria**: il processo completa l'esecuzione del suo codice (ad esempio, l'utente chiude un programma). Ogni processo può chiamare esplicitamente la funzione di terminazione, usando come `exit()` in Unix/Linux o `ExitProcess()` in Windows.
 - **Terminazione forzata**: un errore o un'eccezione non gestita (come una divisione per zero o un accesso in memoria non valido) può causare la terminazione forzata del processo. Il sistema operativo o un altro processo può terminare forzatamente un processo tramite chiamate di sistema (ad esempio, tramite `kill()` in Unix o `TerminateProcess()` in Windows). Generalmente solo il processo padre del processo che si vuole terminare può invocare una chiamata di sistema di questo tipo, altrimenti gli utenti potrebbero causare arbitrariamente la terminazione forzata di processi di chiunque.
 
 Le fasi principali della terminazione di un processo sono:
