@@ -1,17 +1,7 @@
 %%
-\## Esempio di gestione dei processi</span>
-
-Supponiamo di aprire un browser web. Il sistema operativo creerà un processo per eseguire il browser. Questo processo avrà il suo spazio di memoria, il suo stato, e sarà gestito dal sistema operativo attraverso il cosiddetto scheduler, che decide quale processo eseguire in un dato momento.
-
----
-
 \# Storia
 
 I primi sistemi elaborativi consentivano l'esecuzione di un solo programma alla volta, che aveva il completo controllo del sistema e accesso a tutte le sue risorse. Gli attuali sistemi elaborativi consentono, invece, che più programmi siano caricati in memoria ed eseguiti in modo concorrente. Tale evoluzione richiede un più severo controllo e una maggiore compartimentazione dei vari programmi. Da tali necessità deriva la nozione di processo d'elaborazione – o, più brevemente, processo – che in prima istanza si può definire come un programma in esecuzione, e costituisce l'unità di lavoro dei moderni sistemi time-sharing.
-
----
-
-4. **Contesto di esecuzione del processore**: l'insieme delle informazioni che descrivono lo stato di un processo in esecuzione su un sistema. Queste informazioni sono essenziali affinché il sistema operativo possa gestire l'esecuzione dei processi, specialmente nel caso in cui debba sospendere un processo e poi riprenderlo (ad esempio, durante il **context switch**, ovvero il passaggio da un processo all'altro).
 
 ---
 
@@ -66,6 +56,156 @@ La **differenza tra multitasking e multiprogrammazione** riguarda il modo in cui
 - **Multitasking**: In un sistema operativo come Windows o Linux, un utente può ascoltare musica, navigare sul web e scrivere in un editor di testo contemporaneamente. Il sistema operativo assegna piccoli intervalli di tempo a ciascuno di questi processi, creando l'illusione che vengano eseguiti simultaneamente.
 
 In sintesi, la **multiprogrammazione** si concentra sull'efficienza della CPU, mentre il **multitasking** si concentra sull'interattività e sulla gestione di più attività per l'utente.
+
+---
+
+\## **I/O-bound process** e **CPU-bound process**
+I concetti di **I/O-bound process** e **CPU-bound process** si riferiscono al tipo di risorse su cui un processo è più dipendente durante la sua esecuzione. La distinzione tra questi due tipi di processi è fondamentale per l'ottimizzazione delle prestazioni dei sistemi operativi e per la pianificazione dei processi (scheduling).
+
+\### I/O-bound process
+- **Definizione**: Un processo **I/O-bound** è un processo che passa la maggior parte del suo tempo **in attesa di operazioni di input/output (I/O)**, come la lettura da o la scrittura su un disco, l'attesa di dati dalla rete, o l'interazione con dispositivi come tastiere e stampanti. Il tempo di esecuzione sulla CPU è relativamente breve rispetto al tempo trascorso in attesa di I/O.
+
+- **Caratteristiche**:
+  - **Uso intenso di I/O**: Questi processi effettuano molte operazioni di input/output e, quindi, tendono a essere **spesso bloccati** (in stato di attesa) fino a quando le operazioni di I/O non sono completate.
+  - **Breve tempo di utilizzo della CPU**: Quando il processo ottiene il controllo della CPU, tende a eseguire solo un piccolo numero di calcoli prima di essere nuovamente bloccato per attendere l'I/O.
+  - **Esempi**:
+    - Un programma che attende frequenti input da parte dell'utente, come un editor di testo o un'applicazione interattiva.
+    - Un processo che trasferisce grandi quantità di dati da o verso un disco rigido (ad esempio, un'applicazione che copia file).
+
+- **Obiettivo dello scheduling**:
+  - I processi I/O-bound beneficiano di una schedulazione che li rimuova rapidamente dallo stato di attesa (quando l'I/O è completato) e gli assegni prontamente la CPU, per minimizzare i tempi di attesa e garantire che le operazioni di I/O siano gestite efficientemente.
+
+\### CPU-bound process
+- **Definizione**: Un processo **CPU-bound** è un processo che trascorre la maggior parte del suo tempo **effettuando calcoli sulla CPU** e richiede relativamente poche operazioni di I/O. Il tempo speso in attesa di operazioni di I/O è trascurabile rispetto al tempo di utilizzo della CPU.
+
+- **Caratteristiche**:
+  - **Uso intenso della CPU**: Questi processi richiedono **molto tempo di CPU** per eseguire i loro calcoli e rimangono in esecuzione per lunghi periodi senza essere bloccati per operazioni di I/O.
+  - **Basso utilizzo di I/O**: I processi CPU-bound raramente richiedono accesso a dispositivi di input/output, e quindi tendono a non essere frequentemente bloccati.
+  - **Esempi**:
+    - Un programma di elaborazione scientifica o di simulazione che esegue complessi calcoli matematici.
+    - Un software che genera immagini grafiche complesse o esegue algoritmi di compressione dati.
+
+- **Obiettivo dello scheduling**:
+  - I processi CPU-bound possono richiedere quanti di tempo più lunghi, poiché tendono a utilizzare la CPU per periodi prolungati prima di completare il loro lavoro o di cedere la CPU.
+
+\### Differenze principali:
+
+| Caratteristica         | **I/O-bound process**                                | **CPU-bound process**                                |
+|------------------------|------------------------------------------------------|------------------------------------------------------|
+| **Uso principale**      | Predomina l'attesa per operazioni di I/O.            | Predomina l'uso intensivo della CPU per calcoli.     |
+| **Tempo in attesa**     | Passa molto tempo in attesa di I/O (bloccato).       | Passa la maggior parte del tempo eseguendo calcoli.  |
+| **Tempo sulla CPU**     | Utilizza la CPU solo per brevi periodi.              | Utilizza la CPU per lunghi periodi senza interruzioni.|
+| **Esempi**              | Editor di testo, programmi di rete, trasferimenti dati. | Elaborazione scientifica, rendering grafico, compressione dati. |
+| **Schedulazione**       | Richiede una gestione rapida dell'I/O.               | Richiede tempi più lunghi di utilizzo della CPU.     |
+
+\### Importanza per lo scheduling:
+Il sistema operativo deve tenere conto del tipo di processo (I/O-bound o CPU-bound) durante la schedulazione per ottimizzare le prestazioni del sistema:
+- **I/O-bound processes**: Vengono solitamente eseguiti con maggiore priorità o con quanti di tempo più brevi per evitare che rimangano inutilmente in attesa di operazioni I/O completate.
+- **CPU-bound processes**: Possono essere eseguiti con quanti di tempo più lunghi per evitare frequenti cambi di contesto e overhead associati, poiché tendono a utilizzare la CPU per periodi più estesi.
+
+\### Esempio pratico:</span>
+- Un **I/O-bound process**, come un programma di rete che riceve pacchetti di dati, potrebbe passare gran parte del tempo in attesa di dati dalla rete. Durante questo tempo, la CPU può essere assegnata ad altri processi.
+- Un **CPU-bound process**, come un software di compressione video, eseguirà complessi calcoli per un lungo periodo di tempo senza fermarsi, poiché non ha bisogno di attendere input/output frequenti.
+
+In sintesi, **I/O-bound** e **CPU-bound** indicano due modelli distinti di comportamento dei processi, ciascuno con diverse esigenze di risorse, e richiedono strategie di scheduling diverse per massimizzare l'efficienza del sistema operativo.
+
+---
+
+Multitasking nei sistemi per dispositivi mobili:
+A causa dei vincoli imposti sui dispositivi mobili, le prime versioni di ios non fornivano il multitasking per le
+applicazioni utente; una sola applicazione veniva eseguita in foreground, mentre tutte le altre erano sospese. I processi
+del sistema operativo erano invece gestiti in multitasking, perché essendo scritti da Apple si comportavano in maniera
+corretta. A partire da ios 4 Apple offre una forma limitata di multitasking per le applicazioni utente, consentendo così
+all'applicazione in foreground di funzionare contemporaneamente a più applicazioni in background. Su un dispositivo
+mobile, l'applicazione in foregroud è l'applicazione aperta al momento e che appare sul display. L'applicazione in
+background rimane in memoria, ma non occupa lo schermo del display. L'api ios 4 fornisce il supporto per il
+multitasking, permettendo così a un processo di rimanere in esecuzione in background senza essere sospeso. Tuttavia,
+questa possibilità è limitata e disponibile soltanto per un numero ridotto di tipologie di applicazioni. Quando l'hardware
+dei dispositivi mobili ha iniziato a offrire memorie più grandi, diversi core di elaborazione e una maggiore durata della
+batteria, le versioni di iOS hanno iniziato a supportare funzionalità più complete e meno restrittive per il multitasking.
+Per esempio, lo schermo più grande sui tablet iPad consentiva di eseguire due app in primo piano contemporaneamente, una tecnica nota come split-screen.
+Fin dalle sue origini, Android ha supportato il multitasking e non ha posto vincoli sulle tipologie di applicazioni che
+possono essere eseguite in background. Un'applicazione che voglia richiedere l'elaborazione mentre è in background
+deve utilizzare un servizio, un componente applicativo separato che viene eseguito per conto del processo in background.
+Si consideri un'applicazione di streaming audio: se l'applicazione si sposta in background, il servizio continua a inviare
+i file audio al driver di periferica audio per suo conto. Il servizio continuerà a funzionare anche se l'applicazione in
+background viene sospesa. I servizi non hanno un'interfaccia utente e hanno un ingombro di memoria modesto,
+fornendo così una tecnica efficace per il multitasking in un ambiente mobile.
+
+• Some mobile systems (e.g., early version of iOS) allow only one process to run, others suspended
+• Due to screen real estate, user interface limits iOS provides for a
+	• Single foreground process- controlled via user interface
+	• Multiple background processes– in memory, running, but not on the display, and with limits
+	• Limits include single, short task, receiving notification of events, specific long-running tasks like audio playback
+• Android runs foreground and background, with fewer limits
+	• Background process uses a service to perform tasks
+	• Service can keep running even if background process is suspended
+	• Service has no user interface, small memory use
+
+---
+
+3.3.2.1 Gerarchia dei processi Android
+A causa dei vincoli imposti dalle risorse, come la memoria limitata, i sistemi operativi mobili possono aver bisogno di terminare
+processi esistenti per recuperare risorse di sistema. Anziché terminare un processo arbitrario, Android ha definito una gerarchia di
+importanza dei processi. Quando il sistema deve terminare un processo per rendere disponibili le risorse per un processo nuovo o più
+importante, esso effettua la scelta di quale processo terminare in base all'ordine crescente di importanza. Dal più al meno importante,
+la classificazione gerarchica dei processi è la seguente.
+Processo in primo piano: il processo visibile sullo schermo, che rappresenta l'applicazione con cui l'utente sta attualmente
+interagendo.
+Processo visibile: un processo che non è direttamente visibile in primo piano, ma che sta eseguendo un'attività a cui il processo
+in primo piano fa riferimento (vale a dire, un processo che esegue un'attività il cui stato è visualizzato dal processo in primo
+piano).
+Processo di servizio: un processo simile a un processo in background, ma che sta eseguendo un'attività evidente all'utente
+(come lo streaming di musica).
+Processo in background: un processo che può svolgere un'attività non evidente all'utente.
+Processo vuoto: un processo che non contiene componenti attive associate a un'applicazione.
+Se occorre recuperare risorse di sistema, Android interrompe prima i processi vuoti, poi i processi in background, e così via. Ai
+processi viene assegnata una valutazione di importanza e Android assegna a un processo la posizione più alta possibile. Per esempio,
+se un processo fornisce un servizio ed è anche visibile, gli verrà assegnata la classificazione di processo visibile più importante.
+Inoltre, le prassi di sviluppo Android suggeriscono di seguire le linee guida del ciclo di vita dei processi, che prevedono che lo stato di
+un processo sia salvato prima della sua terminazione e ripristinato quando l'utente ritorna all'applicazione.
+
+---
+
+\### 3. **Codice di uscita (exit status)**
+
+Quando un processo termina, spesso restituisce un **codice di uscita** al sistema operativo o al processo padre. Questo codice è un valore numerico che indica se il processo è terminato correttamente o se si è verificato un errore. I valori comuni includono:
+
+- **0**: Il processo è terminato con successo.
+- **Un numero diverso da zero**: Indica un errore o una condizione specifica che ha causato la terminazione del processo.
+
+\### 4. **Processo zombie**
+
+Nei sistemi Unix/Linux, quando un processo termina, ma il processo padre non ha ancora recuperato il codice di uscita del processo figlio tramite `wait()`, il processo figlio entra nello stato di **zombie**. In questo stato, il processo ha terminato la sua esecuzione, ma il suo PCB rimane in memoria fino a che il padre non lo recupera. Questo meccanismo permette al processo padre di ricevere informazioni sul motivo della terminazione del figlio.
+
+Se il processo padre non chiama mai `wait()`, i processi zombie rimangono in memoria e possono accumularsi. Se il padre termina, i processi zombie possono essere adottati dal processo `init`, che li rimuove automaticamente.
+
+\### 5. **Orfani e adozione dei processi**
+
+Se un **processo padre** termina prima del **processo figlio**, il figlio diventa un **processo orfano**. Nei sistemi Unix/Linux, i processi orfani vengono adottati dal processo `init`, che diventa il loro nuovo padre. Questo garantisce che, quando i processi orfani terminano, ci sia un processo che può gestire correttamente la loro terminazione e liberare le risorse.
+
+\### 6. **Terminazione forzata**
+
+Quando un processo è bloccato o non risponde, può essere necessario **forzare** la sua terminazione. In Unix/Linux, questo può essere fatto tramite il comando `kill -9 <PID>`, che invia il segnale **SIGKILL**. A differenza di altri segnali come **SIGTERM**, il segnale **SIGKILL** non può essere intercettato o ignorato dal processo, garantendo la sua immediata terminazione.
+
+In Windows, la terminazione forzata può avvenire tramite il Task Manager o tramite la funzione `TerminateProcess()`.
+
+\### 7. **Esempi di funzioni di terminazione**
+
+\#### In Unix/Linux:
+
+- **èxit(int status)`**: Termina il processo corrente e restituisce un codice di uscita al processo padre o al sistema operativo.
+- **`_exit(int status)`**: Simile a èxit()`, ma non esegue le operazioni di pulizia standard (come la chiusura di file o l'invocazione dei gestori di uscita registrati).
+- **`kill(pid_t pid, int signal)`**: Invia un segnale a un processo per terminare il processo con il PID specificato. Ad esempio, `kill(pid, SIGTERM)` invia un segnale di terminazione gentile, mentre `kill(pid, SIGKILL)` forza la terminazione immediata.
+
+\#### In Windows:
+
+- **`ExitProcess(UINT uExitCode)`**: Termina il processo corrente e restituisce il codice di uscita specificato.
+- **`TerminateProcess(HANDLE hProcess, UINT uExitCode)`**: Forza la terminazione di un processo specificato dal gestore (`HANDLE`).
+
+\### In sintesi:
+
+La terminazione di un processo avviene attraverso una serie di operazioni che includono la chiusura delle risorse, l'aggiornamento dello stato del processo, e il rilascio delle risorse. Può essere volontaria (se il processo termina da solo) o involontaria (se il sistema operativo o un altro processo ne forza la terminazione). Dopo la terminazione, il processo rilascia tutte le risorse, e il codice di uscita viene restituito al sistema operativo o al processo padre.
 %%
 
 # Indice
@@ -87,11 +227,19 @@ In sintesi, la **multiprogrammazione** si concentra sull'efficienza della CPU, m
 		- **3.2.1) Tipi principali di code di schedulazione**
 		- **3.2.2) Rappresentazione in memoria delle code di schedulazione**
 	- **3.3) Tipi di schedulazione**
-	- **3.4) Il _context switch_ (_cambio di contesto_)**
+	- **3.4) Il cambio di contesto**
+		- **3.4.1) Utilità e vantaggi del cambio di contesto**
+		- **3.4.2) Come funziona il cambio di contesto**
+		- **3.4.3) Costi del cambio di contesto**
 	- **3.5) Parametri di performance della schedulazione**
-- **4) Thread**
-	- **4.1) Differenza tra processo e thread**
-	- **4.2) Utilità dei thread**
+- **4) Operazioni sui processi**
+	- **4.1) Creazione di un processo**
+		- **4.1.1) `fork()` in Unix/Linux**
+		- **4.1.2) `CreateProcess()` in Windows**
+	- **4.2) Terminazione di un processo**
+- **5) Thread**
+	- **5.1) Differenza tra processo e thread**
+	- **5.2) Utilità dei thread**
 
 # 1) Cos'è un processo
 
@@ -130,24 +278,24 @@ Il **blocco di controllo del processo** (in inglese _PCB_, _Process Control Bloc
 Le informazioni contenute in un PCB variano a seconda delle implementazioni nei vari sistemi operativi, ma in generale sono presenti:
 1. [**Stato del processo**](#23-stato-di-un-processo): la condizione in cui si trova un processo in un dato momento durante la sua esecuzione nel sistema operativo (`new`, `ready`, `ready`, `waiting` o `terminated`).
 2. **Identificatore del processo (_PID_, _Process ID_)**: un numero univoco assegnato al processo dal sistema operativo. Questo identificatore viene utilizzato per distinguere il processo dagli altri processi attivi.
-3. **Program Counter (PC)**: porzione di RAM (distinta e indipendente dall'omonimo registro%%link all'omonimo registro%% contenuto non nella RAM, ma nella CPU) in cui viene memorizzato l'indirizzo dell'istruzione successiva che il processo deve eseguire. Se il processo viene interrotto, il Program Counter consente di riprendere l'esecuzione dal punto in cui è stata interrotta.
-4. **Contenuto dei registri della CPU**: il PCB salva il contenuto dei registri della CPU (es. accumulatori, puntatori allo stack, registri di uso generale) nel momento in cui il processo è stato interrotto. Questo è essenziale per riprendere correttamente l'esecuzione del processo in un successivo [context switch].
+3. **Program Counter (PC)**: il PCB salva il valore contenuto nel Program Counter%%link%%, il registro nella CPU che rappresenta l'indirizzo dell'istruzione successiva che il processo deve eseguire. Se il processo viene interrotto, il Program Counter consente di riprendere l'esecuzione dal punto in cui è stata interrotta, perché appunto conterrà il valore dell'indirizzo di memoria in cui è presente l'istruzione del processo da cui ripartire.
+4. **Contenuto dei registri della CPU**: il PCB salva il contenuto dei registri della CPU (es. accumulatori, puntatori allo stack, registri di uso generale) nel momento in cui il processo è stato interrotto. Questo è essenziale per riprendere correttamente l'esecuzione del processo in un successivo [cambio di contesto].
 5. **Informazioni sulla gestione della memoria**: include dati su come la memoria è allocata al processo, come indirizzi di base e limiti di memoria del processo, oppure tabelle di paginazione o segmentazione, nel caso il sistema operativo utilizzi tecniche di gestione della memoria virtuale.
 6. **Informazioni di I/O**: un elenco dei dispositivi di input/output utilizzati dal processo (es. file aperti, dispositivi hardware come stampanti, reti) e file descriptor che fanno riferimento ai file aperti dal processo.
-7. **Informazioni di scheduling**: un elenco delle informazioni utili allo scheduling della CPU, come:
+7. **Informazioni di schedulazione**: un elenco delle informazioni utili alla schedulazione della CPU, come:
 	- **Priorità del processo**: indica l'importanza relativa del processo rispetto agli altri.
 	- **Tempo di esecuzione accumulato**: il tempo che il processo ha trascorso in esecuzione.
-	- **Algoritmo di scheduling utilizzato**: se il sistema operativo utilizza diverse politiche di scheduling, queste informazioni potrebbero essere presenti nel PCB.
+	- **Algoritmo di schedulazione utilizzato**: se il sistema operativo utilizza diverse politiche di schedulazione, nel PCB viene specificata quale viene usata.
 8. **Informazioni di accounting**: dati utilizzati per tenere traccia del tempo CPU consumato dal processo, della quantità di risorse utilizzate e di eventuali statistiche di utilizzo, utili per la fatturazione o il monitoraggio delle prestazioni.
 9. **Informazioni sui segnali**: elenco dei segnali che il processo può ricevere e le relative azioni da eseguire al ricevimento di un segnale (ad esempio, terminare il processo o ignorare il segnale).
 
 ## 2.2) Funzione del PCB
 
 Il PCB svolge un ruolo cruciale nel gestire i processi nel sistema operativo. Le sue principali funzioni includono:
-- **Salvataggio del contesto del processo**: quando un processo viene sospeso (ad esempio, per un [context switch]), il suo stato (registri CPU, Program Counter, ecc.) viene memorizzato nel PCB. Quando il processo viene ripreso, il contesto viene ripristinato.  
+- **Salvataggio del contesto del processo**: quando un processo viene sospeso (ad esempio, per un [cambio di contesto]), il suo stato (registri CPU, Program Counter, ecc.) viene memorizzato nel PCB. Quando il processo viene ripreso, il contesto viene ripristinato.  
 - **Gestione della memoria**: il PCB tiene traccia delle risorse di memoria utilizzate dal processo, assicurando che il processo non acceda a zone di memoria riservate ad altri processi o al sistema operativo.
 - **Identificazione del processo**: grazie al PID e alle altre informazioni contenute nel PCB, il sistema operativo può gestire un numero elevato di processi contemporaneamente, distinguendo un processo dall'altro.
-- **Scheduling e gestione della priorità**: le informazioni di priorità e di tempo di esecuzione accumulate nel PCB consentono al sistema operativo di decidere quale processo eseguire in un dato momento, ottimizzando l'uso della CPU.
+- **Schedulazione e gestione della priorità**: le informazioni di priorità e di tempo di esecuzione accumulate nel PCB consentono al sistema operativo di decidere quale processo eseguire in un dato momento, ottimizzando l'uso della CPU.
 
 ## 2.3) Stato di un processo
 
@@ -187,8 +335,8 @@ In particolare:
 1. **`new` → `ready`**: dopo che il sistema operativo ha completato l'inizializzazione del processo e assegnato le risorse necessarie (come la memoria), il processo entra nello stato `ready`, in attesa di essere schedulato per l'esecuzione.
 2. **`ready` → `running`**: il sistema operativo seleziona il processo dalla coda dei processi pronti e lo assegna alla CPU. A questo punto, il processo inizia a essere eseguito.
 3. **`ready` → `terminated`**: anche se raro, un processo potrebbe essere terminato mentre è in stato `ready`, magari a causa di un'azione manuale dell'utente o per altre ragioni di sistema.
-4. **`running` → `ready`**: il sistema operativo può interrompere il processo (ad esempio, a causa di un'interruzione del timer, come accade con l'algoritmo di scheduling round-robin). In questo caso, il processo viene sospeso e rimesso nella coda dei processi pronti, aspettando di ottenere nuovamente la CPU.
-5. **`running` → `waiting`**: se il processo richiede un'operazione di input/output o deve attendere che un evento specifico accada (ad esempio, il completamento di una lettura da disco), viene sospeso e spostato nello stato `waiting` fino a quando l'evento non si verifica.
+4. **`running` → `ready`**: il sistema operativo può interrompere il processo (ad esempio, a causa di un'interruzione del timer%%, come accade con l'algoritmo di schedulazione round-robin (aggiungere link)%%). In questo caso, il processo viene sospeso e rimesso nella coda dei processi pronti%%ready queue%%, aspettando di ottenere nuovamente la CPU.
+5. **`running` → `waiting`**: se il processo richiede un'operazione di I/O o deve attendere che un evento specifico accada (ad esempio, il completamento di una lettura da disco), viene sospeso ed entra nello stato `waiting` fino a quando l'evento non si verifica.
 6. **`running` → `terminated`**: quando il processo completa la sua esecuzione (o si verifica un errore fatale), entra nello stato `terminated`, liberando tutte le risorse allocate.
 7. **`waiting` → `ready`**: una volta che l'evento atteso si verifica (ad esempio, un'operazione I/O termina), il processo torna nello stato `ready`, poiché ha tutto ciò di cui ha bisogno per continuare l'esecuzione e aspetta solo che la CPU diventi disponibile.
 8. **`waiting` → `terminated`**: se il processo viene terminato durante l'attesa di un evento (ad esempio, un errore grave o una terminazione forzata dall'utente), il processo passa direttamente allo stato `terminated`.
@@ -274,7 +422,7 @@ Ogni coda generalmente viene memorizzata come una lista concatenata%%link%%, con
 Esistono diversi **tipi di schedulazione**, che variano in base a quando e come viene assegnata la CPU ai processi:
 1. **Schedulazione a lungo termine (o _job scheduler_)**: decide quali processi devono essere caricati in memoria principale (RAM) dalla [job queue]. Il suo scopo è quello di controllare il grado di multiprogrammazione, cioè il numero di processi che possono essere mantenuti in memoria e pronti per essere eseguiti contemporaneamente.
 2. **Schedulazione a medio termine (o _swapper scheduler_)**: è responsabile dello _swapping_ dei processi, cioè dello spostamento temporaneo di processi in stato `waiting` dalla RAM a una memoria secondaria (per esempio su disco) per liberare memoria e fare spazio ad altri processi.
-3. **Schedulazione a breve termine (o _CPU scheduler_)**: è l'unica schedulazione realmente necessaria in un sistema operativo, poiché decide quale processo tra quelli nello stato `ready` dovrà essere eseguito dalla CPU attraverso l'uso di diversi [algoritmi] di schedulazione. Questo processo avviene molto frequentemente (nell'ordine dei millisecondi).
+3. **Schedulazione a breve termine (o _CPU scheduler_)**: è l'unica schedulazione realmente necessaria in un sistema operativo, poiché decide quale processo tra quelli nello stato `ready` dovrà essere eseguito dalla CPU attraverso l'uso di diversi [algoritmi di schedulazione]. Questo processo avviene molto frequentemente (nell'ordine dei millisecondi).
 
 %%
 \## Algoritmi di schedulazione
@@ -313,106 +461,36 @@ Esistono vari **algoritmi di schedulazione** utilizzati per determinare quale pr
 - **Svantaggi**: Può essere complesso da implementare e configurare correttamente.
 %%
 
-## 3.4) Il _context switch_ (_cambio di contesto_)
+## 3.4) Il cambio di contesto
 
 Il **cambio di contesto** (in inglese _context switch_) è l'operazione che il sistema operativo esegue per sospendere l'esecuzione di un processo attualmente in corso e passare l'esecuzione ad un altro processo. Questa operazione è essenziale per implementare il [multitasking], ovvero la capacità di un sistema di eseguire più processi quasi simultaneamente, facendo in modo che ciascun processo ottenga la CPU a turno.
 
-%%
+### 3.4.1) Utilità e vantaggi del cambio di contesto
 
-\### 3.4.1) Dettagli sul cambio di contesto:
+Il cambio di contesto serve principalmente per:
+1. **Multitasking**: dovendo gestire più processi quasi simultaneamente, la CPU esegue ogni processo per un breve intervallo di tempo e poi passa a un altro processo, servendosi proprio del cambio di contesto e garantendo che ogni processo ottenga una porzione del tempo della CPU utile alla sua esecuzione.
+2. **Prevenzione del monopolio della CPU**: in un sistema operativo multitasking, il cambio di contesto permette di sospendere temporaneamente un processo e riprendere l'esecuzione di un altro, assicurando che nessun processo monopolizzi la CPU. Questo permette a più programmi di essere eseguiti nello stesso momento senza che uno blocchi l'altro.
+3. **Gestione dei processi bloccati**: quando un processo è bloccato (cioè nello stato `waiting`, per esempio in attesa di un'operazione di I/O), il cambio di contesto consente alla CPU di passare immediatamente a un altro processo pronto per essere eseguito, ottimizzando l'utilizzo delle risorse.
+4. **Risposta a eventi esterni**: il cambio di contesto può essere innescato da un [interrupt] (ad esempio, l'arrivo di un input da tastiera o il completamento di un'operazione di I/O) che richiede l'attenzione del sistema operativo. Quando si verifica un evento esterno, la CPU può eseguire il cambio di contesto per gestire l'evento e successivamente tornare al processo precedente.
+5. **Supporto alla concorrenza**: nei sistemi [multiprocessore] o [multithread], il cambio di contesto consente a diversi [thread] o processi di essere eseguiti contemporaneamente o in sequenza sulla stessa CPU, migliorando la concorrenza tra le operazioni.
+6. **Ottimizzazione del sistema**: permette di bilanciare [processi CPU-bound] (che utilizzano intensivamente la CPU) e [processi I/O-bound] (che richiedono più operazioni di I/O), migliorando le prestazioni complessive del sistema.
 
-1. **Perché è necessario**:
-   - In un sistema multitasking, la CPU deve gestire più processi contemporaneamente. Tuttavia, la CPU può eseguire solo un processo alla volta. Per garantire che tutti i processi abbiano una possibilità di eseguire, la CPU deve essere periodicamente assegnata a diversi processi in esecuzione o pronti. Il cambio di contesto avviene durante questa assegnazione.
+### 3.4.2) Come funziona il cambio di contesto
 
-2. **Come funziona**:
-   Il sistema operativo sospende il processo corrente e salva tutte le sue informazioni di stato, quindi carica le informazioni del prossimo processo da eseguire.
+Le fasi principali di un cambio di contesto sono:
+1. **Salvataggio dello stato del processo corrente**: il sistema operativo salva lo stato corrente del processo (o thread) in esecuzione, inclusi i valori dei registri della CPU, il valore del Program Counter (PC) che tiene traccia dell'istruzione successiva da eseguire, lo [stato del processo] e le altre informazioni necessarie per riprendere l'esecuzione in futuro. Queste informazioni sono memorizzate nel [PCB] del processo.
+2. **Caricamento del nuovo contesto**: il sistema operativo carica il contesto del prossimo processo da eseguire dal suo corrispettivo [PCB], ripristinando i suoi valori dei registri della CPU e del Program Counter, quindi la CPU riprende l'esecuzione del nuovo processo da dove era stato interrotto l'ultima volta.
+3. **Ripresa dell'esecuzione**: la CPU riprende l'esecuzione del nuovo processo dal punto in cui era stato sospeso.
 
-   **Fasi principali di un cambio di contesto**:
-   - **Salvataggio dello stato del processo corrente**: 
-     Il sistema operativo salva il contesto del processo corrente (stato della CPU e delle risorse), incluse le informazioni come:
-     - Registri della CPU.
-     - Contatore di programma (PC), che tiene traccia dell'istruzione successiva da eseguire.
-     - Pila (stack) corrente e puntatori relativi.
-     - Stato generale del processo (ad esempio, se è in attesa o pronto).
-   - **Caricamento dello stato del processo successivo**:
-     Le informazioni salvate nel **Process Control Block (PCB)** del prossimo processo vengono ripristinate nella CPU, quindi la CPU riprende l'esecuzione del nuovo processo da dove era stato interrotto l'ultima volta.
+Ecco un diagramma che illustra il cambio di contesto tra due processi $P_0$ e $P_1$:
 
-3. **Quando avviene il cambio di contesto**:
-   - **Preemption (Pre-emption)**: Un processo può essere interrotto forzatamente se il suo **quantum di tempo** (nel caso di algoritmi come il Round Robin) è scaduto, o se un processo con priorità più alta richiede la CPU.
-   - **Blocco del processo**: Quando un processo è in attesa di risorse o di un'operazione di input/output (ad esempio, attende che un dispositivo I/O termini un'operazione), la CPU può essere assegnata a un altro processo.
-   - **Interrupt (interruzioni)**: Eventi esterni come l'arrivo di un input da una periferica, oppure interruzioni di sistema (es. timer) possono causare un cambio di contesto.
-   - **Termine del processo**: Quando un processo termina la sua esecuzione, il sistema operativo rilascia le sue risorse e assegna la CPU a un altro processo.
+![](Cambio%20di%20contesto.png)
 
-4. **Costi del cambio di contesto**:
-   Il cambio di contesto è un'operazione che ha un **costo in termini di tempo e risorse**. Durante il tempo necessario per il cambio di contesto:
-   - Nessun processo utente viene effettivamente eseguito.
-   - Ciò comporta un **overhead** di sistema, dato che la CPU esegue operazioni di salvataggio e ripristino del contesto anziché elaborare istruzioni utili per l'utente.
-   - La frequenza del cambio di contesto deve essere ottimizzata per evitare che un eccessivo numero di cambi riduca l'efficienza del sistema.
+### 3.4.3) Costi del cambio di contesto
 
-\### 3.4.2) Componenti coinvolte nel cambio di contesto:
-- **Process Control Block (PCB)**: Il PCB contiene tutte le informazioni relative al processo, come lo stato, i registri, il contatore di programma, le informazioni sulla memoria, le informazioni su I/O e altre risorse. Il cambio di contesto implica il salvataggio e il ripristino del PCB del processo in esecuzione.
-- **Stack e registri della CPU**: Le informazioni specifiche della CPU (registri, puntatori, stato dell'ALU, ecc.) vengono salvate e ripristinate durante un cambio di contesto.
+Il cambio di contesto è un'operazione che ha un costo in termini di tempo e risorse. Durante il tempo necessario per il cambio di contesto, nessun processo utente viene effettivamente eseguito: il cambio di contesto è puro overhead, perché il sistema esegue solo operazioni volte alla gestione dei processi e non alla computazione.
 
-\### 3.4.3) Esempio di scenari di cambio di contesto:
-1. **Schedulazione a tempo** (Round Robin): Il sistema operativo assegna la CPU a un processo per un intervallo di tempo fisso (quantum). Quando il tempo scade, viene effettuato un cambio di contesto per passare al prossimo processo in coda.
-2. **Processo bloccato in attesa di I/O**: Se un processo richiede un'operazione di input/output (come la lettura da disco), viene bloccato finché l'operazione non è completata. Durante questo tempo, viene eseguito un cambio di contesto per passare a un altro processo.
-3. **Interruzione hardware**: Se arriva un interrupt hardware, come un segnale dalla tastiera o un timer di sistema, il sistema operativo esegue un cambio di contesto per rispondere all'interrupt.
-
-\### 3.4.4) In sintesi:
-Il **cambio di contesto** è un meccanismo fondamentale in un sistema operativo multitasking che consente di sospendere un processo in esecuzione e riprendere o avviare l'esecuzione di un altro processo, permettendo l'uso efficiente della CPU e delle risorse del sistema. Tuttavia, poiché comporta un certo overhead, la sua frequenza deve essere ben bilanciata per non penalizzare le prestazioni complessive del sistema.
-%%
-
-%%
-\## **I/O-bound process** e **CPU-bound process**
-I concetti di **I/O-bound process** e **CPU-bound process** si riferiscono al tipo di risorse su cui un processo è più dipendente durante la sua esecuzione. La distinzione tra questi due tipi di processi è fondamentale per l'ottimizzazione delle prestazioni dei sistemi operativi e per la pianificazione dei processi (scheduling).
-
-\### I/O-bound process
-- **Definizione**: Un processo **I/O-bound** è un processo che passa la maggior parte del suo tempo **in attesa di operazioni di input/output (I/O)**, come la lettura da o la scrittura su un disco, l'attesa di dati dalla rete, o l'interazione con dispositivi come tastiere e stampanti. Il tempo di esecuzione sulla CPU è relativamente breve rispetto al tempo trascorso in attesa di I/O.
-
-- **Caratteristiche**:
-  - **Uso intenso di I/O**: Questi processi effettuano molte operazioni di input/output e, quindi, tendono a essere **spesso bloccati** (in stato di attesa) fino a quando le operazioni di I/O non sono completate.
-  - **Breve tempo di utilizzo della CPU**: Quando il processo ottiene il controllo della CPU, tende a eseguire solo un piccolo numero di calcoli prima di essere nuovamente bloccato per attendere l'I/O.
-  - **Esempi**:
-    - Un programma che attende frequenti input da parte dell'utente, come un editor di testo o un'applicazione interattiva.
-    - Un processo che trasferisce grandi quantità di dati da o verso un disco rigido (ad esempio, un'applicazione che copia file).
-
-- **Obiettivo dello scheduling**:
-  - I processi I/O-bound beneficiano di una schedulazione che li rimuova rapidamente dallo stato di attesa (quando l'I/O è completato) e gli assegni prontamente la CPU, per minimizzare i tempi di attesa e garantire che le operazioni di I/O siano gestite efficientemente.
-
-\### CPU-bound process
-- **Definizione**: Un processo **CPU-bound** è un processo che trascorre la maggior parte del suo tempo **effettuando calcoli sulla CPU** e richiede relativamente poche operazioni di I/O. Il tempo speso in attesa di operazioni di I/O è trascurabile rispetto al tempo di utilizzo della CPU.
-
-- **Caratteristiche**:
-  - **Uso intenso della CPU**: Questi processi richiedono **molto tempo di CPU** per eseguire i loro calcoli e rimangono in esecuzione per lunghi periodi senza essere bloccati per operazioni di I/O.
-  - **Basso utilizzo di I/O**: I processi CPU-bound raramente richiedono accesso a dispositivi di input/output, e quindi tendono a non essere frequentemente bloccati.
-  - **Esempi**:
-    - Un programma di elaborazione scientifica o di simulazione che esegue complessi calcoli matematici.
-    - Un software che genera immagini grafiche complesse o esegue algoritmi di compressione dati.
-
-- **Obiettivo dello scheduling**:
-  - I processi CPU-bound possono richiedere quanti di tempo più lunghi, poiché tendono a utilizzare la CPU per periodi prolungati prima di completare il loro lavoro o di cedere la CPU.
-
-\### Differenze principali:
-
-| Caratteristica         | **I/O-bound process**                                | **CPU-bound process**                                |
-|------------------------|------------------------------------------------------|------------------------------------------------------|
-| **Uso principale**      | Predomina l'attesa per operazioni di I/O.            | Predomina l'uso intensivo della CPU per calcoli.     |
-| **Tempo in attesa**     | Passa molto tempo in attesa di I/O (bloccato).       | Passa la maggior parte del tempo eseguendo calcoli.  |
-| **Tempo sulla CPU**     | Utilizza la CPU solo per brevi periodi.              | Utilizza la CPU per lunghi periodi senza interruzioni.|
-| **Esempi**              | Editor di testo, programmi di rete, trasferimenti dati. | Elaborazione scientifica, rendering grafico, compressione dati. |
-| **Schedulazione**       | Richiede una gestione rapida dell'I/O.               | Richiede tempi più lunghi di utilizzo della CPU.     |
-
-\### Importanza per lo scheduling:
-Il sistema operativo deve tenere conto del tipo di processo (I/O-bound o CPU-bound) durante la schedulazione per ottimizzare le prestazioni del sistema:
-- **I/O-bound processes**: Vengono solitamente eseguiti con maggiore priorità o con quanti di tempo più brevi per evitare che rimangano inutilmente in attesa di operazioni I/O completate.
-- **CPU-bound processes**: Possono essere eseguiti con quanti di tempo più lunghi per evitare frequenti cambi di contesto e overhead associati, poiché tendono a utilizzare la CPU per periodi più estesi.
-
-\### Esempio pratico:</span>
-- Un **I/O-bound process**, come un programma di rete che riceve pacchetti di dati, potrebbe passare gran parte del tempo in attesa di dati dalla rete. Durante questo tempo, la CPU può essere assegnata ad altri processi.
-- Un **CPU-bound process**, come un software di compressione video, eseguirà complessi calcoli per un lungo periodo di tempo senza fermarsi, poiché non ha bisogno di attendere input/output frequenti.
-
-In sintesi, **I/O-bound** e **CPU-bound** indicano due modelli distinti di comportamento dei processi, ciascuno con diverse esigenze di risorse, e richiedono strategie di scheduling diverse per massimizzare l'efficienza del sistema operativo.
-%%
+Il tempo necessario varia da sistema a sistema, dipendendo dalla velocità della memoria, dal numero di registri da copiare e dall'esistenza di istruzioni macchina appropriate (per esempio, una singola istruzione per caricare o trasferire in memoria tutti i registri). In genere si tratta di qualche millisecondo di computazione, ma la frequenza del cambio di contesto deve essere ottimizzata per evitare che un eccessivo numero di cambi riduca l'efficienza del sistema.
 
 ## 3.5) Parametri di performance della schedulazione
 
@@ -422,11 +500,153 @@ Alcuni criteri utilizzati per valutare le prestazioni di un algoritmo di schedul
 - **Tempo di risposta**: il tempo che intercorre tra la creazione di un processo e il primo istante in cui il processo inizia a essere eseguito.
 - **Throughput**: il numero di processi completati in un dato intervallo di tempo.
 
-# 4) Thread
+# 4) Operazioni sui processi
+
+Le **operazioni sui processi** rappresentano le azioni che un sistema operativo può eseguire per gestire e controllare i processi in esecuzione. Queste operazioni includono la [creazione], la [terminazione], la [comunicazione] e il [coordinamento] dei processi.
+
+## 4.1) Creazione di un processo
+
+Ogni nuovo processo viene creato a partire da un processo già esistente: il processo creante viene detto _processo padre_ (_parent process_), mentre il nuovo processo è chiamato _processo figlio_ (_child process_). Il sistema operativo assegna al processo appena creato risorse (come spazio di memoria e tempo CPU) e lo aggiunge a una coda di scheduling.
+
+Le fasi principali della creazione di un processo sono:
+1. **Assegnazione di un PID**: ogni processo ha un identificatore univoco (solitamente rappresentato in memoria come un numero intero), noto come _Process ID_ (_PID_). Il PID fornisce un valore univoco per ogni processo del sistema e può essere usato come indice per accedere a vari attributi di un processo all'interno del [kernel].
+2. **Allocazione delle risorse**: vengono allocate le risorse necessarie per il nuovo processo, come lo [spazio di memoria], i descrittori dei file aperti dal processo padre che possono essere ereditati o copiati da lui, il tempo di CPU e così via.
+3. **Inizializzazione del contesto**: il sistema operativo crea un [PCB] per il processo figlio contenente tutte le informazioni di controllo necessarie, come lo stato del processo, i registri, i puntatori alla memoria, i file aperti e altro.
+4. **Inserimento nelle code di scheduling**: il processo viene aggiunto alla coda del long-term scheduler (per la schedulazione a lungo termine) o direttamente alla coda del short-term scheduler (per la schedulazione immediata). %%aggiustare questo punto e sostituire le code del long-term e short-term con quelle di job queue, ready queue ecc.
+Il nuovo processo viene aggiunto alla **coda dei processi pronti** (ready queue) in attesa di essere eseguito. Sarà lo scheduler a decidere quando il processo figlio avrà accesso alla CPU.
+%%
+
+%%https://it.wikipedia.org/wiki/Init
+fare una sottosezione%%
+
+### 4.1.1) `fork()` in Unix/Linux
+
+Nei sistemi Unix/Linux, la creazione di un nuovo processo avviene tramite la chiamata di sistema `fork()`. Questa chiamata crea una copia esatta del processo padre, ma con un nuovo PID. Il valore restituito dalla chiamata `fork()` è diverso per il padre e per il figlio: mentre il processo padre riceve il PID del processo figlio, il processo figlio riceve un valore pari a `0`, indicando che è il processo appena creato.
+
+Un esempio di codice in linguaggio C che utilizza `fork()`:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();  // Crea un nuovo processo figlio
+
+    if (pid == 0) {
+        // Codice eseguito dal processo figlio
+        printf("Sono il processo figlio. PID: %d\n", getpid());
+    } else if (pid > 0) {
+        // Codice eseguito dal processo padre
+        printf("Sono il processo padre. PID del figlio: %d\n", pid);
+    } else {
+        // Errore durante la creazione del processo
+        printf("Errore nella creazione del processo\n");
+    }
+    return 0;
+}
+
+```
+
+Il processo figlio può poi sovrascrivere il suo spazio di memoria e l'eseguibile, entrambi ereditati dal padre, con una nuova immagine di processo tramite una chiamata come èxec()`, che permette di eseguire un programma differente all'interno del processo figlio.
+
+### 4.1.2) `CreateProcess()` in Windows
+
+Nei sistemi operativi Windows, un nuovo processo viene creato tramite l'[API] `CreateProcess()`. Questa funzione crea un nuovo processo e contemporaneamente un [thread] principale all'interno del processo.
+
+A differenza di [`fork()`], che duplica il processo corrente, `CreateProcess()` consente di specificare il nome dell'eseguibile che il processo figlio deve eseguire. Questo significa che, in Windows, il processo figlio inizia immediatamente con l'esecuzione di un programma distinto.
+
+Un esempio di codice in linguaggio C che utilizza `CreateProcess()`:
+
+```c
+#include <windows.h>
+#include <stdio.h>
+
+int main() {
+   STARTUPINFO si;
+   PROCESS_INFORMATION pi;
+
+   // Zero-fill the structures
+   ZeroMemory(&si, sizeof(si));
+   si.cb = sizeof(si);
+   ZeroMemory(&pi, sizeof(pi));
+
+   // Create a new process
+   if (CreateProcess(NULL,           // No module name (use command line)
+					 "C:\\Program.exe", // Command line
+					 NULL,           // Process handle not inheritable
+					 NULL,           // Thread handle not inheritable
+					 FALSE,          // Set handle inheritance to FALSE
+					 0,              // No creation flags
+					 NULL,           // Use parent's environment block
+					 NULL,           // Use parent's starting directory
+					 &si,            // Pointer to STARTUPINFO structure
+					 &pi)            // Pointer to PROCESS_INFORMATION structure
+   ) {
+	   printf("Processo creato con successo!\n");
+	   printf("PID del processo figlio: %d\n", pi.dwProcessId);
+
+	   // Wait until child process exits
+	   WaitForSingleObject(pi.hProcess, INFINITE);
+
+	   // Close process and thread handles
+	   CloseHandle(pi.hProcess);
+	   CloseHandle(pi.hThread);
+   } else {
+	   printf("Errore nella creazione del processo.\n");
+   }
+   return 0;
+}
+```
+
+## 4.2) Terminazione di un processo
+
+Un processo può terminare per vari motivi. Quando termina, le risorse assegnate al processo (come la memoria, i file aperti e il tempo CPU) vengono liberate dal sistema operativo. La terminazione di un processo può essere volontaria o forzata:
+- **Terminazione volontaria**: il processo completa l'esecuzione del suo codice (ad esempio, l'utente chiude un programma). Ogni processo può chiamare esplicitamente la funzione di terminazione, usando come èxit()` in Unix/Linux o `ExitProcess()` in Windows.
+- **Terminazione forzata**: un errore o un'eccezione non gestita (come una divisione per zero o un accesso in memoria non valido) può causare la terminazione forzata del processo. Il sistema operativo o un altro processo può terminare forzatamente un processo tramite chiamate di sistema (ad esempio, tramite `kill()` in Unix o `TerminateProcess()` in Windows). Generalmente solo il processo padre del processo che si vuole terminare può invocare una chiamata di sistema di questo tipo, altrimenti gli utenti potrebbero causare arbitrariamente la terminazione forzata di processi di chiunque.
+
+Le fasi principali della terminazione di un processo sono:
+1. **Richiesta di terminazione**: il processo chiama una funzione di uscita o riceve un segnale di terminazione. Questo avvia il processo di chiusura.
+2. **Chiusura e liberazione delle risorse**: il sistema operativo chiude automaticamente tutti i file aperti dal processo. Anche altri tipi di risorse come socket, canali di comunicazione, semafori o altre strutture di dati vengono rilasciate, così come lo spazio di memoria assegnato al processo (sia quella per il codice che per i dati) viene liberato, in modo che possa essere utilizzato da altri processi.
+3. **Aggiornamento dello stato del processo**: lo [stato del processo] nel [PCB] viene aggiornato in `terminated`. Finché il processo padre non recupera lo stato del processo figlio, si dice che quest'ultimo diventa un _processo zombie_ (in quanto il padre non sa se il processo figlio è ancora vivo o meno).
+4. **Liberazione del PCB dalle code**: il processo viene rimosso dalla coda dei processi pronti%%ready queue%% o da altre code di schedulazione. Il PCB del processo viene marcato per la rimozione o, nel caso di un processo zombie, viene mantenuto in memoria fino a che il processo padre recupera il suo stato.
+5. **Notifica del processo padre**: se il processo è stato generato da un processo padre, quest'ultimo viene notificato della terminazione del figlio. Nei sistemi Unix/Linux, il padre può chiamare la funzione `wait()` per raccogliere il codice di uscita del figlio e permettere la completa rimozione del PCB del figlio dalla memoria.
+6. **Rimozione del processo dal sistema operativo**: una volta che tutte le risorse sono state rilasciate e, se necessario, il processo padre ha recuperato il codice di uscita del figlio, il sistema operativo rimuove il PCB e altre strutture associate al processo dalla memoria. A questo punto, il processo è completamente terminato.
+
+%%
+
+\### 3. **Comunicazione tra processi (Inter-Process Communication, IPC)**
+   Spesso, i processi devono **comunicare e collaborare** tra di loro. La **comunicazione tra processi** (IPC) consente ai processi di scambiarsi dati o segnalare eventi. Le tecniche principali di IPC includono:
+
+   - **Pipe**: Fornisce un canale di comunicazione unidirezionale tra due processi. Un processo scrive dati in un'estremità della pipe, mentre l'altro processo legge dall'altra estremità.
+   - **Message Passing**: I processi inviano e ricevono messaggi tra di loro tramite **code di messaggi** (message queues).
+   - **Memoria condivisa**: Due o più processi possono condividere una porzione di memoria, il che permette lo scambio rapido di informazioni.
+   - **Socket**: Permettono la comunicazione tra processi su macchine diverse tramite protocolli di rete.
+
+\### 6. **Coordinamento e sincronizzazione tra processi**
+   Nei sistemi con **processi concorrenti**, è necessario coordinare l'esecuzione di più processi per evitare problemi come **race conditions** (condizioni di corsa) o **deadlock** (stallo). Le operazioni per la sincronizzazione includono:
+
+   - **Mutua esclusione**: Garantisce che un solo processo possa accedere a una risorsa condivisa alla volta (utilizzando semafori o mutex).
+   - **Semafori**: I **semafori** sono variabili utilizzate per controllare l'accesso a risorse condivise, permettendo ai processi di attendere in modo sicuro l'accesso a una risorsa.
+   - **Monitor**: I **monitor** sono costrutti di alto livello per gestire la mutua esclusione e la sincronizzazione dei processi.
+
+\### 7. **Forking e clonazione di processi**
+   Alcuni sistemi operativi (come Unix/Linux) permettono a un processo di creare una **copia di se stesso** tramite l'operazione di **fork**. Il processo figlio risultante è una replica del processo padre, con la stessa memoria, ma con un diverso **PID**.
+
+\### 8. **Gestione dei segnali (Signals)**
+   I processi possono inviare e ricevere **segnali**, che sono notifiche asincrone inviate dal sistema operativo o da altri processi per segnalare eventi come errori, richieste di terminazione o altri eventi specifici. Ad esempio, in Unix/Linux, il comando **kill** invia segnali a un processo (ad esempio, **SIGTERM** per richiedere la terminazione del processo).
+
+\### 9. **Esecuzione di processi in foreground e background**
+   Nei sistemi multiutente, è possibile eseguire un processo in **foreground** (in primo piano) o in **background** (sullo sfondo). Un processo in background può continuare a essere eseguito mentre l'utente esegue altre attività.
+
+\### In sintesi:
+Le operazioni sui processi sono fondamentali per gestire l'esecuzione dei programmi in un sistema operativo. Esse includono la **creazione**, la **terminazione**, la **comunicazione**, la **sincronizzazione**, e la **schedulazione** dei processi, tutte attività necessarie per garantire l'efficienza e la stabilità del sistema.
+%%
+
+# 5) Thread
 
 Un _thread_ (abbreviazione di _thread of execution_, _filo dell'esecuzione_) è l'unità granulare in cui un processo può essere suddiviso e che può essere eseguito a divisione di tempo (cioè assegnando a ognuno una determinata porzione di tempo in cui poter essere eseguito) o in parallelo ad altri thread da parte del processore. In altre parole, un thread è una parte del processo che viene eseguita, in maniera concorrente ed indipendente, internamente allo stato generale del processo stesso.
 
-## 4.1) Differenza tra processo e thread
+## 5.1) Differenza tra processo e thread
 
 I termini _processo_ e _thread_, nonostante a volte vengano usati in maniera interscambiabile, in realtà indicano due cose distinte:
 - Un processo è un'istanza indipendente del programma, con il proprio spazio di memoria.
@@ -479,7 +699,7 @@ Un **thread** (o thread di esecuzione) è l'unità di esecuzione più piccola ch
 In sintesi: **ogni processo può contenere più thread**, ma i **thread** appartengono sempre a un **processo**.
 %%
 
-## 4.2) Utilità dei thread
+## 5.2) Utilità dei thread
 
 I thread servono appositamente per rendere concorrente l'esecuzione di più operazioni all'interno di uno stesso processo: se un processo sta, per esempio, eseguendo un browser, l'esecuzione avviene seguendo una singola sequenza di istruzioni; quindi il processo può svolgere un solo compito alla volta. Tramite lo stesso processo, per esempio, un utente non può contemporaneamente inserire caratteri e verificare la correttezza ortografica di quel che sta scrivendo.
 
@@ -493,5 +713,3 @@ Questa funzione è particolarmente utile sui sistemi multicore, in cui più thre
 - https://it.wikipedia.org/wiki/Processo_(informatica)
 - https://it.wikipedia.org/wiki/Thread_(informatica)
 %%
-
-
