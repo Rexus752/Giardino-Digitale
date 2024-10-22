@@ -239,12 +239,16 @@ La terminazione di un processo avviene attraverso una serie di operazioni che in
 	- **4.2 - Terminazione di un processo**
 	- **4.3 - Comunicazione tra processi**
 		- **4.3.1 - Pipe**
-			- **4.3.1.1 - Caratteristiche principali**
-			- **4.3.1.2 - Funzionamento di base**
-				- **4.3.1.2.1 - Esempio in linguaggio C**
-			- **4.3.1.3 - Le pipe anonime e i loro limiti**
-			- **4.3.1.4 - Named pipe (FIFO)**
+			- **4.3.1.1 - Caratteristiche principali delle pipe**
+			- **4.3.1.2 - Funzionamento di base delle pipe**
+				- **4.3.1.2.1 - Esempio di codice in linguaggio C**
+			- **4.3.1.3 - Vantaggi e svantaggi delle pipe**
+			- **4.3.1.4 - Named pipe**
 		- **4.3.2 - Code di messaggi**
+			- **4.3.2.1 - Caratteristiche principali delle code di messaggi**
+			- **4.3.2.2 - Funzionamento delle code di messaggi**
+				- **4.3.2.2.1 - Esempio di codice in linguaggio C**
+			- **4.3.2.3 - Vantaggi e svantaggi delle code di messaggi**
 - **5 - Thread**
 	- **5.1 - Differenza tra processo e thread**
 	- **5.2 - Utilità dei thread**
@@ -634,14 +638,14 @@ Le principali tecniche di comunicazione tra processi sono: %% SISTEMARE LISTA CO
 
 Le **pipe** %%([pronuncia]: `/paɪp/`)%%sono un meccanismo di comunicazione tra processi che permette a uno o più processi di condividere dati tramite un canale unidirezionale. In sostanza, una pipe crea un collegamento tra due processi: uno scrive dati nella pipe e l'altro legge quei dati.
 
-#### 4.3.1.1 - Caratteristiche principali
+#### 4.3.1.1 - Caratteristiche principali delle pipe
 
 Le caratteristiche principali delle pipe sono:
 - **Unidirezionali**: i dati fluiscono in una sola direzione (dal processo scrivente a quello leggente).
 - **Anonime**: sono tipicamente usate tra processi che hanno una relazione gerarchica (padre-figlio). In genere, il processo padre crea una pipe e poi genera il processo figlio che la usa.
 - **Comunicazione in memoria**: la pipe si comporta come un buffer circolare tra i due processi, memorizzando temporaneamente i dati fino a quando non vengono letti.
 
-#### 4.3.1.2 - Funzionamento di base
+#### 4.3.1.2 - Funzionamento di base delle pipe
 
 Una pipe in UNIX o Linux può essere creata con la chiamata di sistema%%link%% `pipe()`. Questa funzione genera due file descriptor:
 - Il file descriptor per la lettura (`fd[0]`);
@@ -651,9 +655,9 @@ Un processo può scrivere dati nel file descriptor `fd[1]` e un altro processo p
 
 %%mettere link ai file descriptor%%
 
-##### 4.3.1.2.1 - Esempio in linguaggio C
+##### 4.3.1.2.1 - Esempio di codice in linguaggio C
 
-Ecco un esempio di come funziona una pipe in linguaggio C%%link%%, in cui un processo padre invia un messaggio al processo figlio usando una pipe.
+Ecco un esempio di uso delle pipe in linguaggio C%%link%%, in cui un processo padre invia un messaggio al processo figlio usando una pipe.
 
 ```c
 #include <stdio.h>
@@ -709,19 +713,36 @@ Spiegazione del codice:
 	- Nel processo padre, chiudiamo l'estremità di lettura (`fd[0]`) e scriviamo il messaggio nella pipe tramite `write()`.
 	- Nel processo figlio, chiudiamo l'estremità di scrittura (`fd[1]`) e leggiamo il messaggio tramite `read()`.
 - Dopo la comunicazione, ogni processo chiude l'estremità della pipe che non è più necessaria.
+%%nel codice e nella sua spiegazione scrivere tutto in modo impersonale, non in prima persona plurale%%
 
-#### 4.3.1.3 - Le pipe anonime e i loro limiti
+#### 4.3.1.3 - Vantaggi e svantaggi delle pipe
 
-Le pipe "comuni" sono dette _pipe anonime_ e presentano determinati limiti:
-1. Funzionano solo tra processi con una relazione gerarchica (padre-figlio).
-2. Sono unidirezionali: per comunicare anche nella direzione opposta (quindi per effettuare una comunicazione bidirezionale) serve una seconda pipe.
-3. La pipe ha una dimensione limitata e i processi devono gestire correttamente il buffering.
+I principali vantaggi delle pipe sono:
+- **Semplicità**: le pipe sono facili da usare e implementare, soprattutto per la comunicazione tra processi con una relazione gerarchica (ad esempio, un processo padre e un processo figlio). Sono supportate direttamente a livello del sistema operativo, con chiamate di sistema semplici come `pipe()` per creare una pipe e `read()`/`write()` per leggere e scrivere dati.
+- **Comunicazione unidirezionale**: le pipe forniscono un canale di comunicazione unidirezionale, utile in situazioni in cui i dati devono fluire solo in una direzione (da un processo produttore a un processo consumatore).
+- **Buffering automatico**: le pipe utilizzano un buffer interno gestito dal sistema operativo, che rende la gestione dei dati tra i processi più semplice, senza necessità di gestire manualmente il buffering dei dati.
+- **Sincronizzazione implicita**: le pipe assicurano una forma di sincronizzazione implicita, in quanto se un processo tenta di leggere da una pipe vuota, verrà bloccato fino a quando non ci saranno dati disponibili. Allo stesso modo, se la pipe è piena, il processo che scrive attenderà fino a quando c'è spazio libero.
+- **Indipendenza dalla rete**: le pipe funzionano a livello locale tra processi sullo stesso sistema, senza necessità di connessioni di rete, il che le rende efficienti in termini di prestazioni per la comunicazione tra processi locali.
 
-Per ovviare a questi limiti, sono state create le [named pipe](Processi%20di%20un%20Sistema%20Operativo.md#Named%20Pipe%20(FIFO)).
+I principali svantaggi delle pipe sono:
+- **Unidirezionalità**: i dati nelle pipe possono fluire in una sola direzione. Se è necessaria la comunicazione bidirezionale (andata e ritorno), bisogna creare due pipe, aumentando la complessità della gestione dei dati.
+- **Uso limitato tra processi correlati**: le pipe, dette anche _pipe anonime_, funzionano solo tra processi che hanno una relazione gerarchica (ad esempio, un processo padre che comunica con il figlio). Per comunicare tra processi non correlati, è necessario usare le [named pipe (FIFO)](Processi%20di%20un%20Sistema%20Operativo.md#4.3.1.4%20-%20Named%20pipe%20(FIFO)), che sono più complesse da gestire rispetto alle pipe anonime.
+- **Capacità limitata**: le pipe hanno una capacità limitata (tipicamente qualche kilobyte%%link%%). Se il buffer si riempie, il processo scrivente viene bloccato finché il buffer non viene svuotato. Allo stesso modo, se non ci sono dati, il processo leggente viene bloccato.
+- **Accesso sequenziale**: le pipe operano in modo sequenziale secondo la politica FIFO (_First In, First Out_). Questo è ideale per flussi semplici di dati, ma in scenari complessi, in cui è richiesta una gestione avanzata dei messaggi, le pipe possono risultare limitate.
+- **No persistenza dei dati**: i dati nelle pipe sono transienti, cioè una volta che i dati vengono letti, vengono rimossi dalla pipe. Se un processo legge i dati ma non li elabora correttamente, non è possibile rileggere il messaggio. Inoltre, se un processo termina senza leggere i dati, questi vengono persi.
+- **Sincronizzazione manuale nei processi complessi**: sebbene ci sia sincronizzazione implicita, in scenari complessi potrebbe essere necessario gestire manualmente la sincronizzazione tra processi per evitare race condition%%link%% o blocchi inutili.
+- **Non adatte per grandi quantità di dati**: le pipe sono ideali per il passaggio di piccoli blocchi di dati. Quando è necessario trasferire grandi quantità di dati o file complessi, l'uso delle pipe diventa inefficiente rispetto ad altri metodi di IPC come la memoria condivisa%%link%%.
 
-#### 4.3.1.4 - Named pipe (FIFO)
+Le pipe sono particolarmente utili quando:
+- I processi devono comunicare in modo **semplice** e con **piccoli volumi di dati**.
+- C'è una relazione padre-figlio tra i processi.
+- La comunicazione deve avvenire **in una sola direzione**.
 
-Le **named pipe** o **FIFO** sono una versione più avanzata delle pipe anonime: a differenza di quest'ultime, le named pipe possono essere utilizzate anche tra processi non correlati e sono bidirezionali. Vengono create con il comando `mkfifo` o la chiamata di sistema `mkfifo()`.
+Tuttavia, se la comunicazione richiede bidirezionalità, persistenza dei dati, o se è necessario trasferire grandi quantità di informazioni tra processi non correlati, potrebbe essere meglio usare altri metodi IPC come le [code di messaggi](Processi%20di%20un%20Sistema%20Operativo.md#4.3.2%20-%20Code%20di%20messaggi), la memoria condivisa%%link%%, o i socket%%link%%.
+
+#### 4.3.1.4 - Named pipe
+
+Le **named pipe** (anche chiamate _FIFO_ per il loro comportamento) sono una versione più avanzata delle _pipe anonime_, cioè le comuni pipe: a differenza di quest'ultime, infatti, le named pipe possono essere utilizzate anche tra processi non legati da una relazione padre-figlio e sono bidirezionali. Vengono create con il comando `mkfifo` o la chiamata di sistema `mkfifo()`.
 
 Ecco un esempio di named pipe:
 
@@ -743,12 +764,136 @@ Esempi: `pipe()` in UNIX/Linux, pipe nei comandi shell (`|`).
 
 ### 4.3.2 - Code di messaggi
 
-Le **code di messaggi** (_message queues_) consentono lo scambio di messaggi tra processi. I messaggi possono essere messi in coda da un processo e letti da un altro processo in modo asincrono.
-- Vantaggio: i processi non devono essere sincronizzati tra loro.
-- Esempi: `msgget()`, `msgsnd()`, `msgrcv()` su UNIX.
+Le **code di messaggi** (_message queues_) sono una tecnica di comunicazione tra processi che permette a più processi di inviare e ricevere messaggi in maniera asincrona. In altre parole, un processo può inserire un messaggio in una coda, e un altro processo (o più processi) può leggerlo in un momento successivo, senza che i processi debbano sincronizzarsi perfettamente.
+
+#### 4.3.2.1 - Caratteristiche principali delle code di messaggi
+
+Le caratteristiche principali delle code di messaggi sono:
+- **Asincronia**: un processo può inviare un messaggio senza aspettare che l'altro processo lo legga immediatamente.
+- **Ordinamento**: i messaggi sono normalmente gestiti secondo la politica FIFO (_First In, First Out_), cioè il primo messaggio inserito è il primo a essere letto.
+- **Identificatori**: i messaggi possono avere identificatori o tipi per permettere ai processi di filtrare quelli di interesse.
+- **Persistenza temporanea**: i messaggi rimangono nella coda fino a quando non vengono letti o cancellati.
+
+#### 4.3.2.2 - Funzionamento delle code di messaggi
+
+In un sistema operativo come UNIX o Linux, le code di messaggi sono implementate usando una serie di chiamate di sistema%%link%%:
+- `msgget()`: crea o accede a una coda di messaggi esistente.
+- `msgsnd()`: invia un messaggio a una coda.
+- `msgrcv()`: riceve un messaggio da una coda.
+- `msgctl()`: esegue operazioni di controllo sulla coda, come eliminarla.
+
+##### 4.3.2.2.1 - Esempio di codice in linguaggio C
+
+Ecco un esempio di uso delle code di messaggi in linguaggio C%%link%%, in cui un processo invia un messaggio a una coda e un altro lo legge.
+
+Ecco il codice per scrivere in una coda:
+
+```c
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <string.h>
+
+// Definizione della struttura del messaggio
+struct msg_buffer {
+    long msg_type;
+    char msg_text[100];
+} message;
+
+int main() {
+    key_t key;
+    int msgid;
+
+    // Generazione di una chiave univoca
+    key = ftok("progfile", 65);
+
+    // Creazione di una coda di messaggi e ottenimento del suo ID
+    msgid = msgget(key, 0666 | IPC_CREAT);
+
+    message.msg_type = 1;
+
+    printf("Inserisci un messaggio: ");
+    fgets(message.msg_text, sizeof(message.msg_text), stdin);
+
+    // Invio del messaggio nella coda
+    msgsnd(msgid, &message, sizeof(message), 0);
+
+    printf("Messaggio inviato: %s\n", message.msg_text);
+
+    return 0;
+}
+```
+
+Ecco il codice per leggere dalla coda:
+
+```c
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+// Definizione della struttura del messaggio
+struct msg_buffer {
+    long msg_type;
+    char msg_text[100];
+} message;
+
+int main() {
+    key_t key;
+    int msgid;
+
+    // Generazione di una chiave univoca
+    key = ftok("progfile", 65);
+
+    // Accesso alla coda di messaggi esistente
+    msgid = msgget(key, 0666 | IPC_CREAT);
+
+    // Ricezione del messaggio dalla coda
+    msgrcv(msgid, &message, sizeof(message), 1, 0);
+
+    // Stampa del messaggio ricevuto
+    printf("Messaggio ricevuto: %s\n", message.msg_text);
+
+    // Rimozione della coda di messaggi
+    msgctl(msgid, IPC_RMID, NULL);
+
+    return 0;
+}
+```
+
+Spiegazione del codice:
+- `key_t key = ftok("progfile", 65);`: genera una chiave IPC univoca, utilizzata per identificare la coda di messaggi.
+- `msgget()`: crea (o accede, se esiste già) a una coda di messaggi associata a quella chiave.
+- `msgsnd()`: invia un messaggio a quella coda. Il messaggio è contenuto nella struttura `msg_buffer`, dove `msg_type` indica il tipo di messaggio e `msg_text` contiene il testo.
+- `msgrcv()`: riceve un messaggio dalla coda. È possibile specificare un tipo di messaggio (`msg_type`) per filtrare i messaggi da leggere.
+- `msgctl()`: rimuove la coda di messaggi quando non è più necessaria.
+
+#### 4.3.2.3 - Vantaggi e svantaggi delle code di messaggi
+
+I principali vantaggi delle code di messaggi sono:
+- **Comunicazione asincrona**: i processi non devono essere eseguiti contemporaneamente per scambiarsi dati. Un processo può inviare un messaggio e terminare, mentre il destinatario può ricevere il messaggio in un secondo momento.
+- **Decoupling tra processi**: i processi non devono essere direttamente collegati o conoscere l'identità l'uno dell'altro. Questo rende i sistemi più flessibili e modulari, poiché è possibile aggiungere o rimuovere processi senza influenzare gli altri.
+- **Ordine dei messaggi**: i messaggi vengono normalmente gestiti secondo la politica FIFO (_First In, First Out_). Questo garantisce che i messaggi vengano elaborati nell'ordine in cui sono stati inviati, il che è utile per mantenere la coerenza temporale.
+- **Supporto per messaggi di diversi tipi e filtri**: è possibile associare a ciascun messaggio un "tipo" o identificatore. Questo permette ai processi di filtrare e leggere solo i messaggi di un certo tipo, migliorando la flessibilità nella gestione di diverse categorie di messaggi.
+- **Persistenza temporanea dei messaggi**: i messaggi rimangono nella coda fino a quando non vengono letti, rendendo possibile la comunicazione anche se i processi sono avviati o terminano in momenti diversi.
+- **Semplicità di implementazione**: le code di messaggi offrono un'interfaccia relativamente semplice per inviare e ricevere dati rispetto ad altre tecniche IPC più complesse come socket %%link%%o memoria condivisa%%link%%.
+
+I principali svantaggi delle code di messaggi sono:
+- **Dimensione limitata della coda**: le code di messaggi hanno una dimensione massima limitata. Se la coda si riempie e non viene letta in tempo, i nuovi messaggi non possono essere inviati, causando un blocco o un ritardo nei processi di invio.
+- **Performance**: le operazioni sulle code di messaggi possono introdurre overhead, poiché ogni operazione di invio e ricezione richiede il passaggio attraverso il kernel del sistema operativo. Questo rende le code di messaggi meno efficienti rispetto a metodi come la memoria condivisa%%link%%, che permette accesso diretto ai dati.
+- **Possibile perdita di messaggi**: se la coda viene eliminata o se un processo termina bruscamente senza leggere i messaggi, questi possono essere persi, a meno che non venga implementato un meccanismo di persistenza.
+- **Sincronizzazione non garantita**: anche se la comunicazione è asincrona, i processi che devono essere strettamente sincronizzati richiederanno meccanismi aggiuntivi (es. semafori%%link%%) per evitare condizioni di gara (race conditions%%link%%) o accessi concorrenti ai messaggi.
+- **Meno adatte per grandi quantità di dati**: le code di messaggi sono più adatte per scambiare piccoli messaggi, piuttosto che grandi blocchi di dati. Per grandi quantità di dati, la memoria condivisa%%link%% è più efficiente.
+- **Gestione complessa di timeout**: la gestione dei timeout (attesa di un messaggio per un certo tempo prima di rinunciare) può richiedere logica aggiuntiva, rendendo la programmazione più complessa in scenari che necessitano di risposte rapide o certe.
+
+Le code di messaggi sono particolarmente utili quando:
+- La comunicazione tra processi deve essere **asincrona**.
+- Il **decoupling** tra i processi è importante, permettendo a vari moduli di essere sviluppati indipendentemente.
+- Si desidera mantenere un sistema **modulare** con processi che possono essere aggiunti o rimossi senza impatti significativi.
+- I messaggi sono piccoli e non richiedono molta sincronizzazione.
+
+Tuttavia, se i processi richiedono un accesso veloce e simultaneo a grandi quantità di dati o sincronizzazione stretta, metodi alternativi come memoria condivisa%%link%% o socket%%link%% potrebbero essere preferibili.
 
 %%
-
 \### 3. **Memoria condivisa (Shared Memory)**
    - Nella **memoria condivisa**, due o più processi possono accedere alla stessa area di memoria. Questo è uno dei metodi più veloci di IPC, poiché i processi possono leggere e scrivere direttamente nella stessa area di memoria.
    - Problema: la sincronizzazione tra processi è necessaria per evitare accessi concorrenti alla stessa porzione di memoria (tipicamente attraverso mutex o semafori).
@@ -874,3 +1019,4 @@ Prendere info da:
 - https://it.wikipedia.org/wiki/Thread_(informatica)
 - https://it.wikipedia.org/wiki/Pipe_(informatica)
 %%
+
