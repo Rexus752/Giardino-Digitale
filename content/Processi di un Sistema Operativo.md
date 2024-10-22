@@ -237,6 +237,14 @@ La terminazione di un processo avviene attraverso una serie di operazioni che in
 		- **4.1.1 - `fork()` in Unix/Linux**
 		- **4.1.2 - `CreateProcess()` in Windows**
 	- **4.2 - Terminazione di un processo**
+	- **4.3 - Comunicazione tra processi**
+		- **4.3.1 - Pipe**
+			- **4.3.1.1 - Caratteristiche principali**
+			- **4.3.1.2 - Funzionamento di base**
+				- **4.3.1.2.1 - Esempio in linguaggio C**
+			- **4.3.1.3 - Le pipe anonime e i loro limiti**
+			- **4.3.1.4 - Named pipe (FIFO)**
+		- **4.3.2 - Code di messaggi**
 - **5 - Thread**
 	- **5.1 - Differenza tra processo e thread**
 	- **5.2 - Utilità dei thread**
@@ -245,7 +253,7 @@ La terminazione di un processo avviene attraverso una serie di operazioni che in
 
 Il processo è un'istanza di un programma in esecuzione su un computer e rappresenta una delle unità fondamentali di gestione delle risorse da parte di un sistema operativo. Quando un programma viene eseguito, il sistema operativo crea un processo per esso, fornendogli le risorse necessarie, come CPU, memoria, accesso ai file e altri dispositivi. Ogni processo è identificato da un codice univoco chiamato _PID_ (_Process ID_).
 
-Può essere visibile all'utente, come nel caso di un'applicazione durante la sua esecuzione, oppure può essere eseguito in background; per visualizzare la lista completa dei processi eseguiti su un computer e le relative risorse impiegate è possibile utilizzare un software comunemente chiamato _task manager_, mentre la gestione dei processi da parte del sistema operativo è affidata a un particolare programma, detto _process scheduler_, attraverso opportuni [algoritmi di schedulazione].
+Può essere visibile all'utente, come nel caso di un'applicazione durante la sua esecuzione, oppure può essere eseguito in background; per visualizzare la lista completa dei processi eseguiti su un computer e le relative risorse impiegate è possibile utilizzare un software comunemente chiamato _task manager_, mentre la gestione dei processi da parte del sistema operativo è affidata a un particolare programma, detto _process scheduler_, attraverso opportuni algoritmi di schedulazione%%link%%.
 
 ## 1.1 - Differenza tra processo e programma
 
@@ -400,13 +408,13 @@ Gli **obiettivi della schedulazione** sono:
 
 ## 3.2 - Code di schedulazione
 
-Le **code di schedulazione** (_scheduling queues_) sono strutture di dati utilizzate dal sistema operativo per gestire i processi in diverse fasi del loro ciclo di vita. Queste code aiutano il sistema operativo a organizzare e determinare quale processo deve essere eseguito, aspettare o bloccarsi, basandosi su determinati [algoritmi di schedulazione].
+Le **code di schedulazione** (_scheduling queues_) sono strutture di dati utilizzate dal sistema operativo per gestire i processi in diverse fasi del loro ciclo di vita. Queste code aiutano il sistema operativo a organizzare e determinare quale processo deve essere eseguito, aspettare o bloccarsi, basandosi su determinati algoritmi di schedulazione%%link%%.
 
 ### 3.2.1 - Tipi principali di code di schedulazione
 
 I **tipi principali di code di schedulazione** sono:
 1. **Job queue**: contiene tutti i processi nel sistema, indipendentemente dallo stato in cui si trovano. Non appena un processo viene creato, viene aggiunto a questa coda.
-2. **Ready queue**: contiene tutti i processi che sono pronti per l'esecuzione (cioè nello stato `ready`) e in attesa che la CPU sia disponibile. Lo [schedulatore a breve termine] sceglie i processi da questa coda per essere eseguiti. Questa coda è una delle più attive e importanti, poiché determina quali processi avranno accesso alla CPU.
+2. **Ready queue**: contiene tutti i processi che sono pronti per l'esecuzione (cioè nello stato `ready`) e in attesa che la CPU sia disponibile. Lo schedulatore a breve termine%%link%% sceglie i processi da questa coda per essere eseguiti. Questa coda è una delle più attive e importanti, poiché determina quali processi avranno accesso alla CPU.
 3. **Device queue**: ogni dispositivo di I/O nel sistema ha una propria coda. Quando un processo richiede un'operazione di I/O, entra nella coda del dispositivo corrispondente e rimane bloccato finché l'operazione non viene completata. Dopo che l'I/O è completato, il processo può ritornare nella coda dei processi pronti. Per esempio, se un processo sta aspettando che venga completata la lettura da disco, sarà nella coda del disco fino al termine dell'operazione.
 4. **Waiting queue**: contiene processi che sono bloccati in attesa di un evento (cioè nello stato `waiting`), come l'input da un dispositivo o il completamento di una richiesta di I/O. Quando l'evento atteso si verifica, il processo ritorna nella _ready queue_. È simile alla _device queue_, ma può anche includere processi in attesa di altri tipi di eventi non legati ai dispositivi di I/O.
 
@@ -420,9 +428,9 @@ Ogni coda generalmente viene memorizzata come una lista concatenata%%link%%, con
 ## 3.3 - Tipi di schedulazione
 
 Esistono diversi **tipi di schedulazione**, che variano in base a quando e come viene assegnata la CPU ai processi:
-1. **Schedulazione a lungo termine (o _job scheduler_)**: decide quali processi devono essere caricati in memoria principale (RAM) dalla [job queue]. Il suo scopo è quello di controllare il grado di multiprogrammazione, cioè il numero di processi che possono essere mantenuti in memoria e pronti per essere eseguiti contemporaneamente.
+1. **Schedulazione a lungo termine (o _job scheduler_)**: decide quali processi devono essere caricati in memoria principale (RAM) dalla job queue%%link%%. Il suo scopo è quello di controllare il grado di multiprogrammazione, cioè il numero di processi che possono essere mantenuti in memoria e pronti per essere eseguiti contemporaneamente.
 2. **Schedulazione a medio termine (o _swapper scheduler_)**: è responsabile dello _swapping_ dei processi, cioè dello spostamento temporaneo di processi in stato `waiting` dalla RAM a una memoria secondaria (per esempio su disco) per liberare memoria e fare spazio ad altri processi.
-3. **Schedulazione a breve termine (o _CPU scheduler_)**: è l'unica schedulazione realmente necessaria in un sistema operativo, poiché decide quale processo tra quelli nello stato `ready` dovrà essere eseguito dalla CPU attraverso l'uso di diversi [algoritmi di schedulazione]. Questo processo avviene molto frequentemente (nell'ordine dei millisecondi).
+3. **Schedulazione a breve termine (o _CPU scheduler_)**: è l'unica schedulazione realmente necessaria in un sistema operativo, poiché decide quale processo tra quelli nello stato `ready` dovrà essere eseguito dalla CPU attraverso l'uso di diversi algoritmi di schedulazione%%link%%. Questo processo avviene molto frequentemente (nell'ordine dei millisecondi).
 
 %%
 \## Algoritmi di schedulazione
@@ -463,7 +471,7 @@ Esistono vari **algoritmi di schedulazione** utilizzati per determinare quale pr
 
 ## 3.4 - Il cambio di contesto
 
-Il **cambio di contesto** (in inglese _context switch_) è l'operazione che il sistema operativo esegue per sospendere l'esecuzione di un processo attualmente in corso e passare l'esecuzione ad un altro processo. Questa operazione è essenziale per implementare il [multitasking], ovvero la capacità di un sistema di eseguire più processi quasi simultaneamente, facendo in modo che ciascun processo ottenga la CPU a turno.
+Il **cambio di contesto** (in inglese _context switch_) è l'operazione che il sistema operativo esegue per sospendere l'esecuzione di un processo attualmente in corso e passare l'esecuzione ad un altro processo. Questa operazione è essenziale per implementare il multitasking%%link%%, ovvero la capacità di un sistema di eseguire più processi quasi simultaneamente, facendo in modo che ciascun processo ottenga la CPU a turno.
 
 ### 3.4.1 - Utilità e vantaggi del cambio di contesto
 
@@ -471,9 +479,9 @@ Il cambio di contesto serve principalmente per:
 1. **Multitasking**: dovendo gestire più processi quasi simultaneamente, la CPU esegue ogni processo per un breve intervallo di tempo e poi passa a un altro processo, servendosi proprio del cambio di contesto e garantendo che ogni processo ottenga una porzione del tempo della CPU utile alla sua esecuzione.
 2. **Prevenzione del monopolio della CPU**: in un sistema operativo multitasking, il cambio di contesto permette di sospendere temporaneamente un processo e riprendere l'esecuzione di un altro, assicurando che nessun processo monopolizzi la CPU. Questo permette a più programmi di essere eseguiti nello stesso momento senza che uno blocchi l'altro.
 3. **Gestione dei processi bloccati**: quando un processo è bloccato (cioè nello stato `waiting`, per esempio in attesa di un'operazione di I/O), il cambio di contesto consente alla CPU di passare immediatamente a un altro processo pronto per essere eseguito, ottimizzando l'utilizzo delle risorse.
-4. **Risposta a eventi esterni**: il cambio di contesto può essere innescato da un [interrupt] (ad esempio, l'arrivo di un input da tastiera o il completamento di un'operazione di I/O) che richiede l'attenzione del sistema operativo. Quando si verifica un evento esterno, la CPU può eseguire il cambio di contesto per gestire l'evento e successivamente tornare al processo precedente.
-5. **Supporto alla concorrenza**: nei sistemi [multiprocessore] o [multithread], il cambio di contesto consente a diversi [thread](Processi%20di%20un%20Sistema%20Operativo.md#5%20-%20Thread) o processi di essere eseguiti contemporaneamente o in sequenza sulla stessa CPU, migliorando la concorrenza tra le operazioni.
-6. **Ottimizzazione del sistema**: permette di bilanciare [processi CPU-bound] (che utilizzano intensivamente la CPU) e [processi I/O-bound] (che richiedono più operazioni di I/O), migliorando le prestazioni complessive del sistema.
+4. **Risposta a eventi esterni**: il cambio di contesto può essere innescato da un interrupt%%link%% (ad esempio, l'arrivo di un input da tastiera o il completamento di un'operazione di I/O) che richiede l'attenzione del sistema operativo. Quando si verifica un evento esterno, la CPU può eseguire il cambio di contesto per gestire l'evento e successivamente tornare al processo precedente.
+5. **Supporto alla concorrenza**: nei sistemi multiprocessore%%link%% o multithread%%link%%, il cambio di contesto consente a diversi [thread](Processi%20di%20un%20Sistema%20Operativo.md#5%20-%20Thread) o processi di essere eseguiti contemporaneamente o in sequenza sulla stessa CPU, migliorando la concorrenza tra le operazioni.
+6. **Ottimizzazione del sistema**: permette di bilanciare processi CPU-bound%%link%% (che utilizzano intensivamente la CPU) e processi I/O-bound%%link%% (che richiedono più operazioni di I/O), migliorando le prestazioni complessive del sistema.
 
 ### 3.4.2 - Come funziona il cambio di contesto
 
@@ -502,14 +510,14 @@ Alcuni criteri utilizzati per valutare le prestazioni di un algoritmo di schedul
 
 # 4 - Operazioni sui processi
 
-Le **operazioni sui processi** rappresentano le azioni che un sistema operativo può eseguire per gestire e controllare i processi in esecuzione. Queste operazioni includono la [creazione](Processi%20di%20un%20Sistema%20Operativo.md#4.1%20-%20Creazione%20di%20un%20processo), la [terminazione](Processi%20di%20un%20Sistema%20Operativo.md#4.2%20-%20Terminazione%20di%20un%20processo), la [comunicazione] e il [coordinamento] dei processi.
+Le **operazioni sui processi** rappresentano le azioni che un sistema operativo può eseguire per gestire e controllare i processi in esecuzione. Queste operazioni includono la [creazione](Processi%20di%20un%20Sistema%20Operativo.md#4.1%20-%20Creazione%20di%20un%20processo), la [terminazione](Processi%20di%20un%20Sistema%20Operativo.md#4.2%20-%20Terminazione%20di%20un%20processo), la [comunicazione](Processi%20di%20un%20Sistema%20Operativo.md#4.3%20-%20Comunicazione%20tra%20processi) e il coordinamento%%link%% dei processi.
 
 ## 4.1 - Creazione di un processo
 
 Ogni nuovo processo viene creato a partire da un processo già esistente: il processo creante viene detto _processo padre_ (_parent process_), mentre il nuovo processo è chiamato _processo figlio_ (_child process_). Il sistema operativo assegna al processo appena creato risorse (come spazio di memoria e tempo CPU) e lo aggiunge a una coda di scheduling.
 
 Le fasi principali della creazione di un processo sono:
-1. **Assegnazione di un PID**: ogni processo ha un identificatore univoco (solitamente rappresentato in memoria come un numero intero), noto come _Process ID_ (_PID_). Il PID fornisce un valore univoco per ogni processo del sistema e può essere usato come indice per accedere a vari attributi di un processo all'interno del [kernel].
+1. **Assegnazione di un PID**: ogni processo ha un identificatore univoco (solitamente rappresentato in memoria come un numero intero), noto come _Process ID_ (_PID_). Il PID fornisce un valore univoco per ogni processo del sistema e può essere usato come indice per accedere a vari attributi di un processo all'interno del kernel%%link%%.
 2. **Allocazione delle risorse**: vengono allocate le risorse necessarie per il nuovo processo, come lo [spazio di memoria](Processi%20di%20un%20Sistema%20Operativo.md#2.4%20-%20Spazio%20di%20memoria), i descrittori dei file aperti dal processo padre che possono essere ereditati o copiati da lui, il tempo di CPU e così via.
 3. **Inizializzazione del contesto**: il sistema operativo crea un [PCB](Processi%20di%20un%20Sistema%20Operativo.md#2%20-%20Il%20PCB%20e%20le%20informazioni%20sul%20processo) per il processo figlio contenente tutte le informazioni di controllo necessarie, come lo stato del processo, i registri, i puntatori alla memoria, i file aperti e altro.
 4. **Inserimento nelle code di scheduling**: il processo viene aggiunto alla coda del long-term scheduler (per la schedulazione a lungo termine) o direttamente alla coda del short-term scheduler (per la schedulazione immediata). %%aggiustare questo punto e sostituire le code del long-term e short-term con quelle di job queue, ready queue ecc.
@@ -551,7 +559,7 @@ Il processo figlio può poi sovrascrivere il suo spazio di memoria e l'eseguibil
 
 ### 4.1.2 - `CreateProcess()` in Windows
 
-Nei sistemi operativi Windows, un nuovo processo viene creato tramite l'[API] `CreateProcess()`. Questa funzione crea un nuovo processo e contemporaneamente un [thread](Processi%20di%20un%20Sistema%20Operativo.md#5%20-%20Thread) principale all'interno del processo.
+Nei sistemi operativi Windows, un nuovo processo viene creato tramite l'API%%link%% `CreateProcess()`. Questa funzione crea un nuovo processo e contemporaneamente un [thread](Processi%20di%20un%20Sistema%20Operativo.md#5%20-%20Thread) principale all'interno del processo.
 
 A differenza di [`fork()`](Processi%20di%20un%20Sistema%20Operativo.md#4.1.1%20-%20`fork()`%20in%20Unix/Linux), che duplica il processo corrente, `CreateProcess()` consente di specificare il nome dell'eseguibile che il processo figlio deve eseguire. Questo significa che, in Windows, il processo figlio inizia immediatamente con l'esecuzione di un programma distinto.
 
@@ -612,16 +620,166 @@ Le fasi principali della terminazione di un processo sono:
 5. **Notifica del processo padre**: se il processo è stato generato da un processo padre, quest'ultimo viene notificato della terminazione del figlio. Nei sistemi Unix/Linux, il padre può chiamare la funzione `wait()` per raccogliere il codice di uscita del figlio e permettere la completa rimozione del PCB del figlio dalla memoria.
 6. **Rimozione del processo dal sistema operativo**: una volta che tutte le risorse sono state rilasciate e, se necessario, il processo padre ha recuperato il codice di uscita del figlio, il sistema operativo rimuove il PCB e altre strutture associate al processo dalla memoria. A questo punto, il processo è completamente terminato.
 
+## 4.3 - Comunicazione tra processi
+
+Spesso, i processi hanno bisogno di comunicare e collaborare tra di loro. La **comunicazione tra processi** (_Inter-Process Communication_, _IPC_) riguarda le tecniche e i meccanismi attraverso cui i processi di un sistema operativo, che possono essere eseguiti in parallelo o separatamente, scambiano informazioni tra loro. Ogni metodo di comunicazione tra processi ha vantaggi e svantaggi, ed è scelto in base alle esigenze specifiche di sincronizzazione, latenza, throughput e complessità dell'applicazione.
+
+Le principali tecniche di comunicazione tra processi sono: %% SISTEMARE LISTA CON TUTTE LE TECNICHE %%
+- **Pipe**: è un canale di comunicazione unidirezionale tra due processi. Un processo scrive dati in un'estremità della pipe, mentre l'altro processo legge dall'altra estremità.
+- **Message Passing**: I processi inviano e ricevono messaggi tra di loro tramite **code di messaggi** (message queues).
+- **Memoria condivisa**: Due o più processi possono condividere una porzione di memoria, il che permette lo scambio rapido di informazioni.
+- **Socket**: Permettono la comunicazione tra processi su macchine diverse tramite protocolli di rete.
+
+### 4.3.1 - Pipe
+
+Le **pipe** %%([pronuncia]: `/paɪp/`)%%sono un meccanismo di comunicazione tra processi che permette a uno o più processi di condividere dati tramite un canale unidirezionale. In sostanza, una pipe crea un collegamento tra due processi: uno scrive dati nella pipe e l'altro legge quei dati.
+
+#### 4.3.1.1 - Caratteristiche principali
+
+Le caratteristiche principali delle pipe sono:
+- **Unidirezionali**: i dati fluiscono in una sola direzione (dal processo scrivente a quello leggente).
+- **Anonime**: sono tipicamente usate tra processi che hanno una relazione gerarchica (padre-figlio). In genere, il processo padre crea una pipe e poi genera il processo figlio che la usa.
+- **Comunicazione in memoria**: la pipe si comporta come un buffer circolare tra i due processi, memorizzando temporaneamente i dati fino a quando non vengono letti.
+
+#### 4.3.1.2 - Funzionamento di base
+
+Una pipe in UNIX o Linux può essere creata con la chiamata di sistema%%link%% `pipe()`. Questa funzione genera due file descriptor:
+- Il file descriptor per la lettura (`fd[0]`);
+- Il file descriptor per la scrittura (`fd[1]`).
+
+Un processo può scrivere dati nel file descriptor `fd[1]` e un altro processo può leggerli dal file descriptor `fd[0]`.
+
+%%mettere link ai file descriptor%%
+
+##### 4.3.1.2.1 - Esempio in linguaggio C
+
+Ecco un esempio di come funziona una pipe in linguaggio C%%link%%, in cui un processo padre invia un messaggio al processo figlio usando una pipe.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+
+int main() {
+    int fd[2]; // fd[0] per lettura, fd[1] per scrittura
+    pid_t pid;
+    char buffer[100];
+    
+    // Creazione della pipe
+    if (pipe(fd) == -1) {
+        perror("pipe");
+        return 1;
+    }
+
+    // Creazione del processo figlio
+    pid = fork();
+
+    if (pid < 0) {
+        perror("fork");
+        return 1;
+    }
+
+    if (pid > 0) {
+        // Processo padre
+        close(fd[0]); // Chiudiamo l'estremità di lettura nel padre
+
+        // Scriviamo un messaggio nella pipe
+        char msg[] = "Ciao dal processo padre!";
+        write(fd[1], msg, strlen(msg) + 1);
+
+        close(fd[1]); // Chiudiamo l'estremità di scrittura dopo aver scritto
+    } else {
+        // Processo figlio
+        close(fd[1]); // Chiudiamo l'estremità di scrittura nel figlio
+
+        // Leggiamo il messaggio dalla pipe
+        read(fd[0], buffer, sizeof(buffer));
+        printf("Messaggio ricevuto dal figlio: %s\n", buffer);
+
+        close(fd[0]); // Chiudiamo l'estremità di lettura dopo aver letto
+    }
+
+    return 0;
+}
+```
+
+Spiegazione del codice:
+- `pipe(fd)` crea una pipe. `fd[0]` è usato per la lettura e `fd[1]` per la scrittura.
+- `fork()` crea un nuovo processo figlio.
+	- Nel processo padre, chiudiamo l'estremità di lettura (`fd[0]`) e scriviamo il messaggio nella pipe tramite `write()`.
+	- Nel processo figlio, chiudiamo l'estremità di scrittura (`fd[1]`) e leggiamo il messaggio tramite `read()`.
+- Dopo la comunicazione, ogni processo chiude l'estremità della pipe che non è più necessaria.
+
+#### 4.3.1.3 - Le pipe anonime e i loro limiti
+
+Le pipe "comuni" sono dette _pipe anonime_ e presentano determinati limiti:
+1. Funzionano solo tra processi con una relazione gerarchica (padre-figlio).
+2. Sono unidirezionali: per comunicare anche nella direzione opposta (quindi per effettuare una comunicazione bidirezionale) serve una seconda pipe.
+3. La pipe ha una dimensione limitata e i processi devono gestire correttamente il buffering.
+
+Per ovviare a questi limiti, sono state create le [named pipe](Processi%20di%20un%20Sistema%20Operativo.md#Named%20Pipe%20(FIFO)).
+
+#### 4.3.1.4 - Named pipe (FIFO)
+
+Le **named pipe** o **FIFO** sono una versione più avanzata delle pipe anonime: a differenza di quest'ultime, le named pipe possono essere utilizzate anche tra processi non correlati e sono bidirezionali. Vengono create con il comando `mkfifo` o la chiamata di sistema `mkfifo()`.
+
+Ecco un esempio di named pipe:
+
+```bash
+mkfifo mypipe
+```
+
+Dopo aver creato una named pipe, due processi distinti possono usarla per scambiarsi dati:
+- Un processo può scrivere nella pipe con `echo "Hello" > mypipe`;
+- Un altro processo può leggere da essa con `cat < mypipe`.
+
+%% approfondire le named pipe %%
+
+%%
+\#### Pipe nella shell
+
+Esempi: `pipe()` in UNIX/Linux, pipe nei comandi shell (`|`).
 %%
 
-\### 3. **Comunicazione tra processi (Inter-Process Communication, IPC)**
-   Spesso, i processi devono **comunicare e collaborare** tra di loro. La **comunicazione tra processi** (IPC) consente ai processi di scambiarsi dati o segnalare eventi. Le tecniche principali di IPC includono:
+### 4.3.2 - Code di messaggi
 
-   - **Pipe**: Fornisce un canale di comunicazione unidirezionale tra due processi. Un processo scrive dati in un'estremità della pipe, mentre l'altro processo legge dall'altra estremità.
-   - **Message Passing**: I processi inviano e ricevono messaggi tra di loro tramite **code di messaggi** (message queues).
-   - **Memoria condivisa**: Due o più processi possono condividere una porzione di memoria, il che permette lo scambio rapido di informazioni.
-   - **Socket**: Permettono la comunicazione tra processi su macchine diverse tramite protocolli di rete.
+Le **code di messaggi** (_message queues_) consentono lo scambio di messaggi tra processi. I messaggi possono essere messi in coda da un processo e letti da un altro processo in modo asincrono.
+- Vantaggio: i processi non devono essere sincronizzati tra loro.
+- Esempi: `msgget()`, `msgsnd()`, `msgrcv()` su UNIX.
 
+%%
+
+\### 3. **Memoria condivisa (Shared Memory)**
+   - Nella **memoria condivisa**, due o più processi possono accedere alla stessa area di memoria. Questo è uno dei metodi più veloci di IPC, poiché i processi possono leggere e scrivere direttamente nella stessa area di memoria.
+   - Problema: la sincronizzazione tra processi è necessaria per evitare accessi concorrenti alla stessa porzione di memoria (tipicamente attraverso mutex o semafori).
+   - Esempi: `shmget()`, `shmat()`, `shmdt()` su UNIX.
+
+\### 4. **Socket**
+   - I **socket** sono utilizzati per la comunicazione tra processi che potrebbero essere su macchine diverse (comunicazione di rete). Possono essere usati anche per la comunicazione locale (es. socket UNIX).
+   - Supportano protocolli di rete come TCP e UDP.
+   - Esempi: `socket()`, `bind()`, `listen()`, `accept()` su UNIX.
+
+\### 5. **Segnali (Signals)**
+   - I **segnali** sono un metodo per inviare notifiche asincrone a un processo. Un processo può ricevere segnali che indicano la necessità di eseguire qualche azione (es. terminazione, interruzione).
+   - Esempi: `kill()`, `signal()`.
+
+\### 6. **Semafori (Semaphores)**
+   - I **semafori** sono variabili che vengono utilizzate per gestire l'accesso concorrente alle risorse condivise, come la memoria condivisa. Aiutano a evitare situazioni come il **race condition**.
+   - Esempi: `semget()`, `semop()`.
+
+\### 7. **File temporanei e named pipes (FIFO)**
+   - I **file temporanei** possono essere usati per lo scambio di dati tra processi. I dati vengono scritti su file e letti da altri processi.
+   - Le **named pipes** o FIFO funzionano come pipe, ma possono essere utilizzate da processi non correlati (non necessariamente genitore-figlio).
+
+\### 8. **RPC (Remote Procedure Call)**
+   - Un **RPC** permette a un processo di chiamare una funzione eseguita su un altro processo (anche su un'altra macchina). Maschera la complessità della comunicazione, rendendola simile a una chiamata di funzione locale.
+   - Esempi: gRPC, XML-RPC.
+
+\### 9. **Database e Sistemi di File**
+   - Un processo può scrivere dati in un database o file, e un altro processo può leggerli. Questo metodo è meno efficiente rispetto ad altri, ma può essere utile per la persistenza e condivisione di grandi quantità di dati.
+%%
+
+%%
 \### 6. **Coordinamento e sincronizzazione tra processi**
    Nei sistemi con **processi concorrenti**, è necessario coordinare l'esecuzione di più processi per evitare problemi come **race conditions** (condizioni di corsa) o **deadlock** (stallo). Le operazioni per la sincronizzazione includono:
 
@@ -710,7 +868,9 @@ Questa funzione è particolarmente utile sui sistemi multicore, in cui più thre
 
 - Slide del Prof. Aldinucci
 - Libro di SO
+
+Prendere info da:
 - https://it.wikipedia.org/wiki/Processo_(informatica)
 - https://it.wikipedia.org/wiki/Thread_(informatica)
+- https://it.wikipedia.org/wiki/Pipe_(informatica)
 %%
-
